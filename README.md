@@ -29,7 +29,7 @@ Michaella Miller
 MA Computational Arts, Goldsmiths, University of London, 2026
 Supervisor: Dr. Louise Rouse
 
-Claude (Anthropic, 2026) was used for technical guidance, base code structure, and debugging in HTML, and for technical guidance in implementing Python scripts. All design, functionality, research, methodology, content, and conceptual decisions are the author's own.
+Claude Anthropic, 2026) was used for technical guidance, base code structure, and debugging in HTML and Python. All design, functionality, research, methodology, content, and conceptual decisions are the author’s own.
 
 ## License
 All rights reserved
