@@ -32,9 +32,10 @@ Supervisor: Dr. Louise Rouse
 Claude Anthropic, 2026) was used for technical guidance, base code structure, and debugging in HTML and Python. All design, functionality, research, methodology, content, and conceptual decisions are the author’s own.
 
 ## License
-All rights reserved
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to use and adapt with attribution.
 
 ## Contact / Links
 - Live site: https://eilonvir.github.io/Bed-Bug-Archive/
 - Video documentation: https://vimeo.com/1182346717?fl=pl&fe=sh
-- Interactive fiction game: https://editor.p5js.org/mijelly/full/WN1VjXVRW
+- Interactive fiction game: https://editor.p5js.org/mijelly/full/WN1VjXVRW repo: https://github.com/Eilonvir/Moved-to-London--Got-Bed-Bugs.git
+- NLP repo: https://github.com/Eilonvir/Delusory-Parasitosis-NLP.git
