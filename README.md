@@ -36,6 +36,6 @@ Claude Anthropic, 2026) was used for technical guidance, base code structure, an
 
 ## Contact / Links
 - Live site: https://eilonvir.github.io/Bed-Bug-Archive/
-- Video documentation: https://vimeo.com/1182346717?fl=pl&fe=sh
+- Video documentation: https://vimeo.com/manage/videos/1182637114
 - Interactive fiction game: https://editor.p5js.org/mijelly/full/WN1VjXVRW repo: https://github.com/Eilonvir/Moved-to-London--Got-Bed-Bugs.git
 - NLP repo: https://github.com/Eilonvir/Delusory-Parasitosis-NLP.git
