@@ -27,7 +27,6 @@ Video documentation: https://vimeo.com/1182346717?fl=pl&fe=sh
 ## Credits / Acknowledgements
 Michaella Miller
 MA Computational Arts, Goldsmiths, University of London, 2026
-Supervisor: Dr. Louise Rouse
 
 Claude Anthropic, 2026) was used for technical guidance, base code structure, and debugging in HTML and Python. All design, functionality, research, methodology, content, and conceptual decisions are the author’s own.
 
