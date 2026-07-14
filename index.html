@@ -463,6 +463,7 @@ They are attracted to humidity and darkness
   function closeWindow(id) {
     const win = document.getElementById(id);
     if (!win) return;
+    win.querySelectorAll('audio').forEach(a => { a.pause(); });
     win.classList.remove('open');
     openWindows.delete(id);
     updateTaskbar();
@@ -502,8 +503,14 @@ They are attracted to humidity and darkness
 
   document.addEventListener('mousemove', e => {
     if (!dragging) return;
-    dragging.style.left = (e.clientX - dragOffX) + 'px';
-    dragging.style.top = (e.clientY - dragOffY) + 'px';
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const w = dragging.offsetWidth;
+    const h = dragging.offsetHeight;
+    const newLeft = Math.max(0, Math.min(e.clientX - dragOffX, vw - w));
+    const newTop = Math.max(0, Math.min(e.clientY - dragOffY, vh - h));
+    dragging.style.left = newLeft + 'px';
+    dragging.style.top = newTop + 'px';
     dragging.style.right = 'auto';
   });
 
