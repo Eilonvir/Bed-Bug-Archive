@@ -92,23 +92,42 @@
     display: none;
     z-index: 100;
     min-width: 300px;
+    min-height: 130px;
     max-width: 92vw;
     max-height: 82vh;
   }
 
-  .win98-window.open { display: block; }
-  .win98-window .title-bar { cursor: move; user-select: none; }
+  .win98-window.open { display: flex; flex-direction: column; }
+  .win98-window .title-bar { cursor: move; user-select: none; flex: 0 0 auto; }
 
   .window-content {
     background: #fff;
     padding: 10px;
     overflow-y: auto;
-    max-height: calc(82vh - 60px);
+    flex: 1 1 auto;
+    min-height: 0;
     font-family: 'Courier Prime', monospace;
     font-size: 0.78rem;
     line-height: 1.8;
     color: #000;
   }
+
+  .resize-handle {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    width: 16px;
+    height: 16px;
+    cursor: nwse-resize;
+    background: #c0c0c0
+      repeating-linear-gradient(135deg,
+        #808080 0px, #808080 1.5px,
+        transparent 1.5px, transparent 3.5px);
+    box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+    z-index: 5;
+  }
+
+  .resize-handle:hover { background-color: #d4d0c8; }
 
   .window-content p { margin-bottom: 0.7rem; }
   .window-content em { color: #666; font-style: italic; }
@@ -116,6 +135,35 @@
   .window-content audio { width: 100%; margin: 0.4rem 0; accent-color: #000080; }
   .window-content img { width: 100%; max-width: 400px; display: block; margin: 0.6rem 0; filter: grayscale(20%); }
   .img-caption { font-size: 0.58rem; color: #666; margin-bottom: 0.6rem; }
+
+  .carousel-viewport {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #eee;
+  }
+  .carousel-viewport img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+  }
+
+  .carousel-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 6px 0 2px;
+    border-top: 1px solid #ccc;
+  }
+  .carousel-nav button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
 
   .nlp-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px dotted #ccc; font-size: 0.72rem; }
   .nlp-term { min-width: 110px; color: #000080; }
@@ -162,7 +210,7 @@
       </div>
     </div>
     <div class="window-content" style="text-align:center; padding:18px;">
-      <p style="font-size:0.95rem; line-height:2.1;">He asked me why I am interested in bed bugs.<br><em>I told him I had them.</em></p>
+      <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadever is lying at home, <em>waiting to be found</em></p>
       <p style="font-size:0.6rem; color:#666; margin-top:10px; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN</p>
     </div>
   </div>
@@ -472,6 +520,11 @@ She calls her manager - but her card doesn't  work on that door. One of the gard
       <p>hortus sanititis</p>
       <p>Matthew paraffin audio, wikimedia commons image</p>
 
+      <img src="images//BugLife/HS.jpg" alt="" onerror="this.style.display='none'">
+      <div class="img-caption">Wellcome Library, London (1499) Hortus Sanitatis: bed bugs, delousing. Wikimedia
+Commons. Available at: https://commons.wikimedia.org/wiki/File:Hortus_Sanitatis;_
+bed_bugs,_delousing._Wellcome_M0011711.jpg (Accessed: April 10th 2026).
+License: CC BY 4.0.</div>
     </div>
   </div>
 
@@ -486,8 +539,14 @@ She calls her manager - but her card doesn't  work on that door. One of the gard
     </div>
     <div class="window-content">
       <p>Pictures from the house</p>
-      <p>A window inside a window, with tiny leftRight arrows to scroll through illustrations of the after death clean house, with captions where I wax poetic about the clutter</p>
-
+      <div class="carousel-viewport">
+        <img id="house-carousel-img" src="" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="img-caption" id="house-carousel-caption"></div>
+      <div class="carousel-nav">
+        <button id="house-prev" aria-label="Previous image">&#9664;</button>
+        <button id="house-next" aria-label="Next image">&#9654;</button>
+      </div>
     </div>
   </div>
 
@@ -535,6 +594,32 @@ She calls her manager - but her card doesn't  work on that door. One of the gard
   content.insertBefore(newLine, content.querySelector('.field-row-stacked'));
   textarea.value = '';
 };
+
+  const houseImages = [
+    { src: 'images/BugLife/cimex.png', caption: 'A hospital like bed on the ground floor. Tissues and some sort of antiseptic by the bedside.' },
+    { src: 'images/BugLife/cimex2.jpg', caption: 'The calender tracks incontinence symptoms up to mid January, then stops.' },
+    { src: 'images/BugLife/cimexil.jpg', caption: 'Grime on gas pots and pans.' },
+    { src: 'images/BugLife/cimexil2.jpg', caption: 'Freezer is packed. Warren picked up on that at some point. Said they would need to clear that as well' }
+  ];
+  let houseIndex = 0;
+
+  function renderHouseCarousel() {
+    const img = document.getElementById('house-carousel-img');
+    const caption = document.getElementById('house-carousel-caption');
+    img.style.display = '';
+    img.src = houseImages[houseIndex].src;
+    caption.textContent = houseImages[houseIndex].caption;
+  }
+
+  document.getElementById('house-prev').onclick = function() {
+    houseIndex = (houseIndex - 1 + houseImages.length) % houseImages.length;
+    renderHouseCarousel();
+  };
+  document.getElementById('house-next').onclick = function() {
+    houseIndex = (houseIndex + 1) % houseImages.length;
+    renderHouseCarousel();
+  };
+  renderHouseCarousel();
 
   function updateClock() {
     const n = new Date();
@@ -597,19 +682,50 @@ She calls her manager - but her card doesn't  work on that door. One of the gard
   }
 
   document.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const w = dragging.offsetWidth;
-    const h = dragging.offsetHeight;
-    const newLeft = Math.max(0, Math.min(e.clientX - dragOffX, vw - w));
-    const newTop = Math.max(0, Math.min(e.clientY - dragOffY, vh - h));
-    dragging.style.left = newLeft + 'px';
-    dragging.style.top = newTop + 'px';
-    dragging.style.right = 'auto';
+    if (dragging) {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const w = dragging.offsetWidth;
+      const h = dragging.offsetHeight;
+      const newLeft = Math.max(0, Math.min(e.clientX - dragOffX, vw - w));
+      const newTop = Math.max(0, Math.min(e.clientY - dragOffY, vh - h));
+      dragging.style.left = newLeft + 'px';
+      dragging.style.top = newTop + 'px';
+      dragging.style.right = 'auto';
+    }
+    if (resizing) {
+      const r = resizing.getBoundingClientRect();
+      const maxW = window.innerWidth - r.left - 8;
+      const maxH = window.innerHeight - r.top - 8;
+      const newW = Math.max(300, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
+      const newH = Math.max(130, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
+      resizing.style.width = newW + 'px';
+      resizing.style.height = newH + 'px';
+    }
   });
 
-  document.addEventListener('mouseup', () => { dragging = null; });
+  document.addEventListener('mouseup', () => { dragging = null; resizing = null; });
+
+  let resizing = null, resizeStartW = 0, resizeStartH = 0, resizeStartX = 0, resizeStartY = 0;
+
+  function resizeStart(e, id) {
+    e.preventDefault();
+    e.stopPropagation();
+    resizing = document.getElementById(id);
+    resizing.style.zIndex = getTopZ();
+    resizeStartW = resizing.offsetWidth;
+    resizeStartH = resizing.offsetHeight;
+    resizeStartX = e.clientX;
+    resizeStartY = e.clientY;
+  }
+
+  document.querySelectorAll('.win98-window').forEach(win => {
+    if (win.id === 'entry-window') return;
+    const handle = document.createElement('div');
+    handle.className = 'resize-handle';
+    handle.addEventListener('mousedown', e => resizeStart(e, win.id));
+    win.appendChild(handle);
+  });
 </script>
 </body>
 </html>
