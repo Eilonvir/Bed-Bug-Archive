@@ -114,17 +114,20 @@
 
   .resize-handle {
     position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 14px;
-    height: 14px;
+    right: 1px;
+    bottom: 1px;
+    width: 16px;
+    height: 16px;
     cursor: nwse-resize;
-    background:
+    background: #c0c0c0
       repeating-linear-gradient(135deg,
-        #808080 0px, #808080 1px,
-        transparent 1px, transparent 3px);
+        #808080 0px, #808080 1.5px,
+        transparent 1.5px, transparent 3.5px);
+    box-shadow: var(--border-raised-outer), var(--border-raised-inner);
     z-index: 5;
   }
+
+  .resize-handle:hover { background-color: #d4d0c8; }
 
   .window-content p { margin-bottom: 0.7rem; }
   .window-content em { color: #666; font-style: italic; }
