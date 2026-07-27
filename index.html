@@ -136,6 +136,10 @@
   .window-content img { width: 100%; max-width: 400px; display: block; margin: 0.6rem 0; filter: grayscale(20%); }
   .img-caption { font-size: 0.58rem; color: #666; margin-bottom: 0.6rem; }
 
+  .carousel-row { display: flex; align-items: center; gap: 6px; }
+  .carousel-row img { flex: 1; min-width: 0; margin: 0.6rem 0; }
+  .carousel-row button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
+
   .nlp-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px dotted #ccc; font-size: 0.72rem; }
   .nlp-term { min-width: 110px; color: #000080; }
   .nlp-term-personal { display: none; color: #666; font-style: italic; }
@@ -510,8 +514,12 @@ License: CC BY 4.0.</div>
     </div>
     <div class="window-content">
       <p>Pictures from the house</p>
-      <p>A window inside a window, with tiny leftRight arrows to scroll through illustrations of the after death clean house, with captions where I wax poetic about the clutter</p>
-
+      <div class="carousel-row">
+        <button id="house-prev" aria-label="Previous image">&#9664;</button>
+        <img id="house-carousel-img" src="" alt="" onerror="this.style.display='none'">
+        <button id="house-next" aria-label="Next image">&#9654;</button>
+      </div>
+      <div class="img-caption" id="house-carousel-caption"></div>
     </div>
   </div>
 
@@ -559,6 +567,32 @@ License: CC BY 4.0.</div>
   content.insertBefore(newLine, content.querySelector('.field-row-stacked'));
   textarea.value = '';
 };
+
+  const houseImages = [
+    { src: 'images/BugLife/cimex.png', caption: 'A hospital like bed on the ground floor. Tissues and some sort of antiseptic by the bedside.' },
+    { src: 'images/BugLife/cimex2.jpg', caption: 'The calender tracks incontinence symptoms up to mid January, then stops.' },
+    { src: 'images/BugLife/cimexil.jpg', caption: 'Grime on gas pots and pans.' },
+    { src: 'images/BugLife/cimexil2.jpg', caption: 'Freezer is packed. Warren picked up on that at some point. Said they would need to clear that as well' }
+  ];
+  let houseIndex = 0;
+
+  function renderHouseCarousel() {
+    const img = document.getElementById('house-carousel-img');
+    const caption = document.getElementById('house-carousel-caption');
+    img.style.display = '';
+    img.src = houseImages[houseIndex].src;
+    caption.textContent = houseImages[houseIndex].caption;
+  }
+
+  document.getElementById('house-prev').onclick = function() {
+    houseIndex = (houseIndex - 1 + houseImages.length) % houseImages.length;
+    renderHouseCarousel();
+  };
+  document.getElementById('house-next').onclick = function() {
+    houseIndex = (houseIndex + 1) % houseImages.length;
+    renderHouseCarousel();
+  };
+  renderHouseCarousel();
 
   function updateClock() {
     const n = new Date();
