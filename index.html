@@ -92,22 +92,38 @@
     display: none;
     z-index: 100;
     min-width: 300px;
+    min-height: 130px;
     max-width: 92vw;
     max-height: 82vh;
   }
 
-  .win98-window.open { display: block; }
-  .win98-window .title-bar { cursor: move; user-select: none; }
+  .win98-window.open { display: flex; flex-direction: column; }
+  .win98-window .title-bar { cursor: move; user-select: none; flex: 0 0 auto; }
 
   .window-content {
     background: #fff;
     padding: 10px;
     overflow-y: auto;
-    max-height: calc(82vh - 60px);
+    flex: 1 1 auto;
+    min-height: 0;
     font-family: 'Courier Prime', monospace;
     font-size: 0.78rem;
     line-height: 1.8;
     color: #000;
+  }
+
+  .resize-handle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 14px;
+    height: 14px;
+    cursor: nwse-resize;
+    background:
+      repeating-linear-gradient(135deg,
+        #808080 0px, #808080 1px,
+        transparent 1px, transparent 3px);
+    z-index: 5;
   }
 
   .window-content p { margin-bottom: 0.7rem; }
@@ -602,19 +618,50 @@ License: CC BY 4.0.</div>
   }
 
   document.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const w = dragging.offsetWidth;
-    const h = dragging.offsetHeight;
-    const newLeft = Math.max(0, Math.min(e.clientX - dragOffX, vw - w));
-    const newTop = Math.max(0, Math.min(e.clientY - dragOffY, vh - h));
-    dragging.style.left = newLeft + 'px';
-    dragging.style.top = newTop + 'px';
-    dragging.style.right = 'auto';
+    if (dragging) {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const w = dragging.offsetWidth;
+      const h = dragging.offsetHeight;
+      const newLeft = Math.max(0, Math.min(e.clientX - dragOffX, vw - w));
+      const newTop = Math.max(0, Math.min(e.clientY - dragOffY, vh - h));
+      dragging.style.left = newLeft + 'px';
+      dragging.style.top = newTop + 'px';
+      dragging.style.right = 'auto';
+    }
+    if (resizing) {
+      const r = resizing.getBoundingClientRect();
+      const maxW = window.innerWidth - r.left - 8;
+      const maxH = window.innerHeight - r.top - 8;
+      const newW = Math.max(300, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
+      const newH = Math.max(130, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
+      resizing.style.width = newW + 'px';
+      resizing.style.height = newH + 'px';
+    }
   });
 
-  document.addEventListener('mouseup', () => { dragging = null; });
+  document.addEventListener('mouseup', () => { dragging = null; resizing = null; });
+
+  let resizing = null, resizeStartW = 0, resizeStartH = 0, resizeStartX = 0, resizeStartY = 0;
+
+  function resizeStart(e, id) {
+    e.preventDefault();
+    e.stopPropagation();
+    resizing = document.getElementById(id);
+    resizing.style.zIndex = getTopZ();
+    resizeStartW = resizing.offsetWidth;
+    resizeStartH = resizing.offsetHeight;
+    resizeStartX = e.clientX;
+    resizeStartY = e.clientY;
+  }
+
+  document.querySelectorAll('.win98-window').forEach(win => {
+    if (win.id === 'entry-window') return;
+    const handle = document.createElement('div');
+    handle.className = 'resize-handle';
+    handle.addEventListener('mousedown', e => resizeStart(e, win.id));
+    win.appendChild(handle);
+  });
 </script>
 </body>
 </html>
