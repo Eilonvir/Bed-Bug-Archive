@@ -136,9 +136,34 @@
   .window-content img { width: 100%; max-width: 400px; display: block; margin: 0.6rem 0; filter: grayscale(20%); }
   .img-caption { font-size: 0.58rem; color: #666; margin-bottom: 0.6rem; }
 
-  .carousel-row { display: flex; align-items: center; gap: 6px; }
-  .carousel-row img { flex: 1; min-width: 0; margin: 0.6rem 0; }
-  .carousel-row button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
+  .carousel-viewport {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #eee;
+  }
+  .carousel-viewport img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+  }
+
+  .carousel-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 6px 0 2px;
+    border-top: 1px solid #ccc;
+  }
+  .carousel-nav button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
 
   .nlp-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px dotted #ccc; font-size: 0.72rem; }
   .nlp-term { min-width: 110px; color: #000080; }
@@ -514,12 +539,14 @@ License: CC BY 4.0.</div>
     </div>
     <div class="window-content">
       <p>Pictures from the house</p>
-      <div class="carousel-row">
-        <button id="house-prev" aria-label="Previous image">&#9664;</button>
+      <div class="carousel-viewport">
         <img id="house-carousel-img" src="" alt="" onerror="this.style.display='none'">
-        <button id="house-next" aria-label="Next image">&#9654;</button>
       </div>
       <div class="img-caption" id="house-carousel-caption"></div>
+      <div class="carousel-nav">
+        <button id="house-prev" aria-label="Previous image">&#9664;</button>
+        <button id="house-next" aria-label="Next image">&#9654;</button>
+      </div>
     </div>
   </div>
 
