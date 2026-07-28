@@ -11,10 +11,8 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: #f326db;
-    background-image: url('images/Grandflrs.jpg'), repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-    background-size: cover;
-    background-position: center;
+    background-color: var(--surface);
+    box-shadow: var(--border-raised-outer), var(--border-raised-inner) filter opacity(0.75);
     min-height: 100vh;
     font-family: 'Courier Prime', 'Courier New', monospace;
     overflow: hidden;
@@ -24,11 +22,11 @@
   #screen-frame {
     position: fixed;
     inset: 28px;
-    background-color: #e3d5b8;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.55  0 0 0 0 0.47  0 0 0 0 0.35  0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
-    background-repeat: repeat;
-   
+    background-color: #2b2418;
+    background-image: url('images/Grandflrs.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.75);
     overflow: hidden;
   }
 
@@ -84,7 +82,7 @@
     image-rendering: pixelated;
   }
 
-  .icon-folder { background: url("images/icons/folder.svg") center/contain no-repeat; }
+  .icon-folder { background: url("images/icons/folder.svg") center/contain no-repeat; filter: brightness(1.2) drop-shadow(0.6px 0.6px #000); }
   .icon-txt { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat; }
   .icon-exe { background: url("images/icons/puter.png") center/contain no-repeat; }
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
@@ -240,7 +238,7 @@
       </div>
     </div>
     <div class="window-content" style="text-align:center; padding:18px;">
-      <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadever is lying at home, <em>waiting to be found</em></p>
+      <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadever is lying at home, waiting to be found</p>
       <p style="font-size:0.6rem; color:#666; margin-top:10px; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN</p>
     </div>
   </div>
