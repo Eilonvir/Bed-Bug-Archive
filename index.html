@@ -11,14 +11,25 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: #f326db;
-    background-image: url('images/Grandflrs.jpg'), repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    background-color: #2b2418;
+    background-image: url('images/Grandflrs.jpg');
     background-size: cover;
-    /*background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);*/
+    background-position: center;
     min-height: 100vh;
     font-family: 'Courier Prime', 'Courier New', monospace;
     overflow: hidden;
     position: relative;
+  }
+
+  #screen-frame {
+    position: fixed;
+    inset: 28px;
+    background-color: #e3d5b8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.55  0 0 0 0 0.47  0 0 0 0 0.35  0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    background-repeat: repeat;
+   
+    overflow: hidden;
   }
 
   #boot-screen {
@@ -49,7 +60,7 @@
   @keyframes bootfade { to { opacity: 0; pointer-events: none; } }
   #boot-screen.gone { display: none; }
 
-  #desktop { width: 100vw; height: 100vh; position: relative; opacity: 0; transition: opacity 0.8s ease 0.5s; }
+  #desktop { width: 100%; height: 100%; position: relative; opacity: 0; transition: opacity 0.8s ease 0.5s; }
   #desktop.visible { opacity: 1; }
 
   .icon {
@@ -87,7 +98,7 @@
   }
 
   .win98-window {
-    position: fixed;
+    position: absolute;
     display: none;
     z-index: 100;
     min-width: 300px;
@@ -178,9 +189,9 @@
   .code-block { background: #000; color: #0f0; padding: 8px; font-size: 0.63rem; margin: 0.5rem 0; font-family: 'Courier New', monospace; line-height: 1.7; }
   .code-comment { color: #555; }
 
-  #entry-window { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 150; width: 360px; }
+  #entry-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 150; width: 360px; }
 
-  #taskbar { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background: #c0c0c0; border-top: 2px solid #fff; display: flex; align-items: center; padding: 0 4px; gap: 4px; z-index: 200; box-shadow: inset 0 1px 0 #dfdfdf; }
+  #taskbar { position: absolute; bottom: 0; left: 0; right: 0; height: 28px; background: #c0c0c0; border-top: 2px solid #fff; display: flex; align-items: center; padding: 0 4px; gap: 4px; z-index: 200; box-shadow: inset 0 1px 0 #dfdfdf; }
   #start-btn { font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: bold; padding: 2px 6px; height: 22px; cursor: pointer; }
   .taskbar-time { margin-left: auto; font-family: 'Courier New', monospace; font-size: 0.65rem; padding: 0 8px; border: 1px solid #999; height: 22px; display: flex; align-items: center; box-shadow: inset 1px 1px #808080; }
   .taskbar-btn { font-family: 'Courier New', monospace; font-size: 0.62rem; padding: 2px 5px; height: 22px; cursor: pointer; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -199,6 +210,7 @@
   <div class="boot-line">&gt; He asked me why I am interested in bed bugs. I told him I had them.</div>
 </div>
 
+<div id="screen-frame">
 <div id="desktop">
 
   <div class="window win98-window open" id="entry-window">
@@ -573,6 +585,8 @@ License: CC BY 4.0.</div>
   <div class="taskbar-time" id="clock">00:00</div>
 </div>
 
+</div>
+
 <script>
   const bootScreen = document.getElementById('boot-screen');
   const desktop = document.getElementById('desktop');
@@ -670,6 +684,7 @@ License: CC BY 4.0.</div>
   }
 
   let dragging = null, dragOffX = 0, dragOffY = 0;
+  const screenFrame = document.getElementById('screen-frame');
 
   function dragStart(e, id) {
     if (e.target.tagName === 'BUTTON') return;
@@ -682,20 +697,22 @@ License: CC BY 4.0.</div>
 
   document.addEventListener('mousemove', e => {
     if (dragging) {
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
+      const frameRect = screenFrame.getBoundingClientRect();
       const w = dragging.offsetWidth;
       const h = dragging.offsetHeight;
-      const newLeft = Math.max(0, Math.min(e.clientX - dragOffX, vw - w));
-      const newTop = Math.max(0, Math.min(e.clientY - dragOffY, vh - h));
+      const localX = e.clientX - dragOffX - frameRect.left;
+      const localY = e.clientY - dragOffY - frameRect.top;
+      const newLeft = Math.max(0, Math.min(localX, frameRect.width - w));
+      const newTop = Math.max(0, Math.min(localY, frameRect.height - h));
       dragging.style.left = newLeft + 'px';
       dragging.style.top = newTop + 'px';
       dragging.style.right = 'auto';
     }
     if (resizing) {
+      const frameRect = screenFrame.getBoundingClientRect();
       const r = resizing.getBoundingClientRect();
-      const maxW = window.innerWidth - r.left - 8;
-      const maxH = window.innerHeight - r.top - 8;
+      const maxW = frameRect.left + frameRect.width - r.left - 8;
+      const maxH = frameRect.top + frameRect.height - r.top - 8;
       const newW = Math.max(300, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
       const newH = Math.max(130, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
       resizing.style.width = newW + 'px';
