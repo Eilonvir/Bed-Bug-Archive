@@ -133,7 +133,20 @@
   .window-content em { color: #666; font-style: italic; }
   .window-content h3 { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #000; margin: 0.8rem 0 0.5rem; padding-bottom: 0.2rem; }
   .window-content audio { width: 100%; margin: 0.4rem 0; accent-color: #000080; }
-  .window-content img { width: 100%; max-width: 400px; display: block; margin: 0.6rem 0; filter: grayscale(20%); }
+  .window-content img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 0.6rem 0;
+    filter: grayscale(20%);
+    resize: both;
+    overflow: auto;
+    object-fit: contain;
+    min-width: 120px;
+    min-height: 80px;
+    max-height: 600px;
+    border: 1px solid #999;
+  }
   .img-caption { font-size: 0.58rem; color: #666; margin-bottom: 0.6rem; }
 
   .carousel-viewport {
@@ -150,6 +163,12 @@
     max-width: 100%;
     max-height: 100%;
     margin: 0;
+    resize: both;
+    overflow: auto;
+    object-fit: contain;
+    min-width: 120px;
+    min-height: 80px;
+    border: 1px solid #999;
   }
 
   .carousel-nav {
