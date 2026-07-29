@@ -87,6 +87,7 @@
   .icon-exe { background: url("images/icons/puterb.png") center/contain no-repeat; }
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
+  .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
   .icon-label {
     font-family: 'Courier New', monospace;
     font-size: 0.62rem;
@@ -225,7 +226,7 @@
   <div class="boot-line">Checking for parasites.................. OK</div>
   <div class="boot-line">Checking for delusions.................. OK</div>
   <div class="boot-line">Mounting research logs.................. OK</div>
-  <div class="boot-line">&gt; He asked me why I am interested in bed bugs. I told him I had them.</div>
+  <div class="boot-line">&gt; A cadaver lying at home, waiting to be found.</div>
 </div>
 
 <div id="screen-frame">
@@ -285,7 +286,7 @@
   </div>
 
   <div class="icon" style="top: 110px; right: 80px;" ondblclick="openWindow('house-window')">
-    <div class="icon-img icon-egg"></div>
+    <div class="icon-img icon-house"></div>
     <div class="icon-label">the house</div>
   </div>
 
@@ -593,6 +594,16 @@ License: CC BY 4.0.</div>
       <p>Wikimedia Commons images</p>
       <p>Bed bug illustrations and so on</p>
 
+       <div class="carousel-viewport">
+        <img id="bug-carousel-img" src="" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="img-caption" id="bug-carousel-caption"></div>
+      <div class="carousel-nav">
+        <button id="bug-prev" aria-label="Previous image">&#9664;</button>
+        <button id="bug-next" aria-label="Next image">&#9654;</button>
+        
+
+
     </div>
   </div>
 
@@ -652,6 +663,33 @@ License: CC BY 4.0.</div>
     renderHouseCarousel();
   };
   renderHouseCarousel();
+
+  function renderBugCarousel() {
+    const img = document.getElementById('bug-carousel-img');
+    const caption = document.getElementById('bug-carousel-caption');
+    img.style.display = '';
+    img.src = bugImages[bugIndex].src;
+    caption.textContent = bugImages[bugIndex].caption;
+  }
+  const bugImages = [
+    { src: 'images/buglife/cimexil.jpg', caption: 'Bug.' },
+    { src: 'images/buglife/cimexil2.jpg', caption: 'The Bug.' },
+    { src: 'images/buglife/cimexil3.jpg', caption: 'Bug?.' },
+    { src: 'images/buglife/cimexil7.jpg', caption: 'A bug.' },
+    { src: 'images/buglife/cimexil8.jpg', caption: 'The bug.' },
+    { src: 'images/buglife/cimexil9.jpeg', caption: 'Bug.' },
+  ];
+  let bugIndex = 0;
+
+  document.getElementById('bug-prev').onclick = function() {
+    bugIndex = (bugIndex - 1 + bugImages.length) % bugImages.length;
+    renderBugCarousel();
+  };
+  document.getElementById('bug-next').onclick = function() {
+    bugIndex = (bugIndex + 1) % bugImages.length;
+    renderBugCarousel();
+  };
+  renderBugCarousel();
 
   function updateClock() {
     const n = new Date();
