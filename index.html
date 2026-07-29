@@ -88,6 +88,10 @@
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
   .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
+
+  .icon-grid { display: flex; flex-wrap: wrap; gap: 14px; padding: 4px 0 8px; }
+  .icon.static-icon { position: static; }
+
   .icon-label {
     font-family: 'Courier New', monospace;
     font-size: 0.62rem;
@@ -245,19 +249,9 @@
     </div>
   </div>
 
-  <div class="icon" style="top:40px; left:30px;" ondblclick="openWindow('brighton-window')">
+  <div class="icon" style="top:10px; left:30px;" ondblclick="openWindow('interviews-window')">
     <div class="icon-img icon-folder"></div>
-    <div class="icon-label">abundance of knowledge</div>
-  </div>
-
-  <div class="icon" style="top:150px; left:30px;" ondblclick="openWindow('westlondon-window')">
-    <div class="icon-img icon-folder"></div>
-    <div class="icon-label">just fluff</div>
-  </div>
-
-  <div class="icon" style="top:260px; left:30px;" ondblclick="openWindow('North London-window')">
-    <div class="icon-img icon-folder"></div>
-    <div class="icon-label">fluid gone Through to Heaven</div>
+    <div class="icon-label">INTERVIEWS</div>
   </div>
 
   <div class="icon" style="top:380px; left:30px;" ondblclick="openWindow('nlp-window')">
@@ -604,6 +598,52 @@ License: CC BY 4.0.</div>
         
 
 
+    </div>
+  </div>
+  </div>
+
+  <!-- INTERVIEWS -->
+  <div class="window win98-window" id="interviews-window" style="top:100px; left:200px; width:440px;">
+    <div class="title-bar" onmousedown="dragStart(event,'interviews-window')">
+      <div class="title-bar-text">INTERVIEWS</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('interviews-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('interviews-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('interviews-images-window')">
+          <div class="icon-img icon-folder"></div>
+          <div class="icon-label">IMAGES</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
+          <div class="icon-img icon-folder"></div>
+          <div class="icon-label">abundance of knowledge</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
+          <div class="icon-img icon-folder"></div>
+          <div class="icon-label">just fluff</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('North London-window')">
+          <div class="icon-img icon-folder"></div>
+          <div class="icon-label">fluid gone Through to Heaven</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERVIEWS: IMAGES -->
+  <div class="window win98-window" id="interviews-images-window" style="top:130px; left:240px; width:340px;">
+    <div class="title-bar" onmousedown="dragStart(event,'interviews-images-window')">
+      <div class="title-bar-text">INTERVIEWS \ IMAGES</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('interviews-images-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('interviews-images-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      
     </div>
   </div>
 
