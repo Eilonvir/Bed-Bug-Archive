@@ -259,31 +259,21 @@
     <div class="icon-label">analysis.exe</div>
   </div>
 
-  <div class="icon" style="top: 200px;px; left:30px;" ondblclick="openWindow('about-window')">
+  <div class="icon" style="top: 200px; left:30px;" ondblclick="openWindow('about-window')">
     <div class="icon-img icon-txt"></div>
     <div class="icon-label">README.txt</div>
   </div>
 
-  <div class="icon" style="top:440px; right:80px;" ondblclick="openWindow('facts-window')">
-    <div class="icon-img icon-txt"></div>
-    <div class="icon-label">facts.txt</div>
-  </div>
 
   <div class="icon" style="top:320px; right:80px;" ondblclick="openWindow('morgellons-window')">
     <div class="icon-img icon-egg"></div>
     <div class="icon-label">Morgellons</div>
   </div>
 
-  <div class="icon" style="top: 210px; right: 80px;" ondblclick="openWindow('september-window')">
+  <div class="icon" style="bottom: 100px; right: 80px;" ondblclick="openWindow('september-window')">
     <div class="icon-img icon-bed"></div>
     <div class="icon-label">September</div>
   </div>
-
-  <div class="icon" style="top: 30px; right:80px;" ondblclick="openWindow('extermination-window')">
-    <div class="icon-img icon-egg"></div>
-    <div class="icon-label">hortus S</div>
-  </div> 
-
 
 
   <!-- BRIGHTON -->
@@ -607,16 +597,20 @@ License: CC BY 4.0.</div>
           <div class="icon-img icon-folder"></div>
           <div class="icon-label">IMAGES</div>
         </div>
-        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
+        <div class="icon static-icon" ondblclick="openWindow('interviews-notes-window')">
           <div class="icon-img icon-folder"></div>
+          <div class="icon-label">NOTES</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
+          <div class="icon-img icon-txt"></div>
           <div class="icon-label">abundance of knowledge</div>
         </div>
         <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
-          <div class="icon-img icon-folder"></div>
+          <div class="icon-img icon-txt"></div>
           <div class="icon-label">just fluff</div>
         </div>
         <div class="icon static-icon" ondblclick="openWindow('North London-window')">
-          <div class="icon-img icon-folder"></div>
+          <div class="icon-img icon-txt"></div>
           <div class="icon-label">fluid gone Through to Heaven</div>
         </div>
       </div>
@@ -645,12 +639,36 @@ License: CC BY 4.0.</div>
       </div>
     </div>
   </div>
+
+  <!-- INTERVIEWS: NOTES -->
+  <div class="window win98-window" id="interviews-notes-window" style="top:115px; left:230px; width:340px;">
+    <div class="title-bar" onmousedown="dragStart(event,'interviews-notes-window')">
+      <div class="title-bar-text">INTERVIEWS \ NOTES</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('interviews-notes-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('interviews-notes-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('facts-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">facts.txt</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('extermination-window')">
+          <div class="icon-img icon-egg"></div>
+          <div class="icon-label">hortus S</div>
+        </div>
+      </div>
+    </div>
+  </div>
 <div id="taskbar">
   <button class="button" id="start-btn">&#x229E; Start</button>
   <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
   <div class="taskbar-time" id="clock">00:00</div>
 </div>
 
+</div>
 </div>
 
 <script>
