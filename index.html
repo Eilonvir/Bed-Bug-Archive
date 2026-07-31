@@ -19,17 +19,6 @@
     position: relative;
   }
 
-  #screen-frame {
-    position: fixed;
-    inset: 28px;
-    background-color: #2b2418;
-    background-image: url('images/Grandflrs.jpg');
-    background-size: cover;
-    background-position: center;
-    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.75);
-    overflow: hidden;
-  }
-
   #boot-screen {
     position: fixed;
     inset: 0;
@@ -84,8 +73,16 @@
 
   .icon-folder { background: url("images/icons/folder.svg") center/contain no-repeat; filter: brightness(1.2) drop-shadow(0.6px 0.6px #000); }
   .icon-txt { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat; }
-  .icon-exe { background: url("images/icons/puter.png") center/contain no-repeat; }
+  .icon-exe { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='4' width='28' height='24' fill='%23c0c0c0' stroke='%23000' stroke-width='1'/%3E%3Crect x='5' y='7' width='22' height='14' fill='%23000080'/%3E%3C/svg%3E") center/contain no-repeat; }
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
+  .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
+  .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
+
+  .icon-grid { display: flex; flex-wrap: wrap; gap: 14px; padding: 4px 0 8px; }
+  .icon.static-icon { position: static; }
+
+  #interviews-window .window-content { background-color: var(--surface); }
+
   .icon-label {
     font-family: 'Courier New', monospace;
     font-size: 0.62rem;
@@ -141,7 +138,20 @@
   .window-content em { color: #666; font-style: italic; }
   .window-content h3 { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #000; margin: 0.8rem 0 0.5rem; padding-bottom: 0.2rem; }
   .window-content audio { width: 100%; margin: 0.4rem 0; accent-color: #000080; }
-  .window-content img { width: 100%; max-width: 400px; display: block; margin: 0.6rem 0; filter: grayscale(20%); }
+  .window-content img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 0.6rem 0;
+    filter: grayscale(20%);
+    resize: both;
+    overflow: auto;
+    object-fit: contain;
+    min-width: 120px;
+    min-height: 80px;
+    max-height: 600px;
+    border: 1px solid #999;
+  }
   .img-caption { font-size: 0.58rem; color: #666; margin-bottom: 0.6rem; }
 
   .carousel-viewport {
@@ -158,6 +168,12 @@
     max-width: 100%;
     max-height: 100%;
     margin: 0;
+    resize: both;
+    overflow: auto;
+    object-fit: contain;
+    min-width: 120px;
+    min-height: 80px;
+    border: 1px solid #999;
   }
 
   .carousel-nav {
@@ -205,7 +221,7 @@
   <div class="boot-line">Checking for parasites.................. OK</div>
   <div class="boot-line">Checking for delusions.................. OK</div>
   <div class="boot-line">Mounting research logs.................. OK</div>
-  <div class="boot-line">&gt; He asked me why I am interested in bed bugs. I told him I had them.</div>
+  <div class="boot-line">&gt; A cadaver lying at home, waiting to be found.</div>
 </div>
 
 <div id="screen-frame">
@@ -219,14 +235,14 @@
       </div>
     </div>
     <div class="window-content" style="text-align:center; padding:18px;">
-      <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadever is lying at home, waiting to be found</p>
+      <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadever is lying at home, <em>waiting to be found</em></p>
       <p style="font-size:0.6rem; color:#666; margin-top:10px; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN</p>
     </div>
   </div>
 
-  <div class="icon" style="top:40px; left:30px;" ondblclick="openWindow('brighton-window')">
+  <div class="icon" style="top:10px; left:30px;" ondblclick="openWindow('interviews-window')">
     <div class="icon-img icon-folder"></div>
-    <div class="icon-label">abundance of knowledge</div>
+    <div class="icon-label">INTERVIEWS</div>
   </div>
 
   <div class="icon" style="top:150px; left:30px;" ondblclick="openWindow('westlondon-window')">
@@ -239,46 +255,26 @@
     <div class="icon-label">fluid gone Through to Heaven</div>
   </div>
 
-  <div class="icon" style="top:380px; left:30px;" ondblclick="openWindow('nlp-window')">
+  <div class="icon" style="top:370px; left:30px;" ondblclick="openWindow('nlp-window')">
     <div class="icon-img icon-exe"></div>
     <div class="icon-label">analysis.exe</div>
   </div>
 
-  <div class="icon" style="top:480px; left:30px;" ondblclick="openWindow('about-window')">
+  <div class="icon" style="top: 200px; left:30px;" ondblclick="openWindow('about-window')">
     <div class="icon-img icon-txt"></div>
     <div class="icon-label">README.txt</div>
   </div>
 
-  <div class="icon" style="top:440px; right:80px;" ondblclick="openWindow('facts-window')">
-    <div class="icon-img icon-txt"></div>
-    <div class="icon-label">facts.txt</div>
-  </div>
 
   <div class="icon" style="top:320px; right:80px;" ondblclick="openWindow('morgellons-window')">
     <div class="icon-img icon-egg"></div>
     <div class="icon-label">Morgellons</div>
   </div>
 
-  <div class="icon" style="top: 210px; right: 80px;" ondblclick="openWindow('september-window')">
-    <div class="icon-img icon-egg"></div>
+  <div class="icon" style="bottom: 100px; right: 80px;" ondblclick="openWindow('september-window')">
+    <div class="icon-img icon-bed"></div>
     <div class="icon-label">September</div>
   </div>
-
-  <div class="icon" style="top: 110px; right: 80px;" ondblclick="openWindow('house-window')">
-    <div class="icon-img icon-egg"></div>
-    <div class="icon-label">the house</div>
-  </div>
-
-  <div class="icon" style="top:30px; right:80px;" ondblclick="openWindow('img-window')">
-    <div class="icon-img icon-egg"></div>
-    <div class="icon-label">bugImg</div>
-  </div>
-
- <div class="icon" style="top: 560px; right:80px;" ondblclick="openWindow('extermination-window')">
-    <div class="icon-img icon-egg"></div>
-    <div class="icon-label">hortus sanititis</div>
-  </div> 
-
 
 
   <!-- BRIGHTON -->
@@ -356,7 +352,7 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
     <div class="window-content">
       <h3>Field log</h3>
       <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">Content warning: this log contains descriptions of death and human decomposition.</p>
-      <p>I get to the address before Matthew – he tells me on the phone to enter through the side alley </p>
+      <p>I get to the address before Matthew – he tells me on the phone to enter through the side alley. </p>
       <p>I am joining an after death clean up – where a person's body has been found only after a while. As you decompose, your body seeps down and becomes this black debris, embedded into the floorings and furniture.</p>
       <p>The neighbor is the first to greet me. He is dumbfounded when I ask about the pest control people – I guess it would be an insult to be disposed of in the same manner as pests and trash.</p>
       <p>Warren, the other person in that day says it is his first time on this kind of job. He is visibly shaken by it. The nature of the job is dismantling any piece of the house the body had amalgamated with. Then placing them in bags.  </p>
@@ -390,7 +386,7 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">clinical distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
+      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
       <div class="hover-hint">correlation ≠ causation.</div>
     </div>
@@ -511,6 +507,7 @@ She calls her manager - but her card doesn't  work on that door. One of the gard
     </div>
     <div class="window-content">
       <p>What happened in September 2025</p>
+      <p>A minimal bed - maybe pixelated "click me" to reveal the TD sketch as bugs all over - under the images, videos from September will run OR the interactive fiction play button</p>
       <p>To come - images? WhatsApp screenshots? or just the bed bugs on the mattress? Captioned omg omg omg</p>
 
     </div>
@@ -572,17 +569,104 @@ License: CC BY 4.0.</div>
       <p>Wikimedia Commons images</p>
       <p>Bed bug illustrations and so on</p>
 
+       <div class="carousel-viewport">
+        <img id="bug-carousel-img" src="" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="img-caption" id="bug-carousel-caption"></div>
+      <div class="carousel-nav">
+        <button id="bug-prev" aria-label="Previous image">&#9664;</button>
+        <button id="bug-next" aria-label="Next image">&#9654;</button>
+        
+
+
+    </div>
+  </div>
+  </div>
+
+  <!-- INTERVIEWS -->
+  <div class="window win98-window" id="interviews-window" style="top:100px; left:200px; width:440px;">
+    <div class="title-bar" onmousedown="dragStart(event,'interviews-window')">
+      <div class="title-bar-text">INTERVIEWS</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('interviews-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('interviews-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('interviews-images-window')">
+          <div class="icon-img icon-folder"></div>
+          <div class="icon-label">IMAGES</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('interviews-notes-window')">
+          <div class="icon-img icon-folder"></div>
+          <div class="icon-label">NOTES</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">abundance of knowledge</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">just fluff</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('North London-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">fluid gone Through to Heaven</div>
+        </div>
+      </div>
     </div>
   </div>
 
-</div>
+  <!-- INTERVIEWS: IMAGES -->
+  <div class="window win98-window" id="interviews-images-window" style="top:130px; left:240px; width:340px;">
+    <div class="title-bar" onmousedown="dragStart(event,'interviews-images-window')">
+      <div class="title-bar-text">INTERVIEWS \ IMAGES</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('interviews-images-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('interviews-images-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('img-window')">
+          <div class="icon-img icon-egg"></div>
+          <div class="icon-label">bugImg</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('house-window')">
+          <div class="icon-img icon-house"></div>
+          <div class="icon-label">house</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- INTERVIEWS: NOTES -->
+  <div class="window win98-window" id="interviews-notes-window" style="top:115px; left:230px; width:340px;">
+    <div class="title-bar" onmousedown="dragStart(event,'interviews-notes-window')">
+      <div class="title-bar-text">INTERVIEWS \ NOTES</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('interviews-notes-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('interviews-notes-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('facts-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">facts.txt</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('extermination-window')">
+          <div class="icon-img icon-egg"></div>
+          <div class="icon-label">hortus S</div>
+        </div>
+      </div>
+    </div>
+  </div>
 <div id="taskbar">
   <button class="button" id="start-btn">&#x229E; Start</button>
   <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
   <div class="taskbar-time" id="clock">00:00</div>
-</div>
-
 </div>
 
 <script>
@@ -631,6 +715,33 @@ License: CC BY 4.0.</div>
     renderHouseCarousel();
   };
   renderHouseCarousel();
+
+  function renderBugCarousel() {
+    const img = document.getElementById('bug-carousel-img');
+    const caption = document.getElementById('bug-carousel-caption');
+    img.style.display = '';
+    img.src = bugImages[bugIndex].src;
+    caption.textContent = bugImages[bugIndex].caption;
+  }
+  const bugImages = [
+    { src: 'images/buglife/cimexil.jpg', caption: 'Bug.' },
+    { src: 'images/buglife/cimexil2.jpg', caption: 'The Bug.' },
+    { src: 'images/buglife/cimexil3.jpg', caption: 'Bug?.' },
+    { src: 'images/buglife/cimexil7.jpg', caption: 'A bug.' },
+    { src: 'images/buglife/cimexil8.jpg', caption: 'The bug.' },
+    { src: 'images/buglife/cimexil9.jpeg', caption: 'Bug.' },
+  ];
+  let bugIndex = 0;
+
+  document.getElementById('bug-prev').onclick = function() {
+    bugIndex = (bugIndex - 1 + bugImages.length) % bugImages.length;
+    renderBugCarousel();
+  };
+  document.getElementById('bug-next').onclick = function() {
+    bugIndex = (bugIndex + 1) % bugImages.length;
+    renderBugCarousel();
+  };
+  renderBugCarousel();
 
   function updateClock() {
     const n = new Date();
