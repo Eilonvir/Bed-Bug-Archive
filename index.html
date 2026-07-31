@@ -702,8 +702,9 @@ License: CC BY 4.0.</div>
 <script>
   const bootScreen = document.getElementById('boot-screen');
   const desktop = document.getElementById('desktop');
+  const frame = document.getElementById('screen-frame');
+  const windowS = document.getElementById('september-window');
   
-
 
   setTimeout(() => {
     bootScreen.classList.add('fade-out');
@@ -800,15 +801,26 @@ License: CC BY 4.0.</div>
   setInterval(updateClock, 1000);
 
   const openWindows = new Set();
+  let septMode =false;
+
 
   function openWindow(id) {
     const win = document.getElementById(id);
     if (!win) return;
+
     win.classList.add('open');
     win.style.zIndex = getTopZ();
     openWindows.add(id);
     updateTaskbar();
+
     if (id !== 'entry-window') closeWindow('entry-window');
+
+   septMode = (id === 'september-window');
+   if (septMode) {
+      frame.style.filter = 'grayscale(1)';
+    } else {
+      frame.style.filter = 'saturate(0.6)';
+    }
   }
 
   function closeWindow(id) {
@@ -818,6 +830,15 @@ License: CC BY 4.0.</div>
     win.classList.remove('open');
     openWindows.delete(id);
     updateTaskbar();
+
+    if (id === 'september-window') {
+      septMode = false;
+    }
+    if (septMode) {
+      frame.style.filter = 'grayscale(1)';
+    } else {
+      frame.style.filter = 'saturate(0.6)';
+    }
   }
 
   function getTopZ() {
