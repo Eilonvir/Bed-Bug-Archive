@@ -24,6 +24,7 @@
     inset: 28px;
     background-color: #2b2418;
     background-image: url('images/Grandflrs.jpg');
+    filter: saturate(0.6);
     background-size: cover;
     background-position: center;
     box-shadow: inset 0 0 0 2px rgba(255,255,255,0.75);
@@ -197,6 +198,11 @@
     border-top: 1px solid #ccc;
   }
   .carousel-nav button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
+  .story-counter { font-size: 0.6rem; color: #666; min-width: 34px; text-align: center; }
+
+  .story-viewport { min-height: 160px; max-height: 420px; overflow-y: auto; padding-right: 2px; }
+  .story-slide { display: none; }
+  .story-slide.active { display: block; }
 
   .nlp-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px dotted #ccc; font-size: 0.72rem; }
   .nlp-term { min-width: 110px; color: #000080; }
@@ -262,12 +268,6 @@
   <div class="icon" style="top: 200px; left:30px;" ondblclick="openWindow('about-window')">
     <div class="icon-img icon-txt"></div>
     <div class="icon-label">README.txt</div>
-  </div>
-
-
-  <div class="icon" style="top:320px; right:80px;" ondblclick="openWindow('morgellons-window')">
-    <div class="icon-img icon-egg"></div>
-    <div class="icon-label">Morgellons</div>
   </div>
 
   <div class="icon" style="bottom: 100px; right: 80px;" ondblclick="openWindow('september-window')">
@@ -377,17 +377,45 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
       </div>
     </div>
     <div class="window-content">
-      <h3>100 PubMed abstracts — delusory parasitosis</h3>
-      <p style="font-size:0.68rem; color:#555;">131/1970 sentences: demographic + diagnostic co-occurrence (6.6%)<br>Hover over terms to translate.</p>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">women</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:100%"></div></div><span class="nlp-count">(13)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">female</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:77%"></div></div><span class="nlp-count">(10)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">woman</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:69%"></div></div><span class="nlp-count">(9)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">clinical distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
-      <div class="hover-hint">correlation ≠ causation.</div>
+      <div class="story-viewport" id="story-viewport">
+
+        <div class="story-slide" data-story-slide>
+          <p>Delusory parasitosis (DP): a fixed, false belief that one is infested by parasites, insects, or other organisms, held despite the absence of any medical or entomological evidence.</p>
+           <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">List of DP patient characteristics, Hinkle (2000). The Lynch 1993 line in particular infuriated me on behalf of an abstract patient.</p>
+          <div style="font-style: italic; line-height: 2.2; margin: 0.5rem 0; padding-left: 1rem; border-left: 2px solid #ccc;">
+            Reject possibility of psychological or other explanations (Trabert 1995). "I'm not crazy." "I'm not imagining this."<br>
+            Vehemence indicative of DP (Zanol et al. 1998).<br>
+            "Exceptional strength of conviction regarding infestation" (Lynch 1993) — almost diagnostic for DP (Webb 1993).
+          </div>
+          
+        </div>
+
+        <div class="story-slide" data-story-slide>
+          <h3>100 PubMed abstracts — delusory parasitosis</h3>
+
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">women</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:100%"></div></div><span class="nlp-count">(13)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">female</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:77%"></div></div><span class="nlp-count">(10)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">woman</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:69%"></div></div><span class="nlp-count">(9)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">clinical distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
+          <div class="hover-hint">correlation ≠ causation.</div>
+        </div>
+
+        <div class="story-slide" data-story-slide>
+          <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">Content warning: self harm.</p>
+          <img src="images/scratching.jpg" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">"I've been scratching myself."</div>
+        </div>
+      </div>
+
+      <div class="carousel-nav">
+        <button id="story-prev" aria-label="Previous slide">&#9664;</button>
+        <span class="story-counter" id="story-counter"></span>
+        <button id="story-next" aria-label="Next slide">&#9654;</button>
+      </div>
     </div>
   </div>
 
@@ -674,6 +702,8 @@ License: CC BY 4.0.</div>
 <script>
   const bootScreen = document.getElementById('boot-screen');
   const desktop = document.getElementById('desktop');
+  
+
 
   setTimeout(() => {
     bootScreen.classList.add('fade-out');
@@ -744,6 +774,23 @@ License: CC BY 4.0.</div>
     renderBugCarousel();
   };
   renderBugCarousel();
+
+  const storySlides = document.querySelectorAll('#story-viewport .story-slide');
+  let storyIndex = 0;
+
+  function renderStory() {
+    storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
+    document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
+  }
+  document.getElementById('story-prev').onclick = function() {
+    storyIndex = (storyIndex - 1 + storySlides.length) % storySlides.length;
+    renderStory();
+  };
+  document.getElementById('story-next').onclick = function() {
+    storyIndex = (storyIndex + 1) % storySlides.length;
+    renderStory();
+  };
+  renderStory();
 
   function updateClock() {
     const n = new Date();
@@ -853,6 +900,7 @@ License: CC BY 4.0.</div>
     handle.addEventListener('mousedown', e => resizeStart(e, win.id));
     win.appendChild(handle);
   });
+
 </script>
 </body>
 </html>
