@@ -23,8 +23,7 @@
     position: fixed;
     inset: 28px;
     background-color: #2b2418;
-    background-image: url('images/Grandflrs.jpg'); 
-    filter: saturate(0.5);
+    background-image: url('images/Grandflrs.jpg');
     background-size: cover;
     background-position: center;
     box-shadow: inset 0 0 0 2px rgba(255,255,255,0.75);
@@ -89,6 +88,7 @@
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
   .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
+  .icon-kill { background: url("images/icons/kill.jpg?v=2") center/contain no-repeat; }
 
   .icon-grid { display: flex; flex-wrap: wrap; gap: 14px; padding: 4px 0 8px; }
   .icon.static-icon { position: static; }
@@ -200,6 +200,11 @@
     border-top: 1px solid #ccc;
   }
   .carousel-nav button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
+  .story-counter { font-size: 0.6rem; color: #666; min-width: 34px; text-align: center; }
+
+  .story-viewport { min-height: 160px; max-height: 420px; overflow-y: auto; padding-right: 2px; }
+  .story-slide { display: none; }
+  .story-slide.active { display: block; }
 
   .nlp-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px dotted #ccc; font-size: 0.72rem; }
   .nlp-term { min-width: 110px; color: #000080; }
@@ -382,7 +387,7 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
+      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">clinical distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
       <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
       <div class="hover-hint">correlation ≠ causation.</div>
     </div>
@@ -652,7 +657,7 @@ License: CC BY 4.0.</div>
           <div class="icon-label">facts.txt</div>
         </div>
         <div class="icon static-icon" ondblclick="openWindow('extermination-window')">
-          <div class="icon-img icon-egg"></div>
+          <div class="icon-img icon-kill"></div>
           <div class="icon-label">hortus S</div>
         </div>
       </div>
@@ -670,6 +675,9 @@ License: CC BY 4.0.</div>
 <script>
   const bootScreen = document.getElementById('boot-screen');
   const desktop = document.getElementById('desktop');
+  const frame = document.getElementById('screen-frame');
+  const windowS = document.getElementById('september-window');
+  
 
   setTimeout(() => {
     bootScreen.classList.add('fade-out');
@@ -741,6 +749,23 @@ License: CC BY 4.0.</div>
   };
   renderBugCarousel();
 
+  const storySlides = document.querySelectorAll('#story-viewport .story-slide');
+  let storyIndex = 0;
+
+  function renderStory() {
+    storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
+    document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
+  }
+  document.getElementById('story-prev').onclick = function() {
+    storyIndex = (storyIndex - 1 + storySlides.length) % storySlides.length;
+    renderStory();
+  };
+  document.getElementById('story-next').onclick = function() {
+    storyIndex = (storyIndex + 1) % storySlides.length;
+    renderStory();
+  };
+  renderStory();
+
   function updateClock() {
     const n = new Date();
     document.getElementById('clock').textContent = String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
@@ -749,15 +774,26 @@ License: CC BY 4.0.</div>
   setInterval(updateClock, 1000);
 
   const openWindows = new Set();
+  let septMode =false;
+
 
   function openWindow(id) {
     const win = document.getElementById(id);
     if (!win) return;
+
     win.classList.add('open');
     win.style.zIndex = getTopZ();
     openWindows.add(id);
     updateTaskbar();
+
     if (id !== 'entry-window') closeWindow('entry-window');
+
+   septMode = (id === 'september-window');
+   if (septMode) {
+      frame.style.filter = 'grayscale(1)';
+    } else {
+      frame.style.filter = 'saturate(0.6)';
+    }
   }
 
   function closeWindow(id) {
@@ -767,6 +803,15 @@ License: CC BY 4.0.</div>
     win.classList.remove('open');
     openWindows.delete(id);
     updateTaskbar();
+
+    if (id === 'september-window') {
+      septMode = false;
+    }
+    if (septMode) {
+      frame.style.filter = 'grayscale(1)';
+    } else {
+      frame.style.filter = 'saturate(0.6)';
+    }
   }
 
   function getTopZ() {
@@ -849,6 +894,7 @@ License: CC BY 4.0.</div>
     handle.addEventListener('mousedown', e => resizeStart(e, win.id));
     win.appendChild(handle);
   });
+
 </script>
 </body>
 </html>
