@@ -700,6 +700,7 @@ License: CC BY 4.0.</div>
 <div id="taskbar">
   <button class="button" id="start-btn">&#x229E; Start</button>
   <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
+  <button class="button" id="fullscreen-btn" onclick="fullScreen()" title="Toggle fullscreen (Shift+Alt+F)">&#x26F6;</button>
   <div class="taskbar-time" id="clock">00:00</div>
 </div>
 
@@ -809,7 +810,13 @@ License: CC BY 4.0.</div>
 
   const openWindows = new Set();
   let septMode =false;
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
 
+  function updateFullscreenUI() {
+    const active = Boolean(document.fullscreenElement);
+    fullscreenBtn.style.display = active ? 'none' : '';
+    fullscreenBtn.setAttribute('aria-pressed', String(active));
+  }
 
   function openWindow(id) {
     const win = document.getElementById(id);
@@ -853,6 +860,28 @@ License: CC BY 4.0.</div>
     document.querySelectorAll('.win98-window.open').forEach(w => { const z = parseInt(w.style.zIndex)||100; if(z>max) max=z; });
     return max + 1;
   }
+  
+
+  function fullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+    updateFullscreenUI();
+  }
+
+  document.addEventListener('fullscreenchange', updateFullscreenUI);
+
+  document.addEventListener('keydown', (event) => {
+    const isCombo = event.shiftKey && event.altKey && event.key.toLowerCase() === 'f';
+    if (isCombo) {
+      event.preventDefault();
+      fullScreen();
+    }
+  });
+
+  updateFullscreenUI();
 
   function updateTaskbar() {
     const c = document.getElementById('taskbar-buttons');
