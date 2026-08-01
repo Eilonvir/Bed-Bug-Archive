@@ -873,14 +873,6 @@ License: CC BY 4.0.</div>
 
   document.addEventListener('fullscreenchange', updateFullscreenUI);
 
-  document.addEventListener('keydown', (event) => {
-    const isCombo = event.shiftKey && event.altKey && event.key.toLowerCase() === 'f';
-    if (isCombo) {
-      event.preventDefault();
-      fullScreen();
-    }
-  });
-
   updateFullscreenUI();
 
   function updateTaskbar() {
