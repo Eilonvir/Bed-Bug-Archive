@@ -74,7 +74,7 @@
     user-select: none;
   }
 
-  .icon:hover .icon-label { background: #a41a94; color: #fff; }
+  .icon:hover .icon-label { background: #a41a94; color: #ffffff; }
 
   .icon-img {
     width: 70px;
@@ -97,8 +97,8 @@
   .icon-label {
     font-family: 'Courier New', monospace;
     font-size: 0.62rem;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
+    color: #ffffff00;
+    text-shadow: 1px 1px 1px #000000;
     padding: 1px 3px;
     line-height: 1.3;
   }
@@ -117,7 +117,7 @@
   .win98-window .title-bar { cursor: move; user-select: none; flex: 0 0 auto; }
 
   .window-content {
-    background: #fff;
+    background: #c1bdbd;
     padding: 10px;
     overflow-y: auto;
     flex: 1 1 auto;
@@ -171,7 +171,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: #eee;
+    background: #c1bdbd;
   }
   .carousel-viewport img {
     width: auto;
@@ -194,7 +194,7 @@
     gap: 10px;
     position: sticky;
     bottom: 0;
-    background: #fff;
+    background: #c1bdbd;
     padding: 6px 0 2px;
     border-top: 1px solid #ccc;
   }
@@ -251,7 +251,7 @@
       </div>
     </div>
     <div class="window-content" style="text-align:center; padding:18px;">
-      <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadever is lying at home, waiting to be found</p>
+      <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadever is lying at home, waiting to be found.</p>
       <p style="font-size:0.6rem; color:#666; margin-top:10px; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN</p>
     </div>
   </div>
@@ -624,6 +624,18 @@ License: CC BY 4.0.</div>
     </div>
     <div class="window-content">
       <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">KNOWLEDGE</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">FLUFF</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('North London-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">FLUID</div>
+        </div>
         <div class="icon static-icon" ondblclick="openWindow('interviews-images-window')">
           <div class="icon-img icon-folder"></div>
           <div class="icon-label">IMAGES</div>
@@ -631,18 +643,6 @@ License: CC BY 4.0.</div>
         <div class="icon static-icon" ondblclick="openWindow('interviews-notes-window')">
           <div class="icon-img icon-folder"></div>
           <div class="icon-label">NOTES</div>
-        </div>
-        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
-          <div class="icon-img icon-txt"></div>
-          <div class="icon-label">abundance of knowledge</div>
-        </div>
-        <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
-          <div class="icon-img icon-txt"></div>
-          <div class="icon-label">just fluff</div>
-        </div>
-        <div class="icon static-icon" ondblclick="openWindow('North London-window')">
-          <div class="icon-img icon-txt"></div>
-          <div class="icon-label">fluid gone Through to Heaven</div>
         </div>
       </div>
     </div>
@@ -701,6 +701,7 @@ License: CC BY 4.0.</div>
   <button class="button" id="start-btn">&#x229E; Start</button>
   <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
   <div class="taskbar-time" id="clock">00:00</div>
+  <button class="button" id="fullscreen-btn" onclick="fullScreen()" title="Toggle fullscreen (Shift+Alt+F)">&#x26F6;</button>
 </div>
 
 </div>
@@ -809,7 +810,13 @@ License: CC BY 4.0.</div>
 
   const openWindows = new Set();
   let septMode =false;
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
 
+  function updateFullscreenUI() {
+    const active = Boolean(document.fullscreenElement);
+    fullscreenBtn.style.display = active ? 'none' : '';
+    fullscreenBtn.setAttribute('aria-pressed', String(active));
+  }
 
   function openWindow(id) {
     const win = document.getElementById(id);
@@ -853,6 +860,20 @@ License: CC BY 4.0.</div>
     document.querySelectorAll('.win98-window.open').forEach(w => { const z = parseInt(w.style.zIndex)||100; if(z>max) max=z; });
     return max + 1;
   }
+  
+
+  function fullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+    updateFullscreenUI();
+  }
+
+  document.addEventListener('fullscreenchange', updateFullscreenUI);
+
+  updateFullscreenUI();
 
   function updateTaskbar() {
     const c = document.getElementById('taskbar-buttons');
