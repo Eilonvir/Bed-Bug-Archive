@@ -23,8 +23,8 @@
     position: fixed;
     inset: 28px;
     background-color: #2b2418;
-    background-image: url('images/Grandflrs.jpg'); 
-    filter: sepia (0.8);
+    background-image: url('images/Grandflrs.jpg');
+    filter: saturate(0.6);
     background-size: cover;
     background-position: center;
     box-shadow: inset 0 0 0 2px rgba(255,255,255,0.75);
@@ -74,7 +74,7 @@
     user-select: none;
   }
 
-  .icon:hover .icon-label { background: #a41a94; color: #fff; }
+  .icon:hover .icon-label { background: #a41a94; color: #ffffff; }
 
   .icon-img {
     width: 70px;
@@ -89,17 +89,16 @@
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
   .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
+  .icon-kill { background: url("images/icons/kill.jpg?v=2") center/contain no-repeat; }
 
   .icon-grid { display: flex; flex-wrap: wrap; gap: 14px; padding: 4px 0 8px; }
   .icon.static-icon { position: static; }
 
-  #interviews-window .window-content { background-color: var(--surface); }
-
   .icon-label {
     font-family: 'Courier New', monospace;
     font-size: 0.62rem;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
+    color: #ffffff00;
+    text-shadow: 1px 1px 1px #000000;
     padding: 1px 3px;
     line-height: 1.3;
   }
@@ -118,7 +117,7 @@
   .win98-window .title-bar { cursor: move; user-select: none; flex: 0 0 auto; }
 
   .window-content {
-    background: #fff;
+    background: #c1bdbd;
     padding: 10px;
     overflow-y: auto;
     flex: 1 1 auto;
@@ -172,7 +171,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: #eee;
+    background: #c1bdbd;
   }
   .carousel-viewport img {
     width: auto;
@@ -195,11 +194,16 @@
     gap: 10px;
     position: sticky;
     bottom: 0;
-    background: #fff;
+    background: #c1bdbd;
     padding: 6px 0 2px;
     border-top: 1px solid #ccc;
   }
   .carousel-nav button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
+  .story-counter { font-size: 0.6rem; color: #666; min-width: 34px; text-align: center; }
+
+  .story-viewport { min-height: 160px; max-height: 420px; overflow-y: auto; padding-right: 2px; }
+  .story-slide { display: none; }
+  .story-slide.active { display: block; }
 
   .nlp-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px dotted #ccc; font-size: 0.72rem; }
   .nlp-term { min-width: 110px; color: #000080; }
@@ -265,12 +269,6 @@
   <div class="icon" style="top: 200px; left:30px;" ondblclick="openWindow('about-window')">
     <div class="icon-img icon-txt"></div>
     <div class="icon-label">README.txt</div>
-  </div>
-
-
-  <div class="icon" style="top:320px; right:80px;" ondblclick="openWindow('morgellons-window')">
-    <div class="icon-img icon-egg"></div>
-    <div class="icon-label">Morgellons</div>
   </div>
 
   <div class="icon" style="bottom: 100px; right: 80px;" ondblclick="openWindow('september-window')">
@@ -380,17 +378,47 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
       </div>
     </div>
     <div class="window-content">
-      <h3>100 PubMed abstracts — delusory parasitosis</h3>
-      <p style="font-size:0.68rem; color:#555;">131/1970 sentences: demographic + diagnostic co-occurrence (6.6%)<br>Hover over terms to translate.</p>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">women</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:100%"></div></div><span class="nlp-count">(13)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">female</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:77%"></div></div><span class="nlp-count">(10)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">woman</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:69%"></div></div><span class="nlp-count">(9)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
-      <div class="hover-hint">correlation ≠ causation.</div>
+      <div class="story-viewport" id="story-viewport">
+
+        <div class="story-slide" data-story-slide>
+          <p>Delusory parasitosis (DP): a fixed, false belief that one is infested by parasites, insects, or other organisms, held despite the absence of any medical or entomological evidence.</p>
+           <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">List of DP patient characteristics, Hinkle (2000). The Lynch 1993 line in particular infuriated me on behalf of an abstract patient.</p>
+          <div style="font-style: italic; line-height: 2.2; margin: 0.5rem 0; padding-left: 1rem; border-left: 2px solid #ccc;">
+            Reject possibility of psychological or other explanations (Trabert 1995). "I'm not crazy." "I'm not imagining this."<br>
+            Vehemence indicative of DP (Zanol et al. 1998).<br>
+            "Exceptional strength of conviction regarding infestation" (Lynch 1993) — almost diagnostic for DP (Webb 1993).
+          </div>
+          
+        </div>
+
+        <div class="story-slide" data-story-slide>
+
+        <p>DP disproportionately affects women - so if you were to pull characteristics of DP patient demographics you'd get 'female', 'elderly', 'isolated' and so on.</p>
+          <h3>100 PubMed abstracts — delusory parasitosis</h3>
+
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">women</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:100%"></div></div><span class="nlp-count">(13)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">female</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:77%"></div></div><span class="nlp-count">(10)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">woman</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:69%"></div></div><span class="nlp-count">(9)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">clinical distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
+          <div class="hover-hint">correlation ≠ causation.</div>
+        </div>
+
+        <div class="story-slide" data-story-slide>
+          <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">Content warning: self harm.</p>
+          <img src="images/scratching.jpg" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">"I've been scratching myself."</div>
+        </div>
+      </div>
+
+      <div class="carousel-nav">
+        <button id="story-prev" aria-label="Previous slide">&#9664;</button>
+        <span class="story-counter" id="story-counter"></span>
+        <button id="story-next" aria-label="Next slide">&#9654;</button>
+      </div>
     </div>
   </div>
 
@@ -596,6 +624,18 @@ License: CC BY 4.0.</div>
     </div>
     <div class="window-content">
       <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">KNOWLEDGE</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">FLUFF</div>
+        </div>
+        <div class="icon static-icon" ondblclick="openWindow('North London-window')">
+          <div class="icon-img icon-txt"></div>
+          <div class="icon-label">FLUID</div>
+        </div>
         <div class="icon static-icon" ondblclick="openWindow('interviews-images-window')">
           <div class="icon-img icon-folder"></div>
           <div class="icon-label">IMAGES</div>
@@ -603,18 +643,6 @@ License: CC BY 4.0.</div>
         <div class="icon static-icon" ondblclick="openWindow('interviews-notes-window')">
           <div class="icon-img icon-folder"></div>
           <div class="icon-label">NOTES</div>
-        </div>
-        <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
-          <div class="icon-img icon-txt"></div>
-          <div class="icon-label">abundance of knowledge</div>
-        </div>
-        <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
-          <div class="icon-img icon-txt"></div>
-          <div class="icon-label">just fluff</div>
-        </div>
-        <div class="icon static-icon" ondblclick="openWindow('North London-window')">
-          <div class="icon-img icon-txt"></div>
-          <div class="icon-label">fluid gone Through to Heaven</div>
         </div>
       </div>
     </div>
@@ -654,12 +682,16 @@ License: CC BY 4.0.</div>
     </div>
     <div class="window-content">
       <div class="icon-grid">
+        <div class="icon static-icon" ondblclick="openWindow('nlp-window')">
+          <div class="icon-img icon-exe"></div>
+          <div class="icon-label">analysis.exe</div>
+        </div>
         <div class="icon static-icon" ondblclick="openWindow('facts-window')">
           <div class="icon-img icon-txt"></div>
           <div class="icon-label">facts.txt</div>
         </div>
         <div class="icon static-icon" ondblclick="openWindow('extermination-window')">
-          <div class="icon-img icon-egg"></div>
+          <div class="icon-img icon-kill"></div>
           <div class="icon-label">hortus S</div>
         </div>
       </div>
@@ -669,6 +701,7 @@ License: CC BY 4.0.</div>
   <button class="button" id="start-btn">&#x229E; Start</button>
   <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
   <div class="taskbar-time" id="clock">00:00</div>
+  <button class="button" id="fullscreen-btn" onclick="fullScreen()" title="Toggle fullscreen (Shift+Alt+F)">&#x26F6;</button>
 </div>
 
 </div>
@@ -677,6 +710,9 @@ License: CC BY 4.0.</div>
 <script>
   const bootScreen = document.getElementById('boot-screen');
   const desktop = document.getElementById('desktop');
+  const frame = document.getElementById('screen-frame');
+  const windowS = document.getElementById('september-window');
+  
 
   setTimeout(() => {
     bootScreen.classList.add('fade-out');
@@ -748,6 +784,23 @@ License: CC BY 4.0.</div>
   };
   renderBugCarousel();
 
+  const storySlides = document.querySelectorAll('#story-viewport .story-slide');
+  let storyIndex = 0;
+
+  function renderStory() {
+    storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
+    document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
+  }
+  document.getElementById('story-prev').onclick = function() {
+    storyIndex = (storyIndex - 1 + storySlides.length) % storySlides.length;
+    renderStory();
+  };
+  document.getElementById('story-next').onclick = function() {
+    storyIndex = (storyIndex + 1) % storySlides.length;
+    renderStory();
+  };
+  renderStory();
+
   function updateClock() {
     const n = new Date();
     document.getElementById('clock').textContent = String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
@@ -756,15 +809,32 @@ License: CC BY 4.0.</div>
   setInterval(updateClock, 1000);
 
   const openWindows = new Set();
+  let septMode =false;
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+  function updateFullscreenUI() {
+    const active = Boolean(document.fullscreenElement);
+    fullscreenBtn.style.display = active ? 'none' : '';
+    fullscreenBtn.setAttribute('aria-pressed', String(active));
+  }
 
   function openWindow(id) {
     const win = document.getElementById(id);
     if (!win) return;
+
     win.classList.add('open');
     win.style.zIndex = getTopZ();
     openWindows.add(id);
     updateTaskbar();
+
     if (id !== 'entry-window') closeWindow('entry-window');
+
+   septMode = (id === 'september-window');
+   if (septMode) {
+      frame.style.filter = 'grayscale(1)';
+    } else {
+      frame.style.filter = 'saturate(0.6)';
+    }
   }
 
   function closeWindow(id) {
@@ -774,6 +844,15 @@ License: CC BY 4.0.</div>
     win.classList.remove('open');
     openWindows.delete(id);
     updateTaskbar();
+
+    if (id === 'september-window') {
+      septMode = false;
+    }
+    if (septMode) {
+      frame.style.filter = 'grayscale(1)';
+    } else {
+      frame.style.filter = 'saturate(0.6)';
+    }
   }
 
   function getTopZ() {
@@ -781,6 +860,20 @@ License: CC BY 4.0.</div>
     document.querySelectorAll('.win98-window.open').forEach(w => { const z = parseInt(w.style.zIndex)||100; if(z>max) max=z; });
     return max + 1;
   }
+  
+
+  function fullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+    updateFullscreenUI();
+  }
+
+  document.addEventListener('fullscreenchange', updateFullscreenUI);
+
+  updateFullscreenUI();
 
   function updateTaskbar() {
     const c = document.getElementById('taskbar-buttons');
@@ -856,6 +949,7 @@ License: CC BY 4.0.</div>
     handle.addEventListener('mousedown', e => resizeStart(e, win.id));
     win.appendChild(handle);
   });
+
 </script>
 </body>
 </html>
