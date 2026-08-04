@@ -23,12 +23,24 @@
     position: fixed;
     inset: 28px;
     background-color: #2b2418;
-    background-image: url('images/Grandflrs.jpg');
-    filter: saturate(0.6);
-    background-size: cover;
-    background-position: center;
     box-shadow: inset 0 0 0 2px rgba(255,255,255,0.75);
     overflow: hidden;
+    --filter: saturate(0.6);
+  }
+
+  #screen-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('images/Grandflrs.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: var(--filter);
+    z-index: 0;
+  }
+
+  #screen-frame.nlp-hovering::before {
+    filter: var(--filter) grayscale(1) invert(1);
   }
 
   #boot-screen {
@@ -59,7 +71,7 @@
   @keyframes bootfade { to { opacity: 0; pointer-events: none; } }
   #boot-screen.gone { display: none; }
 
-  #desktop { width: 100%; height: 100%; position: relative; opacity: 0; transition: opacity 0.8s ease 0.5s; }
+  #desktop { width: 100%; height: 100%; position: relative; z-index: 1; opacity: 0; transition: opacity 0.8s ease 0.5s; }
   #desktop.visible { opacity: 1; }
 
   .icon {
@@ -74,7 +86,7 @@
     user-select: none;
   }
 
-  .icon:hover .icon-label { background: #a41a94; color: #ffffff; }
+  .icon:hover .icon-label { background: #2d282d56; color: #ffffff; }
 
   .icon-img {
     width: 70px;
@@ -83,9 +95,9 @@
     image-rendering: pixelated;
   }
 
-  .icon-folder { background: url("images/icons/folder.svg") center/contain no-repeat; filter: brightness(1.2) drop-shadow(0.6px 0.6px #000); }
+  .icon-folder { background: url("images/icons/folder.svg") center/contain no-repeat; filter: saturate(0.6) brightness(1.2) drop-shadow(0.6px 0.6px #000); }
   .icon-txt { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat; }
-  .icon-exe { background: url("images/icons/puterb.png") center/contain no-repeat; }
+  .icon-exe { background: url("images/icons/puter.png") center/contain no-repeat; filter: saturate(0.6);}
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
   .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
@@ -130,22 +142,20 @@
 
   .resize-handle {
     position: absolute;
-    right: 1px;
-    bottom: 1px;
     width: 16px;
     height: 16px;
     cursor: nwse-resize;
-    background: #c0c0c0
-      repeating-linear-gradient(135deg,
-        #808080 0px, #808080 1.5px,
-        transparent 1.5px, transparent 3.5px);
-    box-shadow: var(--border-raised-outer), var(--border-raised-inner);
     z-index: 5;
   }
 
-  .resize-handle:hover { background-color: #d4d0c8; }
+  .resize-handle { right: 1px; bottom: 1px; }
+  
+
+  
 
   .window-content p { margin-bottom: 0.7rem; }
+  .window-content a { color: #000080; text-decoration: underline; }
+  .window-content a:hover { color: #a41a94; }
   .window-content em { color: #666; font-style: italic; }
   .window-content h3 { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #000; margin: 0.8rem 0 0.5rem; padding-bottom: 0.2rem; }
   .window-content audio { width: 100%; margin: 0.4rem 0; accent-color: #000080; }
@@ -201,7 +211,12 @@
   .carousel-nav button { flex-shrink: 0; width: 26px; height: 26px; padding: 0; font-size: 0.6rem; cursor: pointer; }
   .story-counter { font-size: 0.6rem; color: #666; min-width: 34px; text-align: center; }
 
-  .story-viewport { min-height: 160px; max-height: 420px; overflow-y: auto; padding-right: 2px; }
+  .story-viewport { height: 400px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   overflow: hidden;
+   background: #c1bdbd; }
   .story-slide { display: none; }
   .story-slide.active { display: block; }
 
@@ -209,7 +224,18 @@
   .nlp-term { min-width: 110px; color: #000080; }
   .nlp-term-personal { display: none; color: #666; font-style: italic; }
   .nlp-row:hover .nlp-term-text { display: none; }
-  .nlp-row:hover .nlp-term-personal { display: inline; }
+  .nlp-row:hover .nlp-term-personal {
+    display: inline-block;
+    animation: squiggly-anim 0.4s linear infinite;
+  }
+
+  @keyframes squiggly-anim {
+    0%   { filter: url(#nlp-squiggly-0); }
+    25%  { filter: url(#nlp-squiggly-1); }
+    50%  { filter: url(#nlp-squiggly-2); }
+    75%  { filter: url(#nlp-squiggly-3); }
+    100% { filter: url(#nlp-squiggly-4); }
+  }
   .nlp-bar-outer { flex: 1; margin: 0 8px; background: #eee; height: 8px; border: 1px solid #999; }
   .nlp-bar-inner { height: 100%; background: #000080; }
   .nlp-row:hover .nlp-bar-inner { background: #000080; }
@@ -228,6 +254,16 @@
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="nlp-squiggly-0"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5"/></filter>
+    <filter id="nlp-squiggly-1"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="2"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5"/></filter>
+    <filter id="nlp-squiggly-2"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="3"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5"/></filter>
+    <filter id="nlp-squiggly-3"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="4"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5"/></filter>
+    <filter id="nlp-squiggly-4"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="5"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5"/></filter>
+  </defs>
+</svg>
 
 <div id="boot-screen">
   <div class="boot-line">UNTITLED_ARCHIVE.exe</div>
@@ -402,7 +438,7 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
           <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
           <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
           <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
-          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">clinical distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
+          <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
           <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
           <div class="hover-hint">correlation ≠ causation.</div>
         </div>
@@ -432,7 +468,7 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
       </div>
     </div>
     <div class="window-content" style="font-family:'Courier New',monospace; font-size:0.72rem; white-space:pre-wrap; background:#fff;">[ untitled ] — micro archive
-You are a researcher investigating bed bug infestations and a condition known as Delusory Parasitosis – when you are convinced you have a parasite in you body but cannot provide empirical evidence of it. Its symptoms such as biting and crawling sensations intersect with symptoms to an array of other conditions. 
+You are a researcher investigating bed bug infestations and a condition known as <a href="#" onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a> – when you are convinced you have a parasite in you body but cannot provide empirical evidence of it. Its symptoms such as biting and crawling sensations intersect with symptoms to an array of other conditions. 
 
 
 You sent a mass email to local pest control services requesting a shadowing interview: and have attended three appointments over the course of March 2026. They produced mainly audio recordings and
@@ -469,21 +505,33 @@ Goldsmiths, University of London, 2026
       </div>
     </div>
     <div class="window-content" style="font-family:'Courier New',monospace; font-size:0.72rem; white-space:pre-wrap; background:#fff;"><h3>Everything I can list about bed bugs off the top of my head</h3>
-They travel well and often
-They spread through public transport
-A few years ago, bed bugs traveled on the Eurostar from Paris to London
-Waves of infestations happen in summer when people travel
-They are smart
-Their bites tend to cluster on one spot – sometimes come in threes or more but they won't necessarily follow this pattern – they can be extremely cautious and taste you on one spot.
-They don't operate as a colony or a swarm. 
-If there are a lot of them, it's just because.
-Their eggs are tiny like specks of dust and will latch onto your clothes easily
-In a lab environment, 50 degrees c for an hour should kill them
+- They travel well and often
 
-Having bed bugs isn't a sign of bad hygiene – just bad luck.
-They develop resistance to pesticides. 
-Bed bug spray must touch them to kill them
-They are attracted to humidity and darkness
+- They spread through public transport
+
+- A few years ago, bed bugs traveled on the Eurostar from Paris to London
+
+- Waves of infestations happen in summer when people travel
+
+- They are smart
+
+- Their bites tend to cluster on one spot – sometimes come in threes or more but they won't necessarily follow this pattern – they can be extremely cautious and taste you on one spot.
+
+- They don't operate as a colony or a swarm. 
+
+- If there are a lot of them, it's just because.
+
+- Their eggs are tiny like specks of dust and will latch onto your clothes easily
+
+- In a lab environment, 50 degrees c for an hour should kill them
+
+- Having bed bugs isn't a sign of bad hygiene – just bad luck.
+
+- They develop resistance to pesticides. 
+
+- Bed bug spray must touch them to kill them
+
+- They are attracted to humidity and darkness
 
 <div class="field-row-stacked" style="width: 200px">
   <label for="text20">Additional notes</label>
@@ -508,7 +556,7 @@ They are attracted to humidity and darkness
   <h3>Field log</h3>
       <p>Anthropology professor meeting</p>
 
-<p>The anthropology department is behind a kindergarten
+<p>The anthropology department is behind a kindergarten 
 It has a red door and the intercom doesn't seem to work 
 There's a communal garden and a separate grassy area where two gardeners are currently working. one of kindergarten teachers is there briefly - I have been standing outside for a while now so I ask how to get in 
 She calls her manager - but her card doesn't  work on that door. One of the gardeners pitches in - his card does allow entrance to the building. I am embarrassed  for not asking him beforehand - my research has to do with blue collar workers (like pest control zoology and entomology, gardening and landscape architecture is a nice intersection)</p>
@@ -529,14 +577,13 @@ She calls her manager - but her card doesn't  work on that door. One of the gard
    <!-- September -->
   <div class="window win98-window" id="september-window" style="top:140px; left:240px; width:480px;">
     <div class="title-bar" onmousedown="dragStart(event,'september-window')">
-      <div class="title-bar-text">September — 2026</div>
+      <div class="title-bar-text">What happened in September 2025</div>
       <div class="title-bar-controls">
         <button aria-label="Minimize" onclick="closeWindow('september-window')"></button>
         <button aria-label="Close" onclick="closeWindow('september-window')"></button>
       </div>
     </div>
     <div class="window-content">
-      <p>What happened in September 2025</p>
       <p>A minimal bed - maybe pixelated "click me" to reveal the TD sketch as bugs all over - under the images, videos from September will run OR the interactive fiction play button</p>
       <p>To come - images? WhatsApp screenshots? or just the bed bugs on the mattress? Captioned omg omg omg</p>
 
@@ -596,9 +643,6 @@ License: CC BY 4.0.</div>
       </div>
     </div>
     <div class="window-content">
-      <p>Wikimedia Commons images</p>
-      <p>Bed bug illustrations and so on</p>
-
        <div class="carousel-viewport">
         <img id="bug-carousel-img" src="" alt="" onerror="this.style.display='none'">
       </div>
@@ -612,6 +656,25 @@ License: CC BY 4.0.</div>
     </div>
   </div>
   </div>
+
+  <!-- Acknowledgements -->
+  <div class="window win98-window" id="credits-window" style="top:100px; left:180px; width:460px;">
+    <div class="title-bar" onmousedown="dragStart(event,'credits-window')">
+      <div class="title-bar-text">Acknowledgements — 18 March 2026</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('credits-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('credits-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <h3>Acknowledgements</h3>
+      <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">Content warning: this log contains descriptions of death and human decomposition.</p>
+      <p>Thank you Matthew Blackwell, Warren King and Project Multipest for sharing your insights from work in pest control. Thank you Ricardo Leizola for consultation regarding interview and documentation mathodologies as well as interesting conceptual links. Thank you Millicent Gunn, Luise Rouse, Jeremy Wenger - for consultation regarding curation, UX, adaptation to a gallery setting, interactive story telling UX concerns and other</p>
+     <h3>bibliography</h3>
+     <p><p>
+    </div>
+  </div>
+
 
   <!-- INTERVIEWS -->
   <div class="window win98-window" id="interviews-window" style="top:100px; left:200px; width:440px;">
@@ -701,7 +764,7 @@ License: CC BY 4.0.</div>
   <button class="button" id="start-btn">&#x229E; Start</button>
   <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
   <div class="taskbar-time" id="clock">00:00</div>
-  <button class="button" id="fullscreen-btn" onclick="fullScreen()" title="Toggle fullscreen (Shift+Alt+F)">&#x26F6;</button>
+  <button class="button" id="fullscreen-btn" onclick="fullScreen()" title="Toggle fullscreen (s+i+c+k)">&#x26F6;</button>
 </div>
 
 </div>
@@ -712,7 +775,11 @@ License: CC BY 4.0.</div>
   const desktop = document.getElementById('desktop');
   const frame = document.getElementById('screen-frame');
   const windowS = document.getElementById('september-window');
-  
+
+  document.querySelectorAll('.nlp-row').forEach(row => {
+    row.addEventListener('mouseenter', () => frame.classList.add('nlp-hovering'));
+    row.addEventListener('mouseleave', () => frame.classList.remove('nlp-hovering'));
+  });
 
   setTimeout(() => {
     bootScreen.classList.add('fade-out');
@@ -771,6 +838,7 @@ License: CC BY 4.0.</div>
     { src: 'images/buglife/cimexil7.jpg', caption: 'A bug.' },
     { src: 'images/buglife/cimexil8.jpg', caption: 'The bug.' },
     { src: 'images/buglife/cimexil9.jpeg', caption: 'Bug.' },
+    { src: 'images/buglife/shoe.jpeg', caption: 'Bug?'},
   ];
   let bugIndex = 0;
 
@@ -790,6 +858,12 @@ License: CC BY 4.0.</div>
   function renderStory() {
     storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
     document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
+  }
+
+  function openNLPStory(index = 0) {
+    storyIndex = index;
+    openWindow('nlp-window');
+    renderStory();
   }
   document.getElementById('story-prev').onclick = function() {
     storyIndex = (storyIndex - 1 + storySlides.length) % storySlides.length;
@@ -831,9 +905,9 @@ License: CC BY 4.0.</div>
 
    septMode = (id === 'september-window');
    if (septMode) {
-      frame.style.filter = 'grayscale(1)';
+      frame.style.setProperty('--filter', 'grayscale(1)');
     } else {
-      frame.style.filter = 'saturate(0.6)';
+      frame.style.setProperty('--filter', 'saturate(0.6)');
     }
   }
 
@@ -849,9 +923,9 @@ License: CC BY 4.0.</div>
       septMode = false;
     }
     if (septMode) {
-      frame.style.filter = 'grayscale(1)';
+      frame.style.setProperty('--filter', 'grayscale(1)');
     } else {
-      frame.style.filter = 'saturate(0.6)';
+      frame.style.setProperty('--filter', 'saturate(0.6)');
     }
   }
 
@@ -946,7 +1020,9 @@ License: CC BY 4.0.</div>
     if (win.id === 'entry-window') return;
     const handle = document.createElement('div');
     handle.className = 'resize-handle';
-    handle.addEventListener('mousedown', e => resizeStart(e, win.id));
+    [handle].forEach(h => {
+      h.addEventListener('mousedown', e => resizeStart(e, win.id));
+    });
     win.appendChild(handle);
   });
 
