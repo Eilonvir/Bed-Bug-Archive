@@ -224,7 +224,18 @@
   .nlp-term { min-width: 110px; color: #000080; }
   .nlp-term-personal { display: none; color: #666; font-style: italic; }
   .nlp-row:hover .nlp-term-text { display: none; }
-  .nlp-row:hover .nlp-term-personal { display: inline; }
+  .nlp-row:hover .nlp-term-personal {
+    display: inline-block;
+    animation: squiggly-anim 0.4s linear infinite;
+  }
+
+  @keyframes squiggly-anim {
+    0%   { filter: url(#nlp-squiggly-0); }
+    25%  { filter: url(#nlp-squiggly-1); }
+    50%  { filter: url(#nlp-squiggly-2); }
+    75%  { filter: url(#nlp-squiggly-3); }
+    100% { filter: url(#nlp-squiggly-4); }
+  }
   .nlp-bar-outer { flex: 1; margin: 0 8px; background: #eee; height: 8px; border: 1px solid #999; }
   .nlp-bar-inner { height: 100%; background: #000080; }
   .nlp-row:hover .nlp-bar-inner { background: #000080; }
@@ -243,6 +254,16 @@
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="nlp-squiggly-0"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5"/></filter>
+    <filter id="nlp-squiggly-1"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="2"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5"/></filter>
+    <filter id="nlp-squiggly-2"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="3"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5"/></filter>
+    <filter id="nlp-squiggly-3"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="4"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5"/></filter>
+    <filter id="nlp-squiggly-4"><feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="5"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5"/></filter>
+  </defs>
+</svg>
 
 <div id="boot-screen">
   <div class="boot-line">UNTITLED_ARCHIVE.exe</div>
