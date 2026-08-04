@@ -86,7 +86,7 @@
     user-select: none;
   }
 
-  .icon:hover .icon-label { background: #a41a94; color: #ffffff; }
+  .icon:hover .icon-label { background: #2d282d56; color: #ffffff; }
 
   .icon-img {
     width: 70px;
@@ -97,7 +97,7 @@
 
   .icon-folder { background: url("images/icons/folder.svg") center/contain no-repeat; filter: saturate(0.6) brightness(1.2) drop-shadow(0.6px 0.6px #000); }
   .icon-txt { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat; }
-  .icon-exe { background: url("images/icons/puterb.png") center/contain no-repeat; filter: saturate(0.6);}
+  .icon-exe { background: url("images/icons/puter.png") center/contain no-repeat; filter: saturate(0.6);}
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
   .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
@@ -142,22 +142,20 @@
 
   .resize-handle {
     position: absolute;
-    right: 1px;
-    bottom: 1px;
     width: 16px;
     height: 16px;
     cursor: nwse-resize;
-    background: #c0c0c0
-      repeating-linear-gradient(135deg,
-        #808080 0px, #808080 1.5px,
-        transparent 1.5px, transparent 3.5px);
-    box-shadow: var(--border-raised-outer), var(--border-raised-inner);
     z-index: 5;
   }
 
-  .resize-handle:hover { background-color: #d4d0c8; }
+  .resize-handle { right: 1px; bottom: 1px; }
+  
+
+  
 
   .window-content p { margin-bottom: 0.7rem; }
+  .window-content a { color: #000080; text-decoration: underline; }
+  .window-content a:hover { color: #a41a94; }
   .window-content em { color: #666; font-style: italic; }
   .window-content h3 { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #000; margin: 0.8rem 0 0.5rem; padding-bottom: 0.2rem; }
   .window-content audio { width: 100%; margin: 0.4rem 0; accent-color: #000080; }
@@ -449,7 +447,7 @@ He shows me a fresh inky spot of bed bug feces on the mattress – it still smud
       </div>
     </div>
     <div class="window-content" style="font-family:'Courier New',monospace; font-size:0.72rem; white-space:pre-wrap; background:#fff;">[ untitled ] — micro archive
-You are a researcher investigating bed bug infestations and a condition known as Delusory Parasitosis – when you are convinced you have a parasite in you body but cannot provide empirical evidence of it. Its symptoms such as biting and crawling sensations intersect with symptoms to an array of other conditions. 
+You are a researcher investigating bed bug infestations and a condition known as <a href="#" onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a> – when you are convinced you have a parasite in you body but cannot provide empirical evidence of it. Its symptoms such as biting and crawling sensations intersect with symptoms to an array of other conditions. 
 
 
 You sent a mass email to local pest control services requesting a shadowing interview: and have attended three appointments over the course of March 2026. They produced mainly audio recordings and
@@ -486,21 +484,33 @@ Goldsmiths, University of London, 2026
       </div>
     </div>
     <div class="window-content" style="font-family:'Courier New',monospace; font-size:0.72rem; white-space:pre-wrap; background:#fff;"><h3>Everything I can list about bed bugs off the top of my head</h3>
-They travel well and often
-They spread through public transport
-A few years ago, bed bugs traveled on the Eurostar from Paris to London
-Waves of infestations happen in summer when people travel
-They are smart
-Their bites tend to cluster on one spot – sometimes come in threes or more but they won't necessarily follow this pattern – they can be extremely cautious and taste you on one spot.
-They don't operate as a colony or a swarm. 
-If there are a lot of them, it's just because.
-Their eggs are tiny like specks of dust and will latch onto your clothes easily
-In a lab environment, 50 degrees c for an hour should kill them
+- They travel well and often
 
-Having bed bugs isn't a sign of bad hygiene – just bad luck.
-They develop resistance to pesticides. 
-Bed bug spray must touch them to kill them
-They are attracted to humidity and darkness
+- They spread through public transport
+
+- A few years ago, bed bugs traveled on the Eurostar from Paris to London
+
+- Waves of infestations happen in summer when people travel
+
+- They are smart
+
+- Their bites tend to cluster on one spot – sometimes come in threes or more but they won't necessarily follow this pattern – they can be extremely cautious and taste you on one spot.
+
+- They don't operate as a colony or a swarm. 
+
+- If there are a lot of them, it's just because.
+
+- Their eggs are tiny like specks of dust and will latch onto your clothes easily
+
+- In a lab environment, 50 degrees c for an hour should kill them
+
+- Having bed bugs isn't a sign of bad hygiene – just bad luck.
+
+- They develop resistance to pesticides. 
+
+- Bed bug spray must touch them to kill them
+
+- They are attracted to humidity and darkness
 
 <div class="field-row-stacked" style="width: 200px">
   <label for="text20">Additional notes</label>
@@ -525,7 +535,7 @@ They are attracted to humidity and darkness
   <h3>Field log</h3>
       <p>Anthropology professor meeting</p>
 
-<p>The anthropology department is behind a kindergarten
+<p>The anthropology department is behind a kindergarten 
 It has a red door and the intercom doesn't seem to work 
 There's a communal garden and a separate grassy area where two gardeners are currently working. one of kindergarten teachers is there briefly - I have been standing outside for a while now so I ask how to get in 
 She calls her manager - but her card doesn't  work on that door. One of the gardeners pitches in - his card does allow entrance to the building. I am embarrassed  for not asking him beforehand - my research has to do with blue collar workers (like pest control zoology and entomology, gardening and landscape architecture is a nice intersection)</p>
@@ -626,6 +636,25 @@ License: CC BY 4.0.</div>
   </div>
   </div>
 
+  <!-- Acknowledgements -->
+  <div class="window win98-window" id="credits-window" style="top:100px; left:180px; width:460px;">
+    <div class="title-bar" onmousedown="dragStart(event,'credits-window')">
+      <div class="title-bar-text">Acknowledgements — 18 March 2026</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('credits-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('credits-window')"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <h3>Acknowledgements</h3>
+      <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">Content warning: this log contains descriptions of death and human decomposition.</p>
+      <p>Thank you Matthew Blackwell, Warren King and Project Multipest for sharing your insights from work in pest control. Thank you Ricardo Leizola for consultation regarding interview and documentation mathodologies as well as interesting conceptual links. Thank you Millicent Gunn, Luise Rouse, Jeremy Wenger - for consultation regarding curation, UX, adaptation to a gallery setting, interactive story telling UX concerns and other</p>
+     <h3>bibliography</h3>
+     <p><p>
+    </div>
+  </div>
+
+
   <!-- INTERVIEWS -->
   <div class="window win98-window" id="interviews-window" style="top:100px; left:200px; width:440px;">
     <div class="title-bar" onmousedown="dragStart(event,'interviews-window')">
@@ -714,7 +743,7 @@ License: CC BY 4.0.</div>
   <button class="button" id="start-btn">&#x229E; Start</button>
   <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
   <div class="taskbar-time" id="clock">00:00</div>
-  <button class="button" id="fullscreen-btn" onclick="fullScreen()" title="Toggle fullscreen (Shift+Alt+F)">&#x26F6;</button>
+  <button class="button" id="fullscreen-btn" onclick="fullScreen()" title="Toggle fullscreen (s+i+c+k)">&#x26F6;</button>
 </div>
 
 </div>
@@ -808,6 +837,12 @@ License: CC BY 4.0.</div>
   function renderStory() {
     storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
     document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
+  }
+
+  function openNLPStory(index = 0) {
+    storyIndex = index;
+    openWindow('nlp-window');
+    renderStory();
   }
   document.getElementById('story-prev').onclick = function() {
     storyIndex = (storyIndex - 1 + storySlides.length) % storySlides.length;
@@ -964,7 +999,9 @@ License: CC BY 4.0.</div>
     if (win.id === 'entry-window') return;
     const handle = document.createElement('div');
     handle.className = 'resize-handle';
-    handle.addEventListener('mousedown', e => resizeStart(e, win.id));
+    [handle].forEach(h => {
+      h.addEventListener('mousedown', e => resizeStart(e, win.id));
+    });
     win.appendChild(handle);
   });
 
