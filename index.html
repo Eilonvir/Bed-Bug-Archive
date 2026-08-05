@@ -101,7 +101,8 @@
   .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
   .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
-  .icon-kill { background: url("images/icons/kill.jpg?v=2") center/contain no-repeat; }
+  .icon-kill { background: url("images/icons/kill.jpg?v=2") center/contain no-repeat; } 
+  .icon-bin { background: url("images/icons/bin.png") center/contain no-repeat; filter: grayscale(100%);} 
 
   .icon-grid { display: flex; flex-wrap: wrap; gap: 14px; padding: 4px 0 8px; }
   .icon.static-icon { position: static; }
@@ -307,9 +308,9 @@
     <div class="icon-label">README.txt</div>
   </div>
 
-  <div class="icon" style="bottom: 100px; right: 80px;" ondblclick="openWindow('september-window')">
-    <div class="icon-img icon-bed"></div>
-    <div class="icon-label">September</div>
+  <div class="icon" style="bottom: 10px; right: 10px;" ondblclick="openWindow('bin-window')">
+    <div class="icon-img icon-bin"></div>
+    <div class="icon-label">BIN=</div>
   </div>
 
 
@@ -756,6 +757,22 @@ License: CC BY 4.0.</div>
         <div class="icon static-icon" ondblclick="openWindow('extermination-window')">
           <div class="icon-img icon-kill"></div>
           <div class="icon-label">hortus S</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- BIN -->
+  <div class="window win98-window" id="bin-window" style="top:130px; left:240px; width:340px;">
+    <div class="title-bar" onmousedown="dragStart(event,'bin-window')">
+      <div class="title-bar-text">BIN</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" onclick="closeWindow('bin-window')"></button>
+        <button aria-label="Close" onclick="closeWindow('bin-window')"></button>
+      </div>
+    </div>
+      <div class="icon static-icon" ondblclick="openWindow('september-window')">
+          <div class="icon-img icon-bed"></div>
+          <div class="icon-label">September</div>
         </div>
       </div>
     </div>
