@@ -102,7 +102,7 @@
   .icon-bed { background: url("images/icons/bed.png") center/contain no-repeat; }
   .icon-house { background: url("images/icons/stoneb.svg") center/contain no-repeat; scale: 0.75; filter: grayscale(90%); }
   .icon-kill { background: url("images/icons/kill.jpg?v=2") center/contain no-repeat; } 
-  .icon-bin { background: url("images/icons/bin.png") center/contain no-repeat; filter: grayscale(100%);} 
+  .icon-bin { background: url("images/icons/bin.png") center/contain no-repeat; filter: grayscale(1) saturate(0.6);} 
 
   .icon-grid { display: flex; flex-wrap: wrap; gap: 14px; padding: 4px 0 8px; }
   .icon.static-icon { position: static; }
@@ -246,7 +246,7 @@
   .code-block { background: #000; color: #0f0; padding: 8px; font-size: 0.63rem; margin: 0.5rem 0; font-family: 'Courier New', monospace; line-height: 1.7; }
   .code-comment { color: #555; }
 
-  #entry-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 150; width: 360px; }
+  #entry-window { position: absolute; left: calc(50% - 180px); top: calc(50% - 110px); z-index: 150; width: 360px; }
 
   #taskbar { position: absolute; bottom: 0; left: 0; right: 0; height: 28px; background: #c0c0c0; border-top: 2px solid #fff; display: flex; align-items: center; padding: 0 4px; gap: 4px; z-index: 200; box-shadow: inset 0 1px 0 #dfdfdf; }
   #start-btn { font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: bold; padding: 2px 6px; height: 22px; cursor: pointer; }
@@ -281,8 +281,8 @@
 <div id="desktop">
 
   <div class="window win98-window open" id="entry-window">
-    <div class="title-bar">
-      <div class="title-bar-text">untitled — micro archive</div>
+    <div class="title-bar" onmousedown="dragStart(event,'entry-window')">
+      <div class="title-bar-text">Bugzzz-archive</div>
       <div class="title-bar-controls">
         <button aria-label="Close" onclick="closeWindow('entry-window')"></button>
       </div>
@@ -310,7 +310,7 @@
 
   <div class="icon" style="bottom: 10px; right: 10px;" ondblclick="openWindow('bin-window')">
     <div class="icon-img icon-bin"></div>
-    <div class="icon-label">BIN=</div>
+    <div class="icon-label">BIN</div>
   </div>
 
 
@@ -986,8 +986,11 @@ License: CC BY 4.0.</div>
 
   function dragStart(e, id) {
     if (e.target.tagName === 'BUTTON') return;
+    e.preventDefault();
+    e.stopPropagation();
     dragging = document.getElementById(id);
     dragging.style.zIndex = getTopZ();
+    dragging.style.transform = 'none';
     const r = dragging.getBoundingClientRect();
     dragOffX = e.clientX - r.left;
     dragOffY = e.clientY - r.top;
