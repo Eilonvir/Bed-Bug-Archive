@@ -37,7 +37,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('images/flrMode.jpg');
+      background-image: url('images/Grandflrs.jpg');
       background-size: cover;
       background-position: center;
       filter: var(--filter);
@@ -179,7 +179,7 @@
     }
 
     .icon-house {
-      background: url("images/icons/stoneb.svg") center/contain no-repeat;
+      background: url("images/icons/stonez.png") center/contain no-repeat;
       scale: 0.75;
       filter: grayscale(90%);
     }
@@ -756,6 +756,8 @@
             <div class="story-slide" data-story-slide>
               <p>Delusory parasitosis (DP): a fixed, false belief that one is infested by parasites, insects, or other
                 organisms, held despite the absence of any medical or entomological evidence.</p>
+              <p>Despite that, patients tend to do their own evidence gathering, providing <a href="#"
+            onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.</p>  
               <p
                 style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
                 List of DP patient characteristics, Hinkle (2000). The Lynch 1993 line in particular infuriated me on
@@ -775,7 +777,7 @@
 
               <p>DP disproportionately affects women - so if you were to pull characteristics of DP patient demographics
                 you'd get 'female', 'elderly', 'isolated' and so on.</p>
-              <h3>100 PubMed abstracts — delusory parasitosis</h3>
+              <h3>Patient characteristics, pulled from 100 PubMed abstracts</h3>
 
               <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">women</span><span
                     class="nlp-term-personal">you</span></span>
@@ -1301,6 +1303,11 @@
       storyIndex = index;
       openWindow('nlp-window');
       renderStory();
+    }
+
+    function openSpecimen(index = 0){
+      storyIndex = index;
+      openWindow('img-window');
     }
     document.getElementById('story-prev').onclick = function () {
       storyIndex = (storyIndex - 1 + storySlides.length) % storySlides.length;
