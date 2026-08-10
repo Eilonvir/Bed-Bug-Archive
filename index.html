@@ -41,11 +41,12 @@
       background-size: cover;
       background-position: center;
       filter: var(--filter);
+      transition: filter 4.5s cubic-bezier(0.45, 0, 0.55, 1);
       z-index: 0;
     }
 
     #screen-frame.nlp-hovering::before {
-       animation: inverted-back 1.5s ease forwards;
+       filter: saturate(0.6) grayscale(1) invert(1);
     }
 
     #bug-canvas-holder {
@@ -541,33 +542,6 @@
         filter: saturate(0.6) grayscale(1);
       }
     }
-
-
-    #screen-frame.invert-anim::before {
-  animation-name: inverted-back;
-  animation-duration: 1.5s;
-  animation-timing-function: ease;
-  animation-fill-mode: forwards;
-}
-
-
-    @keyframes inverted-back {
-  0% {
-    filter: saturate(0.6);
-  }
-  25% {
-    filter: saturate(0.6) grayscale(0.2) invert(0.2);
-  }
-  50% {
-    filter: saturate(0.6) grayscale(0.5) invert(0.5);
-  }
-  75% {
-    filter: saturate(0.6) grayscale(0.8) invert(0.8);
-  }
-  100% {
-    filter: saturate(0.6) grayscale(1) invert(1);
-  }
-}
 
 
 
