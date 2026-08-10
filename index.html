@@ -45,7 +45,7 @@
     }
 
     #screen-frame.nlp-hovering::before {
-      filter: var(--filter) grayscale(1) invert(1);
+       animation: inverted-back 1.5s ease forwards;
     }
 
     #bug-canvas-holder {
@@ -515,6 +515,61 @@
         filter: url(#nlp-squiggly-4);
       }
     }
+    
+
+    #screen-frame.bw-anim::before {
+      animation-name: bw;
+      animation-duration: 1.5s;
+      animation-timing-function: ease;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes bw {
+      0% {
+        filter: saturate(0.6);
+      }
+      25% {
+        filter: saturate(0.6) grayscale(0.2);
+      }
+      50% {
+        filter: saturate(0.6) grayscale(0.5);
+      }
+      75% {
+        filter: saturate(0.6) grayscale(0.8);
+      }
+      100% {
+        filter: saturate(0.6) grayscale(1);
+      }
+    }
+
+
+    #screen-frame.invert-anim::before {
+  animation-name: inverted-back;
+  animation-duration: 1.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+
+    @keyframes inverted-back {
+  0% {
+    filter: saturate(0.6);
+  }
+  25% {
+    filter: saturate(0.6) grayscale(0.2) invert(0.2);
+  }
+  50% {
+    filter: saturate(0.6) grayscale(0.5) invert(0.5);
+  }
+  75% {
+    filter: saturate(0.6) grayscale(0.8) invert(0.8);
+  }
+  100% {
+    filter: saturate(0.6) grayscale(1) invert(1);
+  }
+}
+
+
 
     .nlp-bar-outer {
       flex: 1;
@@ -1499,8 +1554,10 @@ function typeText(el, text, i = 0) {
 
       septMode = (id === 'september-window');
       if (septMode) {
+        frame.classList.add('bw-anim');
         frame.style.setProperty('--filter', 'grayscale(1)');
       } else {
+        frame.classList.remove('bw-anim');
         frame.style.setProperty('--filter', 'saturate(0.6)');
       }
     }
@@ -1519,6 +1576,7 @@ function typeText(el, text, i = 0) {
       if (septMode) {
         frame.style.setProperty('--filter', 'grayscale(1)');
       } else {
+        frame.classList.remove('bw-anim');
         frame.style.setProperty('--filter', 'saturate(0.6)');
       }
     }
@@ -1653,6 +1711,7 @@ function typeText(el, text, i = 0) {
       document.getElementById('fluid-poem-text').innerHTML = '';
 
       septMode = false;
+      frame.classList.remove('bw-anim');
       frame.style.setProperty('--filter', 'saturate(0.6)');
 
       playBootSequence();
