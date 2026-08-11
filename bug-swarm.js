@@ -1,5 +1,7 @@
 // ---- bug presence: tune how sparse/dense the sightings feel ----
-const MAX_CONCURRENT_BUGS = 2;      // how many bugs can be alive at once — keep low, this is a glimpse not a swarm
+const BASE_CONCURRENT_BUGS = 2;     // resting bug count — keep low, this is a glimpse not a swarm
+const PEAK_CONCURRENT_BUGS = 20;    // bug count while a hover-invert transition is boosting the swarm
+const SWARM_EASE = 0.02;            // per-frame lerp toward the target count — bigger = snappier ramp
 const BUG_LIFETIME_MIN_FRAMES = 60;  // ~2s at 30fps — how long a spawned bug stays before vanishing
 const BUG_LIFETIME_MAX_FRAMES = 150; // ~5s
 const BUG_GAP_MIN_FRAMES = 60;       // ~2s of nothing before a slot can spawn again
@@ -82,6 +84,8 @@ function bugSwarmSketch(p) {
   let imageBuf;             // shared offscreen buffer a photo bug is drawn into before dithering
   let staticTextureBuf;     // resting dither texture, rendered once and blitted each frame
   let loadedBugImages = []; // successfully loaded p5.Image objects from IMAGE_BUG_FILES
+  let activeBugTarget = BASE_CONCURRENT_BUGS; // how many slots should be live — set from outside via p.setSwarmBoost
+  let activeBugCount = BASE_CONCURRENT_BUGS;  // eased toward activeBugTarget each frame
 
   p.preload = function () {
     IMAGE_BUG_FILES.forEach(name => {
@@ -212,8 +216,8 @@ function bugSwarmSketch(p) {
     staticTextureBuf = p.createGraphics(p.width, p.height);
     staticTextureBuf.pixelDensity(1);
     renderStaticTexture();
-    // stagger initial gaps so slots don't all try to spawn in sync
-    for (let i = 0; i < MAX_CONCURRENT_BUGS; i++) {
+    // pool sized to the peak; only the eased-in slice at the front is live at any moment
+    for (let i = 0; i < PEAK_CONCURRENT_BUGS; i++) {
       slots.push({ bug: null, timer: p.floor(p.random(BUG_GAP_MIN_FRAMES, BUG_GAP_MAX_FRAMES)) });
     }
   };
@@ -224,6 +228,11 @@ function bugSwarmSketch(p) {
     staticTextureBuf = p.createGraphics(p.width, p.height);
     staticTextureBuf.pixelDensity(1);
     renderStaticTexture();
+  };
+
+  // called from outside (e.g. the invert-filter hover) to ramp the swarm up or back down
+  p.setSwarmBoost = function (boosted) {
+    activeBugTarget = boosted ? PEAK_CONCURRENT_BUGS : BASE_CONCURRENT_BUGS;
   };
 
   function drawProceduralBug(b, alpha) {
@@ -278,7 +287,10 @@ function bugSwarmSketch(p) {
     p.clear();
     p.image(staticTextureBuf, 0, 0);
 
-    slots.forEach(slot => {
+    activeBugCount += (activeBugTarget - activeBugCount) * SWARM_EASE;
+    const liveCount = Math.round(activeBugCount);
+
+    slots.slice(0, liveCount).forEach(slot => {
       updateSlot(slot);
       const b = slot.bug;
       if (!b) return;
@@ -289,4 +301,5 @@ function bugSwarmSketch(p) {
   };
 }
 
-new p5(bugSwarmSketch);
+const bugSwarmInstance = new p5(bugSwarmSketch);
+window.setBugSwarmBoost = boosted => bugSwarmInstance.setSwarmBoost(boosted);
