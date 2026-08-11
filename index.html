@@ -428,7 +428,7 @@
 
     .nlp-row:hover .nlp-term-personal {
       display: inline-block;
-      animation: squiggly-anim 0.4s linear infinite;
+      animation: squiggly-ramp-in 1s linear forwards, squiggly-anim 0.4s linear infinite 1s;
     }
 
     .story-slide-2:hover p,
@@ -436,7 +436,7 @@
     .story-slide-2:hover .nlp-term-text,
     .story-slide-2:hover .nlp-count,
     .story-slide-2:hover .hover-hint {
-      animation: squiggly-anim 0.4s linear infinite;
+      animation: squiggly-ramp-in 1s linear forwards, squiggly-anim 0.4s linear infinite 1s;
     }
 
 
@@ -494,6 +494,28 @@
   border: 1px solid #999;
   filter: grayscale(20%);
 }
+
+    @keyframes squiggly-ramp-in {
+      0% {
+        filter: none;
+      }
+
+      25% {
+        filter: url(#nlp-squiggly-ramp-1);
+      }
+
+      50% {
+        filter: url(#nlp-squiggly-ramp-2);
+      }
+
+      75% {
+        filter: url(#nlp-squiggly-ramp-3);
+      }
+
+      100% {
+        filter: url(#nlp-squiggly-0);
+      }
+    }
 
     @keyframes squiggly-anim {
       0% {
@@ -651,6 +673,18 @@
       <filter id="nlp-squiggly-4">
         <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="5" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-1">
+        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-2">
+        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.7" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-3">
+        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.1" />
       </filter>
     </defs>
   </svg>
@@ -871,6 +905,7 @@
             <div class="story-slide" data-story-slide>
               <p>Delusory parasitosis (DP): a fixed, false belief that one is infested by parasites, insects, or other
                 organisms, held despite the absence of any medical or entomological evidence.</p>
+              <p>Its symptoms such as biting and crawling sensations intersect with symptoms to an array of other conditions
               <p>Despite that, patients tend to do their own evidence gathering, providing <a href="#"
             onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.</p>  
               <p
@@ -978,14 +1013,10 @@
           style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fff;">
           <p>[untitled] — micro archive</p>
           <p>You are a researcher investigating bed bug infestations and a condition known as <a href="#"
-            onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a> – when you are convinced you
-          have a parasite in you body but cannot provide empirical evidence of it. Its symptoms such as biting and
-          crawling sensations intersect with symptoms to an array of other conditions.</p>
+            onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a> – >
 
-          <p>You sent a mass email to local pest control services requesting a shadowing interview: and have attended three
-          appointments over the course of March 2026. They produced mainly audio recordings and
-          written logs.
-          Looking at your materials you might find a three act narrative:</p>
+          <p>Instructions: double click icons to open windows. They can be dragged around the screen, closed or minimized. In your desktop you will find materials surrounding the research and field logs of your series of interview in pest control</p>
+          Looking at your field logs you might find a three act narrative:</p>
 
           <p>
             I. A young couple<br>
@@ -993,11 +1024,7 @@
             III. An after death clean
           </p>
 
-          <p>NLP prototype: 100 PubMed abstracts on
-          delusory parasitosis, searched for demographic
-          language clustering with diagnostic terminology.</p>
-
-          <p>Github: https://github.com/Eilonvir/Bed-Bug-Archive/tree/main</p>
+          <p>Side note - I thought I was looking at gender. I look at my hands now. I see something moving in my skin. I feel rot.</p>
 
           <p>Author: Michaella Miller</p>
 
@@ -1324,8 +1351,14 @@
     const windowS = document.getElementById('september-window');
 
     document.querySelectorAll('.nlp-row').forEach(row => {
-      row.addEventListener('mouseenter', () => frame.classList.add('nlp-hovering'));
-      row.addEventListener('mouseleave', () => frame.classList.remove('nlp-hovering'));
+      row.addEventListener('mouseenter', () => {
+        frame.classList.add('nlp-hovering');
+        window.setBugSwarmBoost && window.setBugSwarmBoost(true);
+      });
+      row.addEventListener('mouseleave', () => {
+        frame.classList.remove('nlp-hovering');
+        window.setBugSwarmBoost && window.setBugSwarmBoost(false);
+      });
     });
 
     function playBootSequence() {
