@@ -27,7 +27,7 @@
     #screen-frame {
       position: fixed;
       inset: 28px;
-      background-color: #5e909c;
+      background-color: #ee37ccb4;
       box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.75);
       overflow: hidden;
       --filter: saturate(0.6);
@@ -37,7 +37,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('images/grandflrs.jpg');
+      background-image: url('images/noiseflrs.jpg');
       background-size: cover;
       background-position: center;
       filter: var(--filter);
@@ -257,6 +257,15 @@
       font-size: 0.78rem;
       line-height: 1.8;
       color: #000;
+    }
+
+    .scarab-rule {
+      font-size: 1.5rem;
+      letter-spacing: 0.35em;
+      line-height: 1.4;
+      text-align: center;
+      color: #555;
+      margin: 0.6rem 0;
     }
 
     .resize-handle {
@@ -893,7 +902,7 @@
       <!-- NLP -->
       <div class="window win98-window" id="nlp-window" style="top:80px; left:140px; width:420px;">
         <div class="title-bar" onmousedown="dragStart(event,'nlp-window')">
-          <div class="title-bar-text">dp_analysis.exe</div>
+          <div class="title-bar-text">analysis.exe</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('nlp-window')"></button>
             <button aria-label="Close" onclick="closeWindow('nlp-window')"></button>
@@ -903,11 +912,13 @@
           <div class="story-viewport" id="story-viewport">
 
             <div class="story-slide" data-story-slide>
-              <p>Delusory parasitosis (DP): a fixed, false belief that one is infested by parasites, insects, or other
+              <p><b>Delusory parasitosis (DP)</b>: a fixed, false belief that one is infested by parasites, insects, or other
                 organisms, held despite the absence of any medical or entomological evidence.</p>
+              <div class="scarab-rule">𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣</div>
               <p>Despite that, patients tend to do their own evidence gathering, providing <a href="#"
             onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.
               <p
+             
                 style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
                 List of DP patient characteristics, Hinkle (2000). The Lynch 1993 line in particular infuriated me on
                 behalf of an abstract patient.</p>
@@ -1010,7 +1021,7 @@
         </div>
         <div class="window-content"
           style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fff;">
-          <h2>[untitled]  micro archive</h2>
+          <h4>Introduction</h4>
               <div class="bug-thumb-strip">
                 <img src="images/buglife/cimex666.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
                <img src="images/buglife/cimexil4.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
@@ -1020,7 +1031,8 @@
             onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a>, conducting a series of shadowing interviews in pest control.</p>
 
           <p><b>This is your desktop,</b> your archive of materials of your research and field work.</p>
-
+          
+           <div class="scarab-rule">𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 </div> 
           <p><h3>Instructions:</h3> double-click icons to open windows. They can be dragged around the screen, closed or minimized.<p>
         
           </p>In your desktop you will find materials surrounding the research and field logs of your series of interview in pest control.</p>
@@ -1154,7 +1166,7 @@
           <p>hortus sanititis</p>
           <p>Matthew paraffin audio, wikimedia commons image</p>
 
-          <img src="images/buglife/hs.jpg" alt="" onerror="this.style.display='none'">
+          <img src="images/buglife/hs3.jpg" style="filter: opacity(0.8);" alt="" onerror="this.style.display='none'">
           <div class="img-caption">Wellcome Library, London (1499) Hortus Sanitatis: bed bugs, delousing. Wikimedia
             Commons. Available at: https://commons.wikimedia.org/wiki/File:Hortus_Sanitatis;_
             bed_bugs,_delousing._Wellcome_M0011711.jpg (Accessed: April 10th 2026).
@@ -1431,11 +1443,11 @@
       caption.textContent = bugImages[bugIndex].caption;
     }
     const bugImages = [
-      { src: 'images/buglife/cimexil.jpg', caption: 'Bug.' },
-      { src: 'images/buglife/cimexil2.jpg', caption: 'The Bug.' },
-      { src: 'images/buglife/cimexil3.jpg', caption: 'Bug?.' },
-      { src: 'images/buglife/cimexil7.jpg', caption: 'A bug.' },
-      { src: 'images/buglife/cimexil8.jpg', caption: 'The bug.' },
+      { src: 'images/buglife/bwdith-6.jpg', caption: 'Bug.' },
+      { src: 'images/buglife/bwdith-2.jpg', caption: 'The Bug.' },
+      { src: 'images/buglife/bwdith-13.jpg', caption: 'Bug?.' },
+      { src: 'images/buglife/bwdith-7.jpg', caption: 'A bug.' },
+      { src: 'images/buglife/bwdith-8.jpg', caption: 'The bug.' },
       { src: 'images/buglife/cimexil9.jpeg', caption: 'Bug.' },
       { src: 'images/buglife/shoe.jpeg', caption: 'Bug?' },
     ];
