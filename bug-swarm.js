@@ -4,8 +4,8 @@ const PEAK_CONCURRENT_BUGS = 500;    // bug count while a hover-invert transitio
 const SWARM_EASE = 0.02;            // per-frame lerp toward the target count — bigger = snappier ramp
 const BUG_LIFETIME_MIN_FRAMES = 60;  // ~2s at 30fps — how long a spawned bug stays before vanishing
 const BUG_LIFETIME_MAX_FRAMES = 150; // ~5s
-const BUG_GAP_MIN_FRAMES = 3000;       // ~2s of nothing before a slot can spawn again
-const BUG_GAP_MAX_FRAMES = 200;      // ~10s
+const BUG_GAP_MIN_FRAMES = 300;       // ~2s of nothing before a slot can spawn again
+const BUG_GAP_MAX_FRAMES = 600;      // ~10s
 const BUG_FADE_FRAMES = 8;           // quick fade in/out at spawn/despawn so it's not a hard pop
 
 // ---- procedural bug shape: tune size/erratic movement ----

@@ -504,6 +504,149 @@
   filter: grayscale(20%);
 }
 
+#dp-story-slide-3 {
+  width: 100%;
+}
+
+#dp-story-slide-3 .dp-terminal,
+#dp-story-slide-3 .typewriter-text {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: #1a1a1a;
+}
+
+.dp-terminal {
+  min-height: 1.7em;
+  margin: 0.6rem 0;
+}
+
+.dp-terminal .blinking {
+  animation: terminal-blink 1.5s steps(1, end) infinite;
+}
+
+@keyframes terminal-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.dp-develop-frame {
+  display: none;
+  width: 360px;
+  height: 240px;
+  max-width: 100%;
+  margin: 0.6rem auto 0.6rem 0;
+  background: #b3afaf;
+  border: 1px solid #999;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.dp-develop-frame.developing {
+  display: block;
+}
+
+.dp-develop-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dp-develop-frame.developing img {
+  animation: dp-develop 6.5s forwards;
+}
+
+@keyframes dp-develop {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    filter: blur(18px) contrast(0.45) grayscale(80%);
+    opacity: 0;
+    animation-timing-function: steps(1, end);
+  }
+
+  5% {
+    clip-path: inset(0 0 87% 0);
+    filter: blur(18px) contrast(0.45) grayscale(80%);
+    opacity: 0.45;
+    animation-timing-function: steps(1, end);
+  }
+
+  18% {
+    clip-path: inset(0 0 66% 0);
+    filter: blur(16px) contrast(0.5) grayscale(78%);
+    opacity: 0.45;
+    animation-timing-function: steps(1, end);
+  }
+
+  24% {
+    clip-path: inset(0 0 66% 0);
+    filter: blur(16px) contrast(0.9) grayscale(78%);
+    opacity: 0.8;
+    animation-timing-function: steps(1, end);
+  }
+
+  27% {
+    clip-path: inset(0 0 66% 0);
+    filter: blur(16px) contrast(0.5) grayscale(78%);
+    opacity: 0.35;
+    animation-timing-function: steps(1, end);
+  }
+
+  40% {
+    clip-path: inset(0 0 48% 0);
+    filter: blur(14px) contrast(0.55) grayscale(72%);
+    opacity: 0.7;
+    animation-timing-function: steps(1, end);
+  }
+
+  54% {
+    clip-path: inset(0 0 48% 0);
+    filter: blur(13px) contrast(0.55) grayscale(72%);
+    opacity: 0.7;
+    animation-timing-function: steps(1, end);
+  }
+
+  59% {
+    clip-path: inset(0 0 27% 0);
+    filter: blur(12px) contrast(0.6) grayscale(66%);
+    opacity: 0.85;
+    animation-timing-function: steps(1, end);
+  }
+
+  70% {
+    clip-path: inset(0 0 27% 0);
+    filter: blur(11px) contrast(0.6) grayscale(66%);
+    opacity: 0.85;
+    animation-timing-function: steps(1, end);
+  }
+
+  76% {
+    clip-path: inset(0 0 9% 0);
+    filter: blur(9px) contrast(0.7) grayscale(58%);
+    opacity: 0.95;
+    animation-timing-function: steps(1, end);
+  }
+
+  83% {
+    clip-path: inset(0 0 0 0);
+    filter: blur(7px) contrast(0.75) grayscale(52%);
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: blur(0) contrast(1) grayscale(20%);
+    opacity: 1;
+  }
+}
+
     @keyframes squiggly-ramp-in {
       0% {
         filter: none;
@@ -752,7 +895,7 @@
       <!-- BRIGHTON -->
       <div class="window win98-window" id="brighton-window" style="top:60px; left:120px; width:480px;">
         <div class="title-bar" onmousedown="dragStart(event,'brighton-window')">
-          <div class="title-bar-text">I. Brighton — March 2026</div>
+          <div class="title-bar-text">KNOWLEDGE</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('brighton-window')"></button>
             <button aria-label="Close" onclick="closeWindow('brighton-window')"></button>
@@ -797,7 +940,7 @@
       <!-- WEST LONDON -->
       <div class="window win98-window" id="westlondon-window" style="top:80px; left:150px; width:460px;">
         <div class="title-bar" onmousedown="dragStart(event,'westlondon-window')">
-          <div class="title-bar-text">II. West London — March 2026</div>
+          <div class="title-bar-text">FLUFF</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('westlondon-window')"></button>
             <button aria-label="Close" onclick="closeWindow('westlondon-window')"></button>
@@ -845,7 +988,7 @@
       <!-- THE ROAD -->
       <div class="window win98-window" id="North London-window" style="top:100px; left:180px; width:460px;">
         <div class="title-bar" onmousedown="dragStart(event,'North London-window')">
-          <div class="title-bar-text">North London — 18 March 2026</div>
+          <div class="title-bar-text">FLUID</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('North London-window')"></button>
             <button aria-label="Close" onclick="closeWindow('North London-window')"></button>
@@ -892,7 +1035,7 @@
     </div>
   </div>
   <div class="window-content">
-    <img src="images/working.gif" alt="" onerror="this.style.display='none'">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain;">
     <h3>Field audio</h3>
     <audio id="fluid-poem-audio" controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
     <div id="fluid-poem-text" class="typewriter-text"></div>
@@ -914,7 +1057,7 @@
             <div class="story-slide" data-story-slide>
               <p><b>Delusory parasitosis (DP)</b>: a fixed, false belief that one is infested by parasites, insects, or other
                 organisms, held despite the absence of any medical or entomological evidence.</p>
-              <div class="scarab-rule">𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣</div>
+              <div class="scarab-rule">𓆣</div>
               <p>Despite that, patients tend to do their own evidence gathering, providing <a href="#"
             onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.
               <p
@@ -990,15 +1133,11 @@
             </div>
 
             <div class="story-slide" data-story-slide id="dp-story-slide-3">
-              <div class="citation-block">
-              <p>Dr. Hinkle, the zoologist who authored one of my DP sources, found her own arms and legs bearing <span class="citation-highlight">"distinct scarification"</span> before the manuscript was even finished.</p>
-              <div class="citation-source">Hinkle (2000)</div>
-              </div>
-              <div class="bug-thumb-strip">
+              <div class="dp-terminal"><span id="dp-slide3-search"></span></div>
+              <div class="dp-develop-frame" id="dp-slide3-frame">
                 <img src="images/scratching.png" alt="Scratching" onerror="this.style.display='none'">
-               <img src="images/edds.jpg" alt="Ed" onerror="this.style.display='none'">
-                <div id="dp-slide3-text" class="typewriter-text"></div>
               </div>
+              <div id="dp-slide3-text" class="typewriter-text"></div>
             </div>
           </div>
 
@@ -1032,7 +1171,7 @@
 
           <p><b>This is your desktop,</b> your archive of materials of your research and field work.</p>
           
-           <div class="scarab-rule">𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 𓆣 </div> 
+           <div class="scarab-rule">𓆣 𓆣 𓆣</div> 
           <p><h3>Instructions:</h3> double-click icons to open windows. They can be dragged around the screen, closed or minimized.<p>
         
           </p>In your desktop you will find materials surrounding the research and field logs of your series of interview in pest control.</p>
@@ -1466,17 +1605,40 @@
     const storySlides = document.querySelectorAll('#story-viewport .story-slide');
     let storyIndex = 0;
 
-    const dpSlide3Text = "Looking for bugs....   I think they are, at least. I'm searching for them in my mattress. I feel a pinprick and, as I am reading Hinkle's article - I can't help but scratch.";
-    let dpSlide3Typed = false;
+    const dpSlide3SearchText = "Looking for bugs....";
+    const dpSlide3Text = "I'm searching my mattress, almost absentmindedly as I am reading another article about parasitosis. I can't help but scratch.";
+    const DP_SLIDE3_HOLD_MS = 2500;
+    const DP_SLIDE3_DEVELOP_MS = 6500;
+    const DP_SLIDE3_BLINK_STOP_LEAD_MS = 1500;
+    let dpSlide3Started = false;
+
+    function startDpSlide3Sequence() {
+      if (dpSlide3Started) return;
+      dpSlide3Started = true;
+
+      const searchEl = document.getElementById('dp-slide3-search');
+      const frameEl = document.getElementById('dp-slide3-frame');
+      const imgEl = frameEl.querySelector('img');
+      const textEl = document.getElementById('dp-slide3-text');
+
+      typeText(searchEl, dpSlide3SearchText, 0, () => {
+        searchEl.classList.add('blinking');
+        setTimeout(() => {
+          imgEl.addEventListener('animationend', () => typeText(textEl, dpSlide3Text), { once: true });
+          frameEl.classList.add('developing');
+          setTimeout(() => searchEl.classList.remove('blinking'),
+            DP_SLIDE3_DEVELOP_MS - DP_SLIDE3_BLINK_STOP_LEAD_MS);
+        }, DP_SLIDE3_HOLD_MS);
+      });
+    }
 
     function renderStory() {
       storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
       document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
 
       const dpSlide3 = document.getElementById('dp-story-slide-3');
-      if (dpSlide3 && dpSlide3.classList.contains('active') && !dpSlide3Typed) {
-        dpSlide3Typed = true;
-        typeText(document.getElementById('dp-slide3-text'), dpSlide3Text);
+      if (dpSlide3 && dpSlide3.classList.contains('active')) {
+        startDpSlide3Sequence();
       }
     }
 
@@ -1522,10 +1684,12 @@ function openFluidPoem() {
   audio.play();
 }
 
-function typeText(el, text, i = 0) {
+function typeText(el, text, i = 0, onDone) {
   if (i < text.length) {
     el.innerHTML += text.charAt(i);
-    setTimeout(() => typeText(el, text, i + 1), 40);
+    setTimeout(() => typeText(el, text, i + 1, onDone), 40);
+  } else if (onDone) {
+    onDone();
   }
 }
 
