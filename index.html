@@ -9,6 +9,15 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
 
+    @font-face {
+      font-family: 'Old English Gothic Pixel';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/OldEnglishGothicPixelRegular-gx1jp.woff') format('woff'),
+           url('fonts/OldEnglishGothicPixelRegular-gx1jp.otf') format('opentype');
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -185,7 +194,7 @@
 
     .icon-egg {
       background: url("images/icons/try.png") center/contain no-repeat;
-      filter: grayscale(1);    
+      filter: grayscale(1)    
     }
 
     .icon-bed {
@@ -247,6 +256,15 @@
       cursor: move;
       user-select: none;
       flex: 0 0 auto;
+    }
+
+ 
+    .title-bar {
+      background: linear-gradient(90deg, #535f8c, #808db8 55%, #9fabcd);
+    }
+
+    .title-bar-text {
+      text-shadow: 1px 1px 0 rgba(30, 34, 56, 0.45);
     }
 
     .window-content {
@@ -1170,7 +1188,7 @@
         </div>
         <div class="window-content"
           style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fbead339;">
-          <h4>Introduction</h4>
+          <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Introduction</h4>
               <div class="bug-thumb-strip">
                 <img src="images/buglife/cimex666.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
                <img src="images/buglife/cimexil4.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
