@@ -200,6 +200,7 @@
     .icon-bed {
       background: url("images/icons/bed.png") center/contain no-repeat;
       filter: saturate(0.6);    
+      filter: grayscale(1);
     }
 
     .icon-house {
@@ -484,6 +485,15 @@
   padding-top: 12px;
   border-top: 1px solid #ccc;
   min-height: 100px;
+}
+
+ #paranoid-window {
+  height: 280px;
+}
+#paranoid-window .window-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .citation-block {
@@ -981,7 +991,7 @@
             seat. Everything feels contaminated here.
           </p>
           <p>Matthew tells me he was cleaning pigeon shit Tuesday. He says the lady today is a bit paranoid. I ask if
-            she is being rightfully paranoid? He says she is not the worst he'd seen. Later, we find a bed bug in the
+            she is being <a href="#" onclick="event.preventDefault(); openParanoid();">'rightfully paranoid?'</a> He says she is not the worst he'd seen. Later, we find a bed bug in the
             seam of her mattress.
             Matthew presents me as his trainee.
             She asks if the bugs can latch onto the cases of her medication. He says no but they can stick to books and
@@ -1007,10 +1017,6 @@
 
           <img src="images/west.jpg" alt="" onerror="this.style.display='none'">
           <div class="img-caption">West London, March 2026</div>
-          <h3>Field audio</h3>
-          <audio controls>
-            <source src="audio/westlondon.mp3" type="audio/mpeg">
-          </audio>
         </div>
       </div>
 
@@ -1068,6 +1074,22 @@
     <h3>Field audio</h3>
     <audio id="fluid-poem-audio" controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
     <div id="fluid-poem-text" class="typewriter-text"></div>
+  </div>
+</div>
+
+   <!-- Paranoid Lady audio pop-up -->
+<div class="window win98-window" id="paranoid-window" style="top:120px; left:180px; width:400px;">
+  <div class="title-bar" onmousedown="dragStart(event,'paranoid-window')">
+    <div class="title-bar-text">A Lady</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize" onclick="minimizeWindow('paranoid-window')"></button>
+      <button aria-label="Close" onclick="closeWindow('paranoid-window')"></button>
+    </div>
+  </div>
+  <div class="window-content">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain;">
+    <h3>Field audio</h3>
+    <audio id="paranoid-audio" controls><source src="audio/westlondon.mp3" type="audio/mpeg"></audio>
   </div>
 </div>
 
@@ -1227,7 +1249,7 @@
         </div>
         <div class="window-content"
           style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fff;">
-          <h3>Everything I can list about bed bugs off the top of my head</h3>
+          <h3 style="font-family:'Old English Gothic Pixel',monospace; font-size:2rem; font-weight:50;">Fun Facts</h3>
           <ul style="padding-left: 1.2em; margin: 0;">
             <li>They travel well and often</li>
             <li>They spread through public transport</li>
@@ -1720,6 +1742,13 @@ function typeText(el, text, i = 0, onDone) {
   } else if (onDone) {
     onDone();
   }
+}
+
+function openParanoid() {
+  openWindow('paranoid-window');
+  const audio = document.getElementById('paranoid-audio');
+  audio.pause();
+  audio.currentTime = 0;
 }
 
     document.getElementById('story-prev').onclick = function () {
