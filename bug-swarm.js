@@ -1,6 +1,6 @@
 // ---- bug presence: tune how sparse/dense the sightings feel ----
 const BASE_CONCURRENT_BUGS = 1;     // resting bug count — keep low, this is a glimpse not a swarm
-const PEAK_CONCURRENT_BUGS = 100;    // bug count while a hover-invert transition is boosting the swarm
+const PEAK_CONCURRENT_BUGS = 200;    // bug count while a hover-invert transition is boosting the swarm
 const SWARM_EASE = 0.02;            // per-frame lerp toward the target count — bigger = snappier ramp
 const BUG_LIFETIME_MIN_FRAMES = 60;  // ~2s at 30fps — how long a spawned bug stays before vanishing
 const BUG_LIFETIME_MAX_FRAMES = 150; // ~5s
@@ -303,3 +303,8 @@ function bugSwarmSketch(p) {
 
 const bugSwarmInstance = new p5(bugSwarmSketch);
 window.setBugSwarmBoost = boosted => bugSwarmInstance.setSwarmBoost(boosted);
+
+
+function trackBug(){
+  drawBugImage(mouseX, mousY);
+}
