@@ -571,14 +571,12 @@
 
 .dp-develop-frame {
   display: none;
-  width: 360px;
-  height: 240px;
+  width: 260px;
   max-width: 100%;
   margin: 0.6rem auto 0.6rem 0;
   background: #b3afaf;
   border: 1px solid #999;
   line-height: 0;
-  overflow: hidden;
 }
 
 .dp-develop-frame.developing {
@@ -588,8 +586,7 @@
 .dp-develop-frame img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 .dp-develop-frame.developing img {
@@ -599,84 +596,84 @@
 @keyframes dp-develop {
   0% {
     clip-path: inset(0 0 100% 0);
-    filter: blur(18px) contrast(0.45) grayscale(80%);
+    filter: contrast(0.45) grayscale(80%);
     opacity: 0;
     animation-timing-function: steps(1, end);
   }
 
   5% {
     clip-path: inset(0 0 87% 0);
-    filter: blur(18px) contrast(0.45) grayscale(80%);
+    filter: contrast(0.45) grayscale(80%);
     opacity: 0.45;
     animation-timing-function: steps(1, end);
   }
 
   18% {
     clip-path: inset(0 0 66% 0);
-    filter: blur(16px) contrast(0.5) grayscale(78%);
+    filter: contrast(0.5) grayscale(78%);
     opacity: 0.45;
     animation-timing-function: steps(1, end);
   }
 
   24% {
     clip-path: inset(0 0 66% 0);
-    filter: blur(16px) contrast(0.9) grayscale(78%);
+    filter: contrast(0.9) grayscale(78%);
     opacity: 0.8;
     animation-timing-function: steps(1, end);
   }
 
   27% {
     clip-path: inset(0 0 66% 0);
-    filter: blur(16px) contrast(0.5) grayscale(78%);
+    filter: contrast(0.5) grayscale(78%);
     opacity: 0.35;
     animation-timing-function: steps(1, end);
   }
 
   40% {
     clip-path: inset(0 0 48% 0);
-    filter: blur(14px) contrast(0.55) grayscale(72%);
+    filter: contrast(0.55) grayscale(72%);
     opacity: 0.7;
     animation-timing-function: steps(1, end);
   }
 
   54% {
     clip-path: inset(0 0 48% 0);
-    filter: blur(13px) contrast(0.55) grayscale(72%);
+    filter: contrast(0.55) grayscale(72%);
     opacity: 0.7;
     animation-timing-function: steps(1, end);
   }
 
   59% {
     clip-path: inset(0 0 27% 0);
-    filter: blur(12px) contrast(0.6) grayscale(66%);
+    filter: contrast(0.6) grayscale(66%);
     opacity: 0.85;
     animation-timing-function: steps(1, end);
   }
 
   70% {
     clip-path: inset(0 0 27% 0);
-    filter: blur(11px) contrast(0.6) grayscale(66%);
+    filter: contrast(0.6) grayscale(66%);
     opacity: 0.85;
     animation-timing-function: steps(1, end);
   }
 
   76% {
     clip-path: inset(0 0 9% 0);
-    filter: blur(9px) contrast(0.7) grayscale(58%);
+    filter: contrast(0.7) grayscale(58%);
     opacity: 0.95;
     animation-timing-function: steps(1, end);
   }
 
   83% {
     clip-path: inset(0 0 0 0);
-    filter: blur(7px) contrast(0.75) grayscale(52%);
+    filter: contrast(0.75) grayscale(52%);
     opacity: 1;
     animation-timing-function: ease-out;
   }
 
   100% {
     clip-path: inset(0 0 0 0);
-    filter: blur(0) contrast(1) grayscale(20%);
+    filter: contrast(1) grayscale(20%);
     opacity: 1;
   }
 }
@@ -1189,7 +1186,7 @@
             <div class="story-slide" data-story-slide id="dp-story-slide-3">
               <div class="dp-terminal"><span id="dp-slide3-search"></span></div>
               <div class="dp-develop-frame" id="dp-slide3-frame">
-                <img src="images/scratching.png" alt="Scratching" onerror="this.style.display='none'">
+                <img src="images/scratchmore.jpg" alt="Scratching" onerror="this.style.display='none'">
               </div>
               <div id="dp-slide3-text" class="typewriter-text"></div>
             </div>
@@ -1650,7 +1647,7 @@
       { src: 'images/buglife/bwdith-7.jpg', caption: 'A bug.' },
       { src: 'images/buglife/squash.png', caption: 'The bug.' },
       { src: 'images/buglife/cimexil9.jpeg', caption: 'Bug.' },
-      { src: 'images/buglife/shoe.jpeg', caption: 'Bug?' },
+      { src: 'images/buglife/shoe.png', caption: 'Bug?' },
     ];
     let bugIndex = 0;
 
