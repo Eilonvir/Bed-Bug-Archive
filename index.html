@@ -184,7 +184,7 @@
     }
 
     .icon-txt {
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='0.5'/%3E%3C/svg%3E") center/contain no-repeat;
     }
 
     .icon-exe {
@@ -236,7 +236,6 @@
       position: static;
     }
 
-    /* NOTES folder: icons in a single line */
     #interviews-notes-window {
       width: 300px;
     }
@@ -251,7 +250,7 @@
 
     .icon-label {
       font-family: 'Courier New', monospace;
-      font-size: 0.62rem;
+      font-size: 0.90rem;
       color: #ffffff00;
       text-shadow: 1px 1px 1px #000000;
       padding: 1px 3px;
@@ -798,6 +797,21 @@
       width: 360px;
     }
 
+    #cw-window {
+      position: absolute;
+      left: calc(50% - 190px);
+      top: calc(50% - 100px);
+      z-index: 400;
+      width: 380px;
+    }
+
+    #cw-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 14px;
+    }
+
     #taskbar {
       position: absolute;
       bottom: 0;
@@ -918,22 +932,22 @@
         </div>
       </div>
 
-      <div class="icon" style="top:10px; left:30px;" ondblclick="openWindow('interviews-window')">
+      <div class="icon" style="top: 60px; left:50px;" ondblclick="openWindow('interviews-window')">
         <div class="icon-img icon-folder"></div>
         <div class="icon-label">INTERVIEWS</div>
       </div>
 
-      <div class="icon" style="top:100px; left:30px;" ondblclick="openWindow('nlp-window')">
+      <div class="icon" style="top: 180px; left:50px;" ondblclick="openWindow('nlp-window')">
         <div class="icon-img icon-exe"></div>
         <div class="icon-label">analysis.exe</div>
       </div>
 
-      <div class="icon" style="top: 200px; left:30px;" ondblclick="openWindow('about-window')">
+      <div class="icon" style="top: 300px; left:50px;" ondblclick="openWindow('about-window')">
         <div class="icon-img icon-txt"></div>
         <div class="icon-label">README.txt</div>
       </div>
 
-      <div class="icon" style="bottom: 10px; right: 10px;" ondblclick="openWindow('bin-window')">
+      <div class="icon" style="bottom: 50px; right: 50px;" ondblclick="openWindow('bin-window')">
         <div class="icon-img icon-bin"></div>
         <div class="icon-label">BIN</div>
       </div>
@@ -1003,6 +1017,7 @@
           <p>The train is packed - I am looking at a woman in a fur coat, a child on his father's lap on the upholstered
             seat. Everything feels contaminated here.
           </p>
+          <div class="scarab-rule"></div>
           <p>Matthew tells me he was cleaning pigeon shit Tuesday. He says the lady today is a bit paranoid. I ask if
             she is being <a href="#" onclick="event.preventDefault(); openParanoid();">'rightfully paranoid?'</a> He says she is not the worst he'd seen. Later, we find a bed bug in the
             seam of her mattress.</p>
@@ -1015,6 +1030,7 @@
             stale biscuit.
             Steaming treatments by themselves are fairly quick – but depend on the clutter in the house.
           </p>
+          <div class="scarab-rule"></div>
           <p>He told me once about a man whose nephew, post mortum commissioned a bed bug extermination. Said he had a wonderful collection of books that sadly were full of them (I didn't know bed bugs latch on books I said. It was just that bad he replied).</p>
           <p>Matthew says the nastiest thing is not the bed bugs – it's going through people's bedding.
             He shows me a fresh inky spot of bed bug feces on the mattress – it still smudges - they fed on her just
@@ -1053,6 +1069,7 @@
            <div class="img-caption">The spot where the body was found - after clean up</div>
             <p>The neighbor is the first to greet me. He is dumbfounded when I ask about the pest control people – I guess
             it would be an insult to be disposed of in the same manner as pests and trash.</p>
+            <div class="scarab-rule"></div>
           <p>Warren, the other person in that day says it is his first time on this kind of job. He is visibly shaken by
             it. The nature of the job is dismantling any piece of the house the body had amalgamated with. Then placing
             them in bags. </p>
@@ -1062,6 +1079,7 @@
           <p>I ask how long has it been? Warren doesn't know how long it takes a body to do that. He was told it's been
             roughly a week. Matthew told me it's been a couple months. It's March. Calendar has logs up to mid January.
           </p>
+          <div class="scarab-rule"></div>
           <p>There is something charming about the incongruity of the collections I find across
             the house; a blender next to medical records, a couch manual, art equipment – but as a certain point the
             state of clutter becomes too much. I wonder how it might have felt for his house to turn on him; the
@@ -1103,6 +1121,23 @@
     <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain;">
     <h3>Field audio</h3>
     <audio id="paranoid-audio" controls><source src="audio/westlondon.mp3" type="audio/mpeg"></audio>
+  </div>
+</div>
+
+   <!-- Content warning -->
+<div class="window win98-window" id="cw-window">
+  <div class="title-bar" onmousedown="dragStart(event,'cw-window')">
+    <div class="title-bar-text">Content warning</div>
+    <div class="title-bar-controls">
+      <button aria-label="Close" onclick="declineContentWarning()"></button>
+    </div>
+  </div>
+  <div class="window-content">
+    <p id="cw-text"></p>
+    <div id="cw-buttons">
+      <button onclick="declineContentWarning()">Go back</button>
+      <button onclick="acceptContentWarning()">Continue</button>
+    </div>
   </div>
 </div>
 
@@ -1327,7 +1362,7 @@
       <!-- Extermination -->
       <div class="window win98-window" id="extermination-window" style="top:160px; left:270px; width:480px;">
         <div class="title-bar" onmousedown="dragStart(event,'extermination-window')">
-          <div class="title-bar-text">Extermination</div>
+          <div class="title-bar-text">Eggsterminate</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('extermination-window')"></button>
             <button aria-label="Close" onclick="closeWindow('extermination-window')"></button>
@@ -1337,7 +1372,7 @@
           <p>hortus sanititis</p>
           <p>Add Matthew paraffin audio</p>
 
-          <img src="images/buglife/hs.2.jpg" style="filter: opacity(0.8);" alt="" onerror="this.style.display='none'">
+          <img src="images/buglife/hs.jpg" style="filter: opacity(0.8);" alt="" onerror="this.style.display='none'">
           <div class="img-caption">They've been around for a while</div>
         </div>
       </div>
@@ -1399,13 +1434,10 @@
           </div>
         </div>
         <div class="window-content">
-        <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Acknowledgements</h4>
-          <p
-            style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
-            Content warning: this log contains descriptions of death and human decomposition.</p>
+        <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Acknowledgements</h4>  
           <p>Thank you Matthew Blackwell, Warren King and Project Multipest for sharing your insights from work in pest
             control. Thank you Ricardo Leizola for consultation regarding interview and documentation methodologies as
-            well as interesting conceptual links. Thank you Millicent Gunn, Luise Rouse, Jeremy Wenger - for
+            well as interesting conceptual links. Thank you Millicent Gunn, Louise Rouse, Jeremy Wenger - for
             consultation regarding curation, UX, adaptation to a gallery setting, interactive story telling UX concerns
             and other</p>
           <div class="scarab-rule"></div>
@@ -1758,6 +1790,11 @@ function openParanoid() {
     setInterval(updateClock, 1000);
 
     const openWindows = new Set();
+    const CONTENT_WARNINGS = {
+      'North London-window': 'This field log describes an unattended death and human decomposition, and includes photographs of the site after cleaning.',
+      'morgellons-window': 'This log discusses mental illness, health anxiety and self-diagnosis.'
+    };
+    let pendingWarning = null;
     let septMode = false;
     const fullscreenBtn = document.getElementById('fullscreen-btn');
 
@@ -1768,6 +1805,29 @@ function openParanoid() {
     }
 
     function openWindow(id) {
+      if (CONTENT_WARNINGS[id] && !openWindows.has(id)) {
+        pendingWarning = id;
+        document.getElementById('cw-text').textContent = CONTENT_WARNINGS[id];
+        openWindowNow('cw-window');
+        return;
+      }
+      openWindowNow(id);
+    }
+
+    function acceptContentWarning() {
+      const id = pendingWarning;
+      pendingWarning = null;
+      closeWindow('cw-window');
+      if (!id) return;
+      openWindowNow(id);
+    }
+
+    function declineContentWarning() {
+      pendingWarning = null;
+      closeWindow('cw-window');
+    }
+
+    function openWindowNow(id) {
       const win = document.getElementById(id);
       if (!win) return;
 
@@ -1908,7 +1968,7 @@ function openParanoid() {
     }
 
     document.querySelectorAll('.win98-window').forEach(win => {
-      if (win.id === 'entry-window') return;
+      if (win.id === 'entry-window' || win.id === 'cw-window') return;
       const handle = document.createElement('div');
       handle.className = 'resize-handle';
       [handle].forEach(h => {
@@ -1923,6 +1983,7 @@ function openParanoid() {
         if (win) win.classList.remove('open');
       });
       openWindows.clear();
+      pendingWarning = null;
       updateTaskbar();
 
       document.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
