@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>PROTOTYPE — audio window templates</title>
+  <link rel="stylesheet" href="98.css-main/style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+    /* ══ scratch file. nothing here is wired into index.html. ══
+       Variants A–G below. Each is the real 98.css frame with the real
+       assets, so what you see is what the popup will look like.        */
+
+    body {
+      margin: 0;
+      padding: 28px;
+      background: #6b6668;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+    }
+
+    .proto-board {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 34px 26px;
+      align-items: flex-start;
+    }
+
+    .proto-slot {
+      width: 400px;
+    }
+
+    /* mirrors .win98-window.open in index.html — without this the content
+       overflows the frame and every variant lies to you */
+    .proto-slot .window {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proto-slot .window .title-bar {
+      flex: 0 0 auto;
+    }
+
+    .proto-tag {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      color: #fff;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .proto-tag b {
+      background: #000;
+      padding: 1px 6px;
+      margin-right: 7px;
+    }
+
+    .proto-note {
+      font-family: 'Courier New', monospace;
+      font-size: 0.62rem;
+      color: #cfc9cb;
+      line-height: 1.6;
+      margin-top: 7px;
+    }
+
+    /* ─── shared base, lifted verbatim from index.html ─── */
+    .title-bar {
+      background: linear-gradient(90deg, #535f8c, #808db8 55%, #9fabcd);
+    }
+
+    .title-bar-text {
+      text-shadow: 1px 1px 0 rgba(30, 34, 56, 0.45);
+    }
+
+    .window-content {
+      background: #c1bdbd;
+      padding: 10px;
+      overflow-y: auto;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: #000;
+    }
+
+    .window-content h3 {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #000;
+      margin: 0.8rem 0 0.5rem;
+      padding-bottom: 0.2rem;
+    }
+
+    .window-content audio {
+      width: 100%;
+      margin: 0.4rem 0;
+      accent-color: #000080;
+    }
+
+    .img-caption {
+      font-size: 0.58rem;
+      color: #666;
+      margin-bottom: 0.6rem;
+    }
+
+    @keyframes terminal-blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .blinking {
+      animation: terminal-blink 1.5s steps(1, end) infinite;
+    }
+
+    /* ─── the part every variant shares: window is a flex column so the
+           transcript can absorb leftover height ─── */
+    .audio-window .window-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .audio-window .window-content > * {
+      flex: 0 0 auto;
+    }
+
+    .audio-window .window-content h3 {
+      margin: 0.75rem 0 0.4rem;
+    }
+
+    .audio-window .window-content h3:first-child {
+      margin-top: 0;
+    }
+
+    .audio-window .audio-transcript {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    .audio-transcript.awaiting {
+      font-family: 'Courier New', monospace;
+      font-style: normal;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      color: #6d6868;
+    }
+
+    .audio-meta {
+      margin: 0;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 1px 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.6rem;
+      line-height: 1.6;
+      min-width: 0;
+    }
+
+    .audio-meta dt {
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #565252;
+    }
+
+    .audio-meta dd {
+      margin: 0;
+      color: #000;
+      overflow-wrap: anywhere;
+    }
+
+    /* ══════ A — tape card: thumb left, meta grid right ══════ */
+    .v-a .audio-card {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .v-a .audio-card-thumb {
+      flex: 0 0 128px;
+      background: #b3afaf;
+      border: 1px solid #999;
+      padding: 3px;
+      line-height: 0;
+    }
+
+    .v-a .audio-card-thumb img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      filter: grayscale(90%) contrast(1.08);
+    }
+
+    .v-a .audio-meta {
+      flex: 1 1 auto;
+    }
+
+    /* ══════ B — full-bleed banner ══════ */
+    .v-b .audio-banner {
+      background: #b3afaf;
+      border: 1px solid #999;
+      line-height: 0;
+    }
+
+    .v-b .audio-banner img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      filter: grayscale(90%) contrast(1.08);
+    }
+
+    .v-b .audio-banner .img-caption {
+      line-height: 1.6;
+      margin: 0;
+      padding: 3px 6px;
+      background: #b3afaf;
+      border-top: 1px solid #999;
+    }
+
+    /* ══════ C — polaroid / evidence card ══════ */
+    .v-c .audio-polaroid-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 4px;
+    }
+
+    .v-c .audio-polaroid {
+      position: relative;
+      background: #efeceb;
+      padding: 8px 8px 4px;
+      box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.35);
+      transform: rotate(-1.8deg);
+      line-height: 0;
+    }
+
+    .v-c .audio-polaroid img {
+      width: 150px;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.12);
+    }
+
+    .v-c .audio-polaroid figcaption {
+      font-family: 'Courier New', monospace;
+      font-size: 0.58rem;
+      line-height: 2.2;
+      color: #444;
+      text-align: center;
+    }
+
+    .v-c .audio-polaroid::before {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      width: 54px;
+      height: 18px;
+      transform: translateX(-50%) rotate(2.5deg);
+      background: rgba(226, 220, 198, 0.72);
+      border-left: 1px solid rgba(0, 0, 0, 0.08);
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* ══════ D — contact sheet strip ══════ */
+    .v-d .audio-contact {
+      display: flex;
+      gap: 4px;
+      background: #4a4646;
+      border: 1px solid #999;
+      padding: 4px;
+    }
+
+    .v-d .audio-contact img {
+      flex: 1 1 0;
+      min-width: 0;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    .v-d .audio-contact-index {
+      font-family: 'Courier New', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      color: #666;
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ══════ E — cassette label ══════ */
+    .v-e .audio-cassette {
+      border: 1px solid #8b8686;
+      background: repeating-linear-gradient(0deg, #cac6c6 0 3px, #c1bdbd 3px 6px);
+      padding: 7px;
+    }
+
+    .v-e .audio-cassette-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Courier New', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.16em;
+      color: #4a4646;
+      border-bottom: 1px solid #8b8686;
+      padding-bottom: 4px;
+      margin-bottom: 7px;
+    }
+
+    .v-e .audio-cassette-body {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .v-e .audio-cassette-body img {
+      flex: 0 0 92px;
+      /* flex items default to min-width:auto, which lets a 3000px source
+         override flex-basis entirely — pin both */
+      width: 92px;
+      min-width: 0;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 1px solid #8b8686;
+      filter: grayscale(100%) sepia(12%) contrast(1.1);
+    }
+
+    .v-e .audio-reels {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .v-e .audio-reel {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #8b8686;
+      background:
+        radial-gradient(circle, #b3afaf 0 26%, transparent 26%),
+        repeating-radial-gradient(circle, #6f6a6a 0 1px, #575252 1px 3px);
+    }
+
+    .v-e .audio-cassette-title {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68rem;
+      text-align: center;
+      color: #000;
+    }
+
+    /* ══════ F — tall split column ══════ */
+    .v-f .audio-split {
+      display: flex;
+      gap: 12px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .v-f .audio-split-img {
+      flex: 0 0 118px;
+      align-self: stretch;
+      background: #b3afaf;
+      border: 1px solid #999;
+      padding: 3px;
+      line-height: 0;
+    }
+
+    .v-f .audio-split-img img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      filter: grayscale(95%) contrast(1.08);
+    }
+
+    .v-f .audio-split-body {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .v-f .audio-split-body h3 {
+      margin-top: 0;
+    }
+
+    .v-f .audio-split-body .audio-transcript {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      font-style: italic;
+    }
+
+    /* ══════ G — typographic, no image ══════ */
+    .v-g .audio-pull {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.02rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: #1a1a1a;
+      padding: 4px 0 10px;
+    }
+
+    .v-g .audio-pull span {
+      background: #f9a8d4;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 0 2px;
+    }
+
+    /* ══════ H / I / J — centred plate, no invented metadata ══════
+       object-fit: contain, so nothing gets cropped at all.          */
+    .v-plain .audio-plate {
+      display: flex;
+      justify-content: center;
+      background: #b3afaf;
+      border: 1px solid #999;
+      padding: 4px;
+    }
+
+    .v-plain .audio-plate img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      /* 120 not 150: at 150 the note clips mid-sentence in a 420px window */
+      max-height: 120px;
+      object-fit: contain;
+      filter: grayscale(90%) contrast(1.08);
+    }
+
+    .v-plain .audio-plate-caption {
+      font-size: 0.58rem;
+      color: #666;
+      text-align: center;
+      margin: 5px 0 0;
+    }
+
+    /* the typed line is the author's, not the recording's — so it gets a
+       hairline instead of a heading that would mislabel it */
+    .v-plain .audio-note {
+      border-top: 1px solid #9a9696;
+      padding-top: 10px;
+      margin-top: 0.7rem;
+    }
+
+    .v-plain .audio-note.awaiting {
+      color: #6d6868;
+    }
+
+    /* J marks the voice by typeface rather than by label */
+    .v-j .audio-note {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.86rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: #1a1a1a;
+    }
+
+    .v-g .audio-pull::before {
+      content: "\201C";
+      font-size: 2.4rem;
+      line-height: 0;
+      vertical-align: -0.35rem;
+      color: #8b8686;
+      margin-right: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="proto-board">
+
+    <!-- ════════════════ A ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>A</b>TAPE CARD</div>
+      <div class="window audio-window v-a" style="height:400px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-card">
+            <div class="audio-card-thumb">
+              <img src="images/working.gif" alt="">
+            </div>
+            <dl class="audio-meta">
+              <dt>Subject</dt><dd>Warren</dd>
+              <dt>Location</dt><dd>North London</dd>
+              <dt>Date</dt><dd>March 2026</dd>
+              <dt>Runtime</dt><dd data-audio-duration>--:--</dd>
+              <dt>File</dt><dd>northlondon.mp3</dd>
+            </dl>
+          </div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <h3>Transcript</h3>
+          <div class="audio-transcript" data-transcript></div>
+        </div>
+      </div>
+      <div class="proto-note">Catalogue entry. Fills the horizontal dead space with typed
+        metadata; runtime reads itself off the file. Portrait sources get centre-cropped.</div>
+    </div>
+
+    <!-- ════════════════ B ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>B</b>PHOTO BANNER</div>
+      <div class="window audio-window v-b" style="height:400px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-banner">
+            <img src="images/working.gif" alt="">
+            <div class="img-caption">North London, March 2026 &middot; 0:28</div>
+          </div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <h3>Transcript</h3>
+          <div class="audio-transcript" data-transcript></div>
+        </div>
+      </div>
+      <div class="proto-note">Image-forward, least fussy. Crops hardest of all of them &mdash;
+        a 16:7 slot through a 3000&times;4000 portrait keeps very little.</div>
+    </div>
+
+    <!-- ════════════════ C ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>C</b>POLAROID</div>
+      <div class="window audio-window v-c" style="height:400px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-polaroid-wrap">
+            <figure class="audio-polaroid">
+              <img src="images/working.gif" alt="">
+              <figcaption>N. London &mdash; 03/26</figcaption>
+            </figure>
+          </div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <div class="audio-transcript" data-transcript></div>
+        </div>
+      </div>
+      <div class="proto-note">Most physical, most "evidence bag". The tape strip and tilt fight
+        the crisp 98 chrome &mdash; that tension is either the point or the problem.</div>
+    </div>
+
+    <!-- ════════════════ D ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>D</b>CONTACT SHEET</div>
+      <div class="window audio-window v-d" style="height:400px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-contact">
+            <img src="images/working.gif" alt="">
+            <img src="images/warren03.jpg" alt="">
+            <img src="images/northlondon.jpg" alt="">
+          </div>
+          <div class="audio-contact-index"><span>FRAME 01&ndash;03</span><span>N. LONDON 03/26</span></div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <h3>Transcript</h3>
+          <div class="audio-transcript" data-transcript></div>
+        </div>
+      </div>
+      <div class="proto-note">Needs 2&ndash;3 images per clip, which you have for Warren but not
+        for every window. Reads as a roll of film rather than one chosen frame.</div>
+    </div>
+
+    <!-- ════════════════ E ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>E</b>CASSETTE LABEL</div>
+      <div class="window audio-window v-e" style="height:400px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-cassette">
+            <div class="audio-cassette-head"><span>SIDE A</span><span>FIELD REC &middot; 03/26</span></div>
+            <div class="audio-cassette-body">
+              <img src="images/working.gif" alt="">
+              <div class="audio-reels">
+                <div class="audio-reel"></div>
+                <div class="audio-reel"></div>
+              </div>
+            </div>
+            <div class="audio-cassette-title">Warren &mdash; North London</div>
+          </div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <div class="audio-transcript" data-transcript></div>
+        </div>
+      </div>
+      <div class="proto-note">The reels can be made to spin only while playing. Most "interesting",
+        but it's decoration &mdash; it says tape, not what's on the tape.</div>
+    </div>
+
+    <!-- ════════════════ F ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>F</b>TALL SPLIT</div>
+      <div class="window audio-window v-f" style="height:400px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-split">
+            <div class="audio-split-img"><img src="images/working.gif" alt=""></div>
+            <div class="audio-split-body">
+              <h3>Field audio</h3>
+              <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+              <h3>Transcript</h3>
+              <div class="audio-transcript" data-transcript></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proto-note">The only one that suits your portrait sources &mdash; a tall column
+        crops almost nothing. Squeezes the player into ~230px though.</div>
+    </div>
+
+    <!-- ════════════════ G ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>G</b>NO IMAGE</div>
+      <div class="window audio-window v-g" style="height:400px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-pull">his <span>body fluid just gone through to heaven</span></div>
+          <dl class="audio-meta">
+            <dt>Subject</dt><dd>Warren</dd>
+            <dt>Location</dt><dd>North London</dd>
+            <dt>Date</dt><dd>March 2026</dd>
+            <dt>Runtime</dt><dd data-audio-duration>--:--</dd>
+          </dl>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <h3>Transcript</h3>
+          <div class="audio-transcript" data-transcript></div>
+        </div>
+      </div>
+      <div class="proto-note">Fallback for clips with no good photo. Leads with the line that
+        made you open the window in the first place.</div>
+    </div>
+
+    <!-- ════════════════ H ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>H</b>CENTRED &mdash; NO LABEL</div>
+      <div class="window audio-window v-plain v-h" style="height:420px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-plate"><img src="images/working.gif" alt=""></div>
+          <div class="audio-plate-caption">North London, March 2026</div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <div class="audio-transcript audio-note" data-transcript data-caret-only></div>
+        </div>
+      </div>
+      <div class="proto-note">Whole frame, no crop, nothing invented. The waiting space holds a
+        lone blinking caret &mdash; it promises writing without claiming what.</div>
+    </div>
+
+    <!-- ════════════════ I ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>I</b>CENTRED &mdash; "NOTE"</div>
+      <div class="window audio-window v-plain v-i" style="height:440px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-plate"><img src="images/working.gif" alt=""></div>
+          <div class="audio-plate-caption">North London, March 2026</div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <h3>Note, written while transcribing</h3>
+          <div class="audio-transcript" data-transcript></div>
+        </div>
+      </div>
+      <div class="proto-note">Says plainly whose voice it is and when it was written. Honest, but
+        it explains the moment before you've had it.</div>
+    </div>
+
+    <!-- ════════════════ J ════════════════ -->
+    <div class="proto-slot">
+      <div class="proto-tag"><b>J</b>CENTRED &mdash; VOICE BY TYPEFACE</div>
+      <div class="window audio-window v-plain v-j" style="height:420px;">
+        <div class="title-bar">
+          <div class="title-bar-text">Warren interview</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="audio-plate"><img src="images/working.gif" alt=""></div>
+          <div class="audio-plate-caption">North London, March 2026</div>
+          <h3>Field audio</h3>
+          <audio controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+          <div class="audio-transcript audio-note" data-transcript data-caret-only></div>
+        </div>
+      </div>
+      <div class="proto-note">Same as H, but the note is serif italic against the archive's
+        monospace &mdash; your voice is marked by type, not by a heading.</div>
+    </div>
+
+  </div>
+
+  <script>
+    const POEM = "What is it about women decaying alive that pulls at me so strong. It is not a new sentiment. Councils - systems leave people for dead in their way. I wish it touched a man as much as an actual corpse would.";
+
+    // fill every runtime slot from the file itself
+    document.querySelectorAll('.audio-window').forEach(win => {
+      const audio = win.querySelector('audio');
+      const slot = win.querySelector('[data-audio-duration]');
+      if (!audio || !slot) return;
+      function showDuration() {
+        if (!isFinite(audio.duration)) return;
+        const mins = Math.floor(audio.duration / 60);
+        const secs = String(Math.floor(audio.duration % 60)).padStart(2, '0');
+        slot.textContent = mins + ':' + secs;
+      }
+      if (audio.readyState > 0) showDuration();
+      audio.addEventListener('loadedmetadata', showDuration);
+    });
+
+    function setAwaiting(el) {
+      el.classList.add('awaiting');
+      // caret-only variants make no claim about what the text will be
+      el.innerHTML = el.hasAttribute('data-caret-only')
+        ? '<span class="blinking">_</span>'
+        : '&gt; awaiting transcript<span class="blinking">_</span>';
+    }
+
+    function setFilled(el) {
+      el.classList.remove('awaiting');
+      el.textContent = POEM;
+    }
+
+    const slots = document.querySelectorAll('[data-transcript]');
+    slots.forEach(setAwaiting);
+
+    // click any window to flip that one between waiting and typed-out
+    document.querySelectorAll('.audio-window').forEach(win => {
+      win.addEventListener('click', e => {
+        if (e.target.closest('audio, button')) return;
+        const t = win.querySelector('[data-transcript]');
+        if (!t) return;
+        t.classList.contains('awaiting') ? setFilled(t) : setAwaiting(t);
+      });
+    });
+  </script>
+<style>.proto-slot:nth-child(-n+7){display:none}</style><script>window.addEventListener("load",()=>{setTimeout(()=>{document.querySelectorAll("[data-transcript]").forEach(setFilled)},300)})</script>
+<script>
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const out=[];
+    ['v-h','v-i','v-j'].forEach(v=>{
+      const w=document.querySelector('.'+v);
+      const t=w.querySelector('[data-transcript]');
+      const cs=getComputedStyle(t);
+      out.push(v+' need='+t.scrollHeight+' have='+t.clientHeight+' lh='+cs.lineHeight+' fam='+cs.fontFamily.split(',')[0]);
+    });
+    document.title=out.join(' | ');
+  },2000);
+});
+</script></body>
+
+</html>
