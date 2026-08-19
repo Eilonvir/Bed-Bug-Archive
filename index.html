@@ -9,6 +9,15 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
 
+    @font-face {
+      font-family: 'Old English Gothic Pixel';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/OldEnglishGothicPixelRegular-gx1jp.woff') format('woff'),
+           url('fonts/OldEnglishGothicPixelRegular-gx1jp.otf') format('opentype');
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -27,7 +36,7 @@
     #screen-frame {
       position: fixed;
       inset: 28px;
-      background-color: #5e909c;
+      background-color: #ee37ccb4;
       box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.75);
       overflow: hidden;
       --filter: saturate(0.6);
@@ -37,7 +46,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('images/grandflrs.jpg');
+      background-image: url('images/noiseflrs.jpg');
       background-size: cover;
       background-position: center;
       filter: var(--filter);
@@ -175,7 +184,7 @@
     }
 
     .icon-txt {
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='0.5'/%3E%3C/svg%3E") center/contain no-repeat;
     }
 
     .icon-exe {
@@ -184,26 +193,36 @@
     }
 
     .icon-egg {
-      background: url("images/bug.png") center/contain no-repeat;
+      background: url("images/icons/try.png") center/contain no-repeat;
+      filter: grayscale(1);    
     }
 
     .icon-bed {
       background: url("images/icons/bed.png") center/contain no-repeat;
+      filter: saturate(0.6);    
+      filter: grayscale(1);
     }
 
     .icon-house {
-      background: url("images/icons/stoneb.svg") center/contain no-repeat;
-      scale: 0.75;
-      filter: grayscale(90%);
+      background: url("images/icons/grave.png") center/contain no-repeat;
+      scale: 1.2;
+      filter: grayscale(0.9);
     }
 
     .icon-kill {
-      background: url("images/icons/kill.jpg") center/contain no-repeat;
+      background: url("images/icons/killbill2.png") center/contain no-repeat;
+      scale: 2.2;
     }
 
     .icon-bin {
       background: url("images/icons/bin.png") center/contain no-repeat;
       filter: grayscale(1) saturate(0.6);
+    }
+
+    .icon-body {
+      background: url("images/icons/body.png") center/contain no-repeat;
+      scale: 1.6;
+      filter: saturate 0.6;
     }
 
     .icon-grid {
@@ -217,9 +236,21 @@
       position: static;
     }
 
+    #interviews-notes-window {
+      width: 300px;
+    }
+
+    #interviews-notes-window .icon-grid {
+      flex-wrap: nowrap;
+    }
+
+    #interviews-notes-window .icon {
+      flex: 0 0 auto;
+    }
+
     .icon-label {
       font-family: 'Courier New', monospace;
-      font-size: 0.62rem;
+      font-size: 0.90rem;
       color: #ffffff00;
       text-shadow: 1px 1px 1px #000000;
       padding: 1px 3px;
@@ -247,6 +278,15 @@
       flex: 0 0 auto;
     }
 
+ 
+    .title-bar {
+      background: linear-gradient(90deg, #535f8c, #808db8 55%, #9fabcd);
+    }
+
+    .title-bar-text {
+      text-shadow: 1px 1px 0 rgba(30, 34, 56, 0.45);
+    }
+
     .window-content {
       background: #c1bdbd;
       padding: 10px;
@@ -257,6 +297,13 @@
       font-size: 0.78rem;
       line-height: 1.8;
       color: #000;
+    }
+
+    .scarab-rule {
+      height: 28px;
+      margin: 0.6rem 0;
+      background: url("images/buglife/bedbug1.png") center/contain no-repeat;
+      opacity: 0.75;
     }
 
     .resize-handle {
@@ -324,7 +371,7 @@
     }
 
     .img-caption {
-      font-size: 0.58rem;
+      font-size: 0.8rem;
       color: #666;
       margin-bottom: 0.6rem;
     }
@@ -413,7 +460,7 @@
 
     .nlp-term {
       min-width: 110px;
-      color: #000080;
+      color: #010109;
     }
 
     .nlp-term-personal {
@@ -428,7 +475,7 @@
 
     .nlp-row:hover .nlp-term-personal {
       display: inline-block;
-      animation: squiggly-anim 0.4s linear infinite;
+      animation: squiggly-ramp-in 1s linear forwards, squiggly-anim 0.4s linear infinite 1s;
     }
 
     .story-slide-2:hover p,
@@ -436,7 +483,7 @@
     .story-slide-2:hover .nlp-term-text,
     .story-slide-2:hover .nlp-count,
     .story-slide-2:hover .hover-hint {
-      animation: squiggly-anim 0.4s linear infinite;
+      animation: squiggly-ramp-in 1s linear forwards, squiggly-anim 0.4s linear infinite 1s;
     }
 
 
@@ -454,6 +501,15 @@
   padding-top: 12px;
   border-top: 1px solid #ccc;
   min-height: 100px;
+}
+
+ #paranoid-window {
+  height: 280px;
+}
+#paranoid-window .window-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .citation-block {
@@ -494,6 +550,168 @@
   border: 1px solid #999;
   filter: grayscale(20%);
 }
+
+#dp-story-slide-3 {
+  width: 100%;
+}
+
+#dp-story-slide-3 .dp-terminal,
+#dp-story-slide-3 .typewriter-text {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: #1a1a1a;
+}
+
+.dp-terminal {
+  min-height: 1.7em;
+  margin: 0.6rem 0;
+}
+
+.dp-terminal .blinking {
+  animation: terminal-blink 1.5s steps(1, end) infinite;
+}
+
+@keyframes terminal-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.dp-develop-frame {
+  display: none;
+  width: 260px;
+  max-width: 100%;
+  margin: 0.6rem auto 0.6rem 0;
+  background: #b3afaf;
+  border: 1px solid #999;
+  line-height: 0;
+}
+
+.dp-develop-frame.developing {
+  display: block;
+}
+
+.dp-develop-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dp-develop-frame.developing img {
+  animation: dp-develop 6.5s forwards;
+}
+
+@keyframes dp-develop {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    filter: contrast(0.45) grayscale(80%);
+    opacity: 0;
+    animation-timing-function: steps(1, end);
+  }
+
+  5% {
+    clip-path: inset(0 0 87% 0);
+    filter: contrast(0.45) grayscale(80%);
+    opacity: 0.45;
+    animation-timing-function: steps(1, end);
+  }
+
+  18% {
+    clip-path: inset(0 0 66% 0);
+    filter: contrast(0.5) grayscale(78%);
+    opacity: 0.45;
+    animation-timing-function: steps(1, end);
+  }
+
+  24% {
+    clip-path: inset(0 0 66% 0);
+    filter: contrast(0.9) grayscale(78%);
+    opacity: 0.8;
+    animation-timing-function: steps(1, end);
+  }
+
+  27% {
+    clip-path: inset(0 0 66% 0);
+    filter: contrast(0.5) grayscale(78%);
+    opacity: 0.35;
+    animation-timing-function: steps(1, end);
+  }
+
+  40% {
+    clip-path: inset(0 0 48% 0);
+    filter: contrast(0.55) grayscale(72%);
+    opacity: 0.7;
+    animation-timing-function: steps(1, end);
+  }
+
+  54% {
+    clip-path: inset(0 0 48% 0);
+    filter: contrast(0.55) grayscale(72%);
+    opacity: 0.7;
+    animation-timing-function: steps(1, end);
+  }
+
+  59% {
+    clip-path: inset(0 0 27% 0);
+    filter: contrast(0.6) grayscale(66%);
+    opacity: 0.85;
+    animation-timing-function: steps(1, end);
+  }
+
+  70% {
+    clip-path: inset(0 0 27% 0);
+    filter: contrast(0.6) grayscale(66%);
+    opacity: 0.85;
+    animation-timing-function: steps(1, end);
+  }
+
+  76% {
+    clip-path: inset(0 0 9% 0);
+    filter: contrast(0.7) grayscale(58%);
+    opacity: 0.95;
+    animation-timing-function: steps(1, end);
+  }
+
+  83% {
+    clip-path: inset(0 0 0 0);
+    filter: contrast(0.75) grayscale(52%);
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: contrast(1) grayscale(20%);
+    opacity: 1;
+  }
+}
+
+    @keyframes squiggly-ramp-in {
+      0% {
+        filter: none;
+      }
+
+      25% {
+        filter: url(#nlp-squiggly-ramp-1);
+      }
+
+      50% {
+        filter: url(#nlp-squiggly-ramp-2);
+      }
+
+      75% {
+        filter: url(#nlp-squiggly-ramp-3);
+      }
+
+      100% {
+        filter: url(#nlp-squiggly-0);
+      }
+    }
 
     @keyframes squiggly-anim {
       0% {
@@ -555,15 +773,17 @@
 
     .nlp-bar-inner {
       height: 100%;
-      background: #000080;
+      background: #0101075f;
     }
 
     .nlp-row:hover .nlp-bar-inner {
-      background: #000080;
+      background: linear-gradient(180deg, #0d3d08 0%, #135e0b97 40%, #2efa1f8b 60%, #0d3d08 100%);
+      mix-blend-mode: hard-light;
+      filter: saturate(1.5) drop-shadow(0 0 3px #25ba1aa0) drop-shadow(0 0 7px #1d9f148e);
     }
 
     .nlp-count {
-      color: #666;
+      color: #666666a1;
       font-size: 0.65rem;
       min-width: 30px;
       text-align: right;
@@ -575,6 +795,21 @@
       top: calc(50% - 110px);
       z-index: 150;
       width: 360px;
+    }
+
+    #cw-window {
+      position: absolute;
+      left: calc(50% - 190px);
+      top: calc(50% - 100px);
+      z-index: 400;
+      width: 380px;
+    }
+
+    #cw-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 14px;
     }
 
     #taskbar {
@@ -652,6 +887,18 @@
         <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="5" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
       </filter>
+      <filter id="nlp-squiggly-ramp-1">
+        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-2">
+        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.7" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-3">
+        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.1" />
+      </filter>
     </defs>
   </svg>
 
@@ -685,31 +932,31 @@
         </div>
       </div>
 
-      <div class="icon" style="top:10px; left:30px;" ondblclick="openWindow('interviews-window')">
+      <div class="icon" style="top: 60px; left:50px;" ondblclick="openWindow('interviews-window')">
         <div class="icon-img icon-folder"></div>
         <div class="icon-label">INTERVIEWS</div>
       </div>
 
-      <div class="icon" style="top:100px; left:30px;" ondblclick="openWindow('nlp-window')">
+      <div class="icon" style="top: 180px; left:50px;" ondblclick="openWindow('nlp-window')">
         <div class="icon-img icon-exe"></div>
         <div class="icon-label">analysis.exe</div>
       </div>
 
-      <div class="icon" style="top: 200px; left:30px;" ondblclick="openWindow('about-window')">
+      <div class="icon" style="top: 300px; left:50px;" ondblclick="openWindow('about-window')">
         <div class="icon-img icon-txt"></div>
         <div class="icon-label">README.txt</div>
       </div>
 
-      <div class="icon" style="bottom: 10px; right: 10px;" ondblclick="openWindow('bin-window')">
+      <div class="icon" style="bottom: 50px; right: 50px;" ondblclick="openWindow('bin-window')">
         <div class="icon-img icon-bin"></div>
         <div class="icon-label">BIN</div>
       </div>
 
 
-      <!-- BRIGHTON -->
+      <!-- KNOWLEDGE -->
       <div class="window win98-window" id="brighton-window" style="top:60px; left:120px; width:480px;">
         <div class="title-bar" onmousedown="dragStart(event,'brighton-window')">
-          <div class="title-bar-text">I. Brighton — March 2026</div>
+          <div class="title-bar-text">KNOWLEDGE</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('brighton-window')"></button>
             <button aria-label="Close" onclick="closeWindow('brighton-window')"></button>
@@ -721,40 +968,43 @@
             control before. This is their first appointment with Matthew – he immediately does heat treatment and
             steaming in the flat. As he states that he "doesn't do inspections" and "if you got bed bugs, you know you
             got it". But he later retracts on that statement as we discuss delusional clients.</p>
+            <img src="images/bright.jpg" style="filter: grayscale(0.6);" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">Steaming treatment</div>
           <p>Matthew had been in pest control since he left school. His father worked in the same field. In show & tell day Matthew's father sent him to school with a dead bat. He was sent to the principal's office.
-            
+             
             <p>He says field
             biologists ('pesties' he calls them) might be more keen to let me in for research. Apparently cavemen got bed
-            bugs from bats hundreds of millions years ago.</p>
+            bugs from bats hundreds of thousands of years ago.</p>
           <p>The bedroom's window is double glazed, making it ideal for effectively turning the room into an oven – the
             goal temperature is 70-80 degrees c for at least four hours. Matthew sets a reflective sheet for insulation
             and blasts steam from a gas balloon from the bottom. He lets me check the room's temperature with an
             infrared thermostat as it's rapidly rising. It's fun.</p>
+             <div class="scarab-rule"></div>
           <p>The paranoia of infestations doesn't rub off on Matthew. He doesn't wear the suit nor changes his clothes
             when coming home. Just sits on his couch. He says that he only brought bed bugs home with him once, because
             he was careless. He is very resilient in that sense. </p>
+           
           <p>Council care homes and children's homes are vulnerable to infestations. Councils have tried to save on pest
             control by prioritizing getting contractors to exterminate one type of pest over the other. But you can't
             save on pest control.</p>
+             
           <p>He tells me of an old lady who was feeding the foxes and another old lady who was council ordered to clear
             up rat dropping from her house floor. When Matthew got there she had already removed several trash bags
             worth of dry droppings on her own. The build up was 10-15 years of droppings – the council charged her with
             the money they might need for contractors for treatment of the house but not for the help she needed. For
             all Matthew knows, she is still in that house.
-
+          
             He made a throwaway comment, half joking of all the crazy women in his field.</p>
           <p>Wednesday's appointment in west London would be at an older lady's house. It would be a steaming treatment.
             I am curious to see how her interaction with Matthew would go as she fits the DP patient profile as well as
             belongs to a demographic that's more vulnerable to infestations.</p>
-          <img src="images/bright.jpg" style="filter: grayscale(0.6);" alt="" onerror="this.style.display='none'">
-          <div class="img-caption">Brighton, March 2026</div>
         </div>
       </div>
 
       <!-- WEST LONDON -->
       <div class="window win98-window" id="westlondon-window" style="top:80px; left:150px; width:460px;">
         <div class="title-bar" onmousedown="dragStart(event,'westlondon-window')">
-          <div class="title-bar-text">II. West London — March 2026</div>
+          <div class="title-bar-text">FLUFF</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('westlondon-window')"></button>
             <button aria-label="Close" onclick="closeWindow('westlondon-window')"></button>
@@ -767,15 +1017,21 @@
           <p>The train is packed - I am looking at a woman in a fur coat, a child on his father's lap on the upholstered
             seat. Everything feels contaminated here.
           </p>
+          <div class="scarab-rule"></div>
           <p>Matthew tells me he was cleaning pigeon shit Tuesday. He says the lady today is a bit paranoid. I ask if
-            she is being rightfully paranoid? He says she is not the worst he'd seen. Later, we find a bed bug in the
-            seam of her mattress.
-            Matthew presents me as his trainee.
+            she is being <a href="#" onclick="event.preventDefault(); openParanoid();">'rightfully paranoid?'</a> He says she is not the worst he'd seen. Later, we find a bed bug in the
+            seam of her mattress.</p>
+
+          <img src="images/west.jpg" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">When I tell you I shrieked</div>
+            <p>Matthew presents me as his trainee.
             She asks if the bugs can latch onto the cases of her medication. He says no but they can stick to books and
             there are a lot of items around. He extracts something round and dark brown from the bed – apparently it's a
             stale biscuit.
             Steaming treatments by themselves are fairly quick – but depend on the clutter in the house.
           </p>
+          <div class="scarab-rule"></div>
+          <p>He told me once about a man whose nephew, post mortum commissioned a bed bug extermination. Said he had a wonderful collection of books that sadly were full of them (I didn't know bed bugs latch on books I said. It was just that bad he replied).</p>
           <p>Matthew says the nastiest thing is not the bed bugs – it's going through people's bedding.
             He shows me a fresh inky spot of bed bug feces on the mattress – it still smudges - they fed on her just
             hours before.
@@ -789,20 +1045,13 @@
             I ask if any clients ever provide such evidence<br>
             He says that yes, the crazy people.
           </div>
-
-          <img src="images/west.jpg" alt="" onerror="this.style.display='none'">
-          <div class="img-caption">West London, March 2026</div>
-          <h3>Field audio</h3>
-          <audio controls>
-            <source src="audio/westlondon.mp3" type="audio/mpeg">
-          </audio>
         </div>
       </div>
 
       <!-- THE ROAD -->
       <div class="window win98-window" id="North London-window" style="top:100px; left:180px; width:460px;">
         <div class="title-bar" onmousedown="dragStart(event,'North London-window')">
-          <div class="title-bar-text">North London — 18 March 2026</div>
+          <div class="title-bar-text">FLUID</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('North London-window')"></button>
             <button aria-label="Close" onclick="closeWindow('North London-window')"></button>
@@ -816,16 +1065,22 @@
           <p>I get to the address before Matthew – he tells me on the phone to enter through the side alley. </p>
           <p>I am joining an after death clean up – where a person's body has been found only after a while. As you
             decompose, your body seeps down and turns into black debris, embedded into the floorings and furniture.</p>
-          <p>The neighbor is the first to greet me. He is dumbfounded when I ask about the pest control people – I guess
+          <img src="images/northlondon.jpg" alt="" onerror="this.style.display='none'">
+           <div class="img-caption">The spot where the body was found - after clean up</div>
+            <p>The neighbor is the first to greet me. He is dumbfounded when I ask about the pest control people – I guess
             it would be an insult to be disposed of in the same manner as pests and trash.</p>
+            <div class="scarab-rule"></div>
           <p>Warren, the other person in that day says it is his first time on this kind of job. He is visibly shaken by
             it. The nature of the job is dismantling any piece of the house the body had amalgamated with. Then placing
             them in bags. </p>
+            <img src="images/warren03.jpg" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">Warren dismantling a chair</div>
           <p>As I am transcribing later – Warren says on the recording of the deceased's body lying there that his <a href="#" onclick="event.preventDefault(); openFluidPoem();">'body fluid just gone through to heaven'</a> I am not sure why I think it's beautiful.</p>
           <p>I ask how long has it been? Warren doesn't know how long it takes a body to do that. He was told it's been
             roughly a week. Matthew told me it's been a couple months. It's March. Calendar has logs up to mid January.
           </p>
-          <p>I think of the uncanny. There is something charming about the incongruity of the collections I find across
+          <div class="scarab-rule"></div>
+          <p>There is something charming about the incongruity of the collections I find across
             the house; a blender next to medical records, a couch manual, art equipment – but as a certain point the
             state of clutter becomes too much. I wonder how it might have felt for his house to turn on him; the
             familiar books hindering movement; the medical equipment becoming an insult; the now vacant bedrooms
@@ -833,9 +1088,6 @@
           <p title="— Julia Armfield, Our Wives Under the Sea (2022)">Somewhere being a place you are left in</p>
           <p>Matthew says most of these cases have carers, though they 'obviously don't do much'. He says it happens
             often in the UK. His longest case was 12 months. A 24 year old was his youngest.</p>
-          <img src="images/northlondon.jpg" alt="" onerror="this.style.display='none'">
-          <img src="images/warren03.jpg" alt="" onerror="this.style.display='none'">
-          <div class="img-caption">North London, March 2026</div>
         </div>
       </div>
 
@@ -849,17 +1101,54 @@
     </div>
   </div>
   <div class="window-content">
-    <img src="images/working.gif" alt="" onerror="this.style.display='none'">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain;">
     <h3>Field audio</h3>
     <audio id="fluid-poem-audio" controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
     <div id="fluid-poem-text" class="typewriter-text"></div>
   </div>
 </div>
 
+   <!-- Paranoid Lady audio pop-up -->
+<div class="window win98-window" id="paranoid-window" style="top:120px; left:180px; width:400px;">
+  <div class="title-bar" onmousedown="dragStart(event,'paranoid-window')">
+    <div class="title-bar-text">A Lady</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize" onclick="minimizeWindow('paranoid-window')"></button>
+      <button aria-label="Close" onclick="closeWindow('paranoid-window')"></button>
+    </div>
+  </div>
+  <div class="window-content">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain;">
+    <h3>Field audio</h3>
+    <audio id="paranoid-audio" controls><source src="audio/westlondon.mp3" type="audio/mpeg"></audio>
+  </div>
+</div>
+
+   <!-- Content warning -->
+<div class="window win98-window" id="cw-window">
+  <div class="title-bar" onmousedown="dragStart(event,'cw-window')">
+    <div class="title-bar-text">CONTENT WARNING</div>
+    <div class="title-bar-controls">
+      <button aria-label="Close" onclick="declineContentWarning()"></button>
+    </div>
+  </div>
+  <div class="window-content">
+    <div style="display:flex; align-items:center; gap:12px;">
+       <img src="images/icons/warning2.png" alt="Warning" style="filter: saturate(0.5); width:80px; height:auto; min-width:0; min-height:0; margin:0; border:none; flex-shrink:0;">
+      <p id="cw-text" style="margin:0;"></p>
+       
+    </div>
+    <div id="cw-buttons">
+      <button onclick="declineContentWarning()">Go back</button>
+      <button onclick="acceptContentWarning()">Continue</button>
+    </div>
+  </div>
+</div>
+
       <!-- NLP -->
       <div class="window win98-window" id="nlp-window" style="top:80px; left:140px; width:420px;">
         <div class="title-bar" onmousedown="dragStart(event,'nlp-window')">
-          <div class="title-bar-text">dp_analysis.exe</div>
+          <div class="title-bar-text">analysis.exe</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('nlp-window')"></button>
             <button aria-label="Close" onclick="closeWindow('nlp-window')"></button>
@@ -869,11 +1158,13 @@
           <div class="story-viewport" id="story-viewport">
 
             <div class="story-slide" data-story-slide>
-              <p>Delusory parasitosis (DP): a fixed, false belief that one is infested by parasites, insects, or other
+              <p><b>Delusory parasitosis (DP)</b>: a fixed, false belief that one is infested by parasites, insects, or other
                 organisms, held despite the absence of any medical or entomological evidence.</p>
+              <div class="scarab-rule"></div>
               <p>Despite that, patients tend to do their own evidence gathering, providing <a href="#"
-            onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.</p>  
+            onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.
               <p
+             
                 style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
                 List of DP patient characteristics, Hinkle (2000). The Lynch 1993 line in particular infuriated me on
                 behalf of an abstract patient.</p>
@@ -945,15 +1236,11 @@
             </div>
 
             <div class="story-slide" data-story-slide id="dp-story-slide-3">
-              <div class="citation-block">
-              <p>Hinkle documents the same collapse in herself — researching the condition, she found her own arms and legs bearing <span class="citation-highlight">"distinct scarification"</span> before the manuscript was even finished.</p>
-              <div class="citation-source">Hinkle (2000)</div>
+              <div class="dp-terminal"><span id="dp-slide3-search"></span></div>
+              <div class="dp-develop-frame" id="dp-slide3-frame">
+                <img src="images/scratchmore.jpg" alt="Scratching" onerror="this.style.display='none'">
               </div>
-              <div class="bug-thumb-strip">
-                <img src="images/scratching.png" alt="Scratching" onerror="this.style.display='none'">
-               <img src="images/edds.jpg" alt="Ed" onerror="this.style.display='none'">
-                <div id="dp-slide3-text" class="typewriter-text"></div>
-              </div>
+              <div id="dp-slide3-text" class="typewriter-text"></div>
             </div>
           </div>
 
@@ -975,17 +1262,21 @@
           </div>
         </div>
         <div class="window-content"
-          style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fff;">
-          <p>[untitled] — micro archive</p>
-          <p>You are a researcher investigating bed bug infestations and a condition known as <a href="#"
-            onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a> – when you are convinced you
-          have a parasite in you body but cannot provide empirical evidence of it. Its symptoms such as biting and
-          crawling sensations intersect with symptoms to an array of other conditions.</p>
+          style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fbead339;">
+          <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Introduction</h4>
+              <div class="bug-thumb-strip">
+                <img src="images/buglife/cimex666.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
+               <img src="images/buglife/cimexil4.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
+               <img src="images/buglife/cimexil3000.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
+              </div>
+          <p><b>You are a researcher</b> investigating bed bug infestations and a condition known as <a href="#"
+            onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a>, conducting a series of shadowing interviews in pest control.</p>
 
-          <p>You sent a mass email to local pest control services requesting a shadowing interview: and have attended three
-          appointments over the course of March 2026. They produced mainly audio recordings and
-          written logs.
-          Looking at your materials you might find a three act narrative:</p>
+          <p><b>This is your desktop,</b> your archive of materials of your research and field work.</p>
+          
+           <div class="scarab-rule"></div> 
+          <p><h3>Instructions:</h3> double-click icons to open windows. They can be dragged around the screen, closed or minimized.<p>
+          </p> Looking at your field logs you might find a three act narrative:</p>
 
           <p>
             I. A young couple<br>
@@ -993,16 +1284,7 @@
             III. An after death clean
           </p>
 
-          <p>NLP prototype: 100 PubMed abstracts on
-          delusory parasitosis, searched for demographic
-          language clustering with diagnostic terminology.</p>
-
-          <p>Github: https://github.com/Eilonvir/Bed-Bug-Archive/tree/main</p>
-
-          <p>Author: Michaella Miller</p>
-
-          <p>MA Computational Arts<br>
-          Goldsmiths, University of London, 2026</p>
+          <p>Happy reading. don't scratch too hard.<p> 
         </div>
       </div>
 
@@ -1017,7 +1299,7 @@
         </div>
         <div class="window-content"
           style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fff;">
-          <h3>Everything I can list about bed bugs off the top of my head</h3>
+          <h3 style="font-family:'Old English Gothic Pixel',monospace; font-size:2rem; font-weight:50;">Fun Facts</h3>
           <ul style="padding-left: 1.2em; margin: 0;">
             <li>They travel well and often</li>
             <li>They spread through public transport</li>
@@ -1046,7 +1328,7 @@
 
       </div>
 
-      <!-- Morgellons -->
+      <!-- BODYMIND -->
       <div class="window win98-window" id="morgellons-window" style="top:120px; left:210px; width:480px;">
         <div class="title-bar" onmousedown="dragStart(event,'morgellons-window')">
           <div class="title-bar-text">Morgellons — March 2026</div>
@@ -1057,39 +1339,13 @@
         </div>
         <div class="window-content">
           <h3>Field log</h3>
-          <p>Anthropology professor meeting</p>
+          
 
-          <p>The anthropology department is behind a kindergarten
-            It has a red door and the intercom doesn't seem to work
-            There's a communal garden and a separate grassy area where two gardeners are currently working. one of
-            kindergarten teachers is there briefly - I have been standing outside for a while now so I ask how to get in
-            She calls her manager - but her card doesn't work on that door. One of the gardeners pitches in - his card
-            does allow entrance to the building. I am embarrassed for not asking him beforehand - my research has to do
-            with blue collar workers (like pest control zoology and entomology, gardening and landscape architecture is
-            a nice intersection)</p>
-
-          <p>The professor is nice. I tell him of my research - he refers me to a documentary that commentates on
-            another film regarding a fictitious - or delusional disease. It explores it through internet comments as
-            input. It might be interesting to use all of these </p>
-
-          <p>He gives me simple and incredibly effective technical documentation methods - Lock brightness on phone when
-            filming, hold and draw out when filming - as you would likely scrap the beginning and end of the clips you
-            might use. Gather visuals of the environment for the b-roll to avoid jumps in my video. The environment
-            complements what transpires verbally in the interview - does it contrast what is said? Provide further
-            insight to the person? I ask how I might get consent and a potential interview with an older lady who had
-            booked a steaming treatment with the pest control person I will shadow tomorrow in west London. He says that
-            I should be clear on not meaning to shame or judge</p>
-
-          <p>Nonverbal encouragement such as fervent nodding to avoid damaging audio recordings. Use silence to
-            encourage further details in the interviewee's answers. Start with chatting to build confidence and build up
-            to specific questions and to encourage more abstract thinking. Avoiding technically disruptive noises but
-            also incorporating them in the outcome.</p>
-
-          <p>He suggests I record phone calls I'd make to pest control companies as interview requests. </p>
-
-          <p>A TA drops by and professor Leizeola tells her briefly of my project "I can already feel them crawling on
-            me" she says. Later on as I watch 'Watching the pain of others' I think that it's such a simple way to
-            express empathy </p>
+          <p>I'm at the anthropology department. A lecturer is running me through interview methodologies - smile and nod - to avoid corrupting your audio. Get your foot at the door with mundane small talk and so on.</p>
+          <p>I'm telling him about my research when a TA drops by, 'I can already feel them crawling' she comments. It's such a simple way to express empathy I think.</p>
+          <p>He tells me about Morgellons disease. Parasitosis is a clinical diagnosis. Morgellons is largely self-diagnosed but falls under DP technically.  Its a twisted, oddly specific symptomatic form of patient agency.</p> 
+          <p>I would like to note that either can be cause by an array of other conditions as a complication. If your body is sick so is your mind and vice versa.</p>
+          <p>I wonder why I'm seeking out the bed bugs. Do I need to pursue sickness for some self worth? Am I searching for sickness? Am I sick? Am I at this point masquerading illness?</p>
 
         </div>
       </div>
@@ -1114,21 +1370,18 @@
       <!-- Extermination -->
       <div class="window win98-window" id="extermination-window" style="top:160px; left:270px; width:480px;">
         <div class="title-bar" onmousedown="dragStart(event,'extermination-window')">
-          <div class="title-bar-text">Extermination</div>
+          <div class="title-bar-text">Eggsterminate</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('extermination-window')"></button>
             <button aria-label="Close" onclick="closeWindow('extermination-window')"></button>
           </div>
         </div>
         <div class="window-content">
-          <p>hortus sanititis</p>
-          <p>Matthew paraffin audio, wikimedia commons image</p>
+          <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Hortus Sanititis</h4>
+          <p>Add Matthew paraffin audio</p>
 
-          <img src="images/buglife/hs.jpg" alt="" onerror="this.style.display='none'">
-          <div class="img-caption">Wellcome Library, London (1499) Hortus Sanitatis: bed bugs, delousing. Wikimedia
-            Commons. Available at: https://commons.wikimedia.org/wiki/File:Hortus_Sanitatis;_
-            bed_bugs,_delousing._Wellcome_M0011711.jpg (Accessed: April 10th 2026).
-            License: CC BY 4.0.</div>
+          <img src="images/buglife/hs.jpg" style="filter: opacity(0.8);" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">They've been around for a while</div>
         </div>
       </div>
 
@@ -1142,7 +1395,8 @@
           </div>
         </div>
         <div class="window-content">
-          <p>Pictures from the house</p>
+            <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">House Pics I've Taken</h4>
+          <p>[That I probably shouldn't have]</p>
           <div class="carousel-viewport">
             <img id="house-carousel-img" src="" alt="" onerror="this.style.display='none'">
           </div>
@@ -1181,25 +1435,30 @@
       <!-- Acknowledgements -->
       <div class="window win98-window" id="credits-window" style="top:100px; left:180px; width:460px;">
         <div class="title-bar" onmousedown="dragStart(event,'credits-window')">
-          <div class="title-bar-text">Acknowledgements — 18 March 2026</div>
+          <div class="title-bar-text">Credits</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('credits-window')"></button>
             <button aria-label="Close" onclick="closeWindow('credits-window')"></button>
           </div>
         </div>
         <div class="window-content">
-          <h3>Acknowledgements</h3>
-          <p
-            style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
-            Content warning: this log contains descriptions of death and human decomposition.</p>
+        <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Acknowledgements</h4>  
           <p>Thank you Matthew Blackwell, Warren King and Project Multipest for sharing your insights from work in pest
             control. Thank you Ricardo Leizola for consultation regarding interview and documentation methodologies as
-            well as interesting conceptual links. Thank you Millicent Gunn, Luise Rouse, Jeremy Wenger - for
+            well as interesting conceptual links. Thank you Millicent Gunn, Louise Rouse, Jeremy Wenger - for
             consultation regarding curation, UX, adaptation to a gallery setting, interactive story telling UX concerns
             and other</p>
+          <div class="scarab-rule"></div>
+          <p>Author: Michaella Miller</p>
+
+          <p>MA Computational Arts<br>
+          Goldsmiths, University of London, 2026</p>
+         
           <h3>bibliography</h3>
           <p>
           <p>
+          <h3>Images</h3>
+          <p>Wellcome Library, London (1499) Hortus Sanitatis: bed bugs, delousing. Wikimedia Commons. Available at: https://commons.wikimedia.org/wiki/File:Hortus_Sanitatis;_ bed_bugs,_delousing._Wellcome_M0011711.jpg (Accessed: April 10th 2026). License: CC BY 4.0.</p>
         </div>
       </div>
 
@@ -1273,9 +1532,9 @@
         </div>
         <div class="window-content">
           <div class="icon-grid">
-            <div class="icon static-icon" ondblclick="openWindow('nlp-window')">
-              <div class="icon-img icon-exe"></div>
-              <div class="icon-label">analysis.exe</div>
+            <div class="icon static-icon" ondblclick="openWindow('morgellons-window')">
+              <div class="icon-img icon-body"></div>
+              <div class="icon-label">BODYMIND</div>
             </div>
             <div class="icon static-icon" ondblclick="openWindow('facts-window')">
               <div class="icon-img icon-txt"></div>
@@ -1297,9 +1556,17 @@
             <button aria-label="Close" onclick="closeWindow('bin-window')"></button>
           </div>
         </div>
-        <div class="icon static-icon" ondblclick="openWindow('september-window')">
-          <div class="icon-img icon-bed"></div>
-          <div class="icon-label">September</div>
+        <div class="window-content">
+          <div class="icon-grid">
+             <div class="icon static-icon" ondblclick="openWindow('credits-window')">
+              <div class="icon-img icon-txt"></div>
+              <div class="icon-label">Credits</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('september-window')">
+              <div class="icon-img icon-bed"></div>
+              <div class="icon-label">September</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1313,7 +1580,6 @@
   </div>
 
   </div>
-  </div>
 
   <script>
     const IDLE_TIMEOUT_MS = 3 * 60 * 1000;
@@ -1324,8 +1590,14 @@
     const windowS = document.getElementById('september-window');
 
     document.querySelectorAll('.nlp-row').forEach(row => {
-      row.addEventListener('mouseenter', () => frame.classList.add('nlp-hovering'));
-      row.addEventListener('mouseleave', () => frame.classList.remove('nlp-hovering'));
+      row.addEventListener('mouseenter', () => {
+        frame.classList.add('nlp-hovering');
+        window.setBugSwarmBoost && window.setBugSwarmBoost(true);
+      });
+      row.addEventListener('mouseleave', () => {
+        frame.classList.remove('nlp-hovering');
+        window.setBugSwarmBoost && window.setBugSwarmBoost(false);
+      });
     });
 
     function playBootSequence() {
@@ -1357,10 +1629,10 @@
     };
 
     const houseImages = [
-      { src: 'images/house/bedsense.jpg', caption: 'A hospital like bed on the ground floor. Tissues and some sort of antiseptic by the bedside.' },
-      { src: 'images/house/dishezzsense.jpg', caption: 'The calendar tracks incontinence symptoms up to mid January, then stops.' },
-      { src: 'images/house/stoves.jpg', caption: 'Grime on gas pots and pans.' },
-      { src: 'images/house/freezers.jpg', caption: 'Freezer is packed. Warren picked up on that at some point. Said they would need to clear that as well' }
+      { src: 'images/house/censored_censored_bedsense.jpg', caption: 'A hospital like bed on the ground floor. Tissues and some sort of antiseptic by the bedside.' },
+      { src: 'images/house/censored_censored_dishezzsense.jpg', caption: 'The calendar tracks incontinence symptoms up to mid January, then stops.' },
+      { src: 'images/house/censored_censored_stoves.jpg', caption: 'Grime on gas pots and pans.' },
+      { src: 'images/house/magicfreezetoo.png', caption: 'Freezer is packed. Warren picked up on that at some point. Said they would need to clear that as well' }
     ];
     let houseIndex = 0;
 
@@ -1390,13 +1662,13 @@
       caption.textContent = bugImages[bugIndex].caption;
     }
     const bugImages = [
-      { src: 'images/buglife/cimexil.jpg', caption: 'Bug.' },
-      { src: 'images/buglife/cimexil2.jpg', caption: 'The Bug.' },
-      { src: 'images/buglife/cimexil3.jpg', caption: 'Bug?.' },
-      { src: 'images/buglife/cimexil7.jpg', caption: 'A bug.' },
-      { src: 'images/buglife/cimexil8.jpg', caption: 'The bug.' },
+      { src: 'images/buglife/bedbug1.png', caption: 'Bug.' },
+      { src: 'images/buglife/bugparts.jpg', caption: 'Bug parts.' },
+      { src: 'images/buglife/bwdith-13.jpg', caption: 'Bug?.' },
+      { src: 'images/buglife/bwdith-7.jpg', caption: 'A bug.' },
+      { src: 'images/buglife/squash.png', caption: 'The bug.' },
       { src: 'images/buglife/cimexil9.jpeg', caption: 'Bug.' },
-      { src: 'images/buglife/shoe.jpeg', caption: 'Bug?' },
+      { src: 'images/buglife/shoe.png', caption: 'Bug?' },
     ];
     let bugIndex = 0;
 
@@ -1413,17 +1685,40 @@
     const storySlides = document.querySelectorAll('#story-viewport .story-slide');
     let storyIndex = 0;
 
-    const dpSlide3Text = "Looking for bugs....   I think they are, at least. I'm searching for them in my mattress. I feel a pinprick and, as I am reading Hinkle's article - I can't help but scratch.";
-    let dpSlide3Typed = false;
+    const dpSlide3SearchText = "Looking for bugs....";
+    const dpSlide3Text = "I'm searching my mattress, almost absentmindedly as I am reading another article about parasitosis. I can't help but scratch.";
+    const DP_SLIDE3_HOLD_MS = 2500;
+    const DP_SLIDE3_DEVELOP_MS = 6500;
+    const DP_SLIDE3_BLINK_STOP_LEAD_MS = 1500;
+    let dpSlide3Started = false;
+
+    function startDpSlide3Sequence() {
+      if (dpSlide3Started) return;
+      dpSlide3Started = true;
+
+      const searchEl = document.getElementById('dp-slide3-search');
+      const frameEl = document.getElementById('dp-slide3-frame');
+      const imgEl = frameEl.querySelector('img');
+      const textEl = document.getElementById('dp-slide3-text');
+
+      typeText(searchEl, dpSlide3SearchText, 0, () => {
+        searchEl.classList.add('blinking');
+        setTimeout(() => {
+          imgEl.addEventListener('animationend', () => typeText(textEl, dpSlide3Text), { once: true });
+          frameEl.classList.add('developing');
+          setTimeout(() => searchEl.classList.remove('blinking'),
+            DP_SLIDE3_DEVELOP_MS - DP_SLIDE3_BLINK_STOP_LEAD_MS);
+        }, DP_SLIDE3_HOLD_MS);
+      });
+    }
 
     function renderStory() {
       storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
       document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
 
       const dpSlide3 = document.getElementById('dp-story-slide-3');
-      if (dpSlide3 && dpSlide3.classList.contains('active') && !dpSlide3Typed) {
-        dpSlide3Typed = true;
-        typeText(document.getElementById('dp-slide3-text'), dpSlide3Text);
+      if (dpSlide3 && dpSlide3.classList.contains('active')) {
+        startDpSlide3Sequence();
       }
     }
 
@@ -1469,11 +1764,20 @@ function openFluidPoem() {
   audio.play();
 }
 
-function typeText(el, text, i = 0) {
+function typeText(el, text, i = 0, onDone) {
   if (i < text.length) {
     el.innerHTML += text.charAt(i);
-    setTimeout(() => typeText(el, text, i + 1), 40);
+    setTimeout(() => typeText(el, text, i + 1, onDone), 40);
+  } else if (onDone) {
+    onDone();
   }
+}
+
+function openParanoid() {
+  openWindow('paranoid-window');
+  const audio = document.getElementById('paranoid-audio');
+  audio.pause();
+  audio.currentTime = 0;
 }
 
     document.getElementById('story-prev').onclick = function () {
@@ -1494,6 +1798,11 @@ function typeText(el, text, i = 0) {
     setInterval(updateClock, 1000);
 
     const openWindows = new Set();
+    const CONTENT_WARNINGS = {
+      'North London-window': 'This field log describes an unattended death and human decomposition, and includes photographs of the site after cleaning.',
+      'morgellons-window': 'This log discusses mental illness, health anxiety and self-diagnosis.'
+    };
+    let pendingWarning = null;
     let septMode = false;
     const fullscreenBtn = document.getElementById('fullscreen-btn');
 
@@ -1504,6 +1813,29 @@ function typeText(el, text, i = 0) {
     }
 
     function openWindow(id) {
+      if (CONTENT_WARNINGS[id] && !openWindows.has(id)) {
+        pendingWarning = id;
+        document.getElementById('cw-text').textContent = CONTENT_WARNINGS[id];
+        openWindowNow('cw-window');
+        return;
+      }
+      openWindowNow(id);
+    }
+
+    function acceptContentWarning() {
+      const id = pendingWarning;
+      pendingWarning = null;
+      closeWindow('cw-window');
+      if (!id) return;
+      openWindowNow(id);
+    }
+
+    function declineContentWarning() {
+      pendingWarning = null;
+      closeWindow('cw-window');
+    }
+
+    function openWindowNow(id) {
       const win = document.getElementById(id);
       if (!win) return;
 
@@ -1644,7 +1976,7 @@ function typeText(el, text, i = 0) {
     }
 
     document.querySelectorAll('.win98-window').forEach(win => {
-      if (win.id === 'entry-window') return;
+      if (win.id === 'entry-window' || win.id === 'cw-window') return;
       const handle = document.createElement('div');
       handle.className = 'resize-handle';
       [handle].forEach(h => {
@@ -1659,6 +1991,7 @@ function typeText(el, text, i = 0) {
         if (win) win.classList.remove('open');
       });
       openWindows.clear();
+      pendingWarning = null;
       updateTaskbar();
 
       document.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
