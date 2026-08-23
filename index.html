@@ -7,7 +7,89 @@
   <title>[ untitled ]</title>
   <link rel="stylesheet" href="98.css-main/style.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+    /* Courier Prime, self-hosted so the piece renders identically with no
+       network — it used to be @import'ed from Google Fonts, which fails
+       silently in a gallery and drops everything back to Courier New.
+       Files in fonts/, SIL Open Font License 1.1 (fonts/CourierPrime-OFL.txt).
+       The latin / latin-ext split and unicode-ranges are Google's own
+       subsetting, kept so only the needed file is fetched. */
+
+    /* regular 400 */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* bold 700 */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* italic 400 */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400i-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400i-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* bold italic 700 — the old @import never requested this, so bold text
+       inside an italic block was being synthetically slanted by the browser */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700i-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700i-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
 
     @font-face {
       font-family: 'Old English Gothic Pixel';
@@ -24,9 +106,86 @@
       box-sizing: border-box;
     }
 
+    /* ─── UI SCALE ───────────────────────────────────────────────────────
+       One knob for the whole interface. Everything below this point is
+       sized in rem, so raising the root font-size scales text, icons,
+       windows, chrome and taskbar together — nothing drifts out of
+       proportion. Roughly:
+
+         1280px viewport →  16px   (laptop — same as the old fixed design)
+         1920px viewport →  19px
+         2560px viewport →  22px   (27" 1440p — the gallery monitor)
+         3440px+         →  26px   (ultrawide, or 4K at 100% OS scaling)
+
+       To make the whole UI bigger or smaller, change only this clamp:
+       the middle term sets the slope, the third the ceiling. ---------- */
+    html {
+      font-size: clamp(16px, 0.47vw + 10px, 26px);
+    }
+
+    /* 98.css pins its window chrome to 11px of a bitmap font with
+       antialiasing switched off. Off its native pixel grid the glyph stems
+       drop pixels, which is what makes title bars, buttons and the taskbar
+       look broken on a large display. Scale it with the root and let it
+       antialias. */
+    body,
+    button,
+    label,
+    input,
+    legend,
+    textarea,
+    select,
+    option,
+    table,
+    ul.tree-view,
+    .window,
+    .title-bar,
+    li[role="tab"] {
+      font-size: 0.85rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input[type="submit"],
+    input[type="reset"] {
+      min-width: 4.7rem;
+      min-height: 1.5rem;
+      padding: 0 0.75rem;
+    }
+
+    .window {
+      padding: 0.2rem;
+    }
+
+    .title-bar {
+      padding: 0.2rem 0.15rem 0.2rem 0.2rem;
+    }
+
+    .title-bar-text {
+      margin-right: 1.5rem;
+    }
+
+    /* The minimise/close glyphs are fixed-size SVG backgrounds (6x2 and
+       8x7) pinned with px offsets. Grow the hit area and the glyph with
+       the rest of the chrome, keeping each one's aspect ratio. */
+    .win98-window .title-bar .title-bar-controls button {
+      min-width: 1.15rem;
+      min-height: 1rem;
+      background-position: center center;
+    }
+
+    .win98-window .title-bar .title-bar-controls button[aria-label="Close"] {
+      background-size: 0.5rem 0.4375rem;
+    }
+
+    .win98-window .title-bar .title-bar-controls button[aria-label="Minimize"] {
+      background-size: 0.4375rem 0.15rem;
+      background-position: center bottom 0.18rem;
+    }
+
     body {
       background-color: var(--surface);
-      box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.75), var(--border-raised-outer), var(--border-raised-inner);
+      box-shadow: inset 0 0 0 0.625rem rgba(255, 255, 255, 0.75), var(--border-raised-outer), var(--border-raised-inner);
       min-height: 100vh;
       font-family: 'Courier Prime', 'Courier New', monospace;
       overflow: hidden;
@@ -35,9 +194,9 @@
 
     #screen-frame {
       position: fixed;
-      inset: 28px;
+      inset: 1.75rem;
       background-color: #ee37ccb4;
-      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+      box-shadow: inset 0 0 0 0.125rem rgba(255, 255, 255, 0.75);
       overflow: hidden;
       --filter: saturate(0.6);
     }
@@ -76,8 +235,8 @@
       background: #000;
       color: #aaa;
       font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
-      padding: 2rem;
+      font-size: 1rem;
+      padding: 2.5rem;
       z-index: 1000;
       line-height: 1.8;
     }
@@ -160,9 +319,9 @@
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      width: 80px;
+      width: 5.75rem;
       text-align: center;
-      padding: 4px;
+      padding: 0.25rem;
       user-select: none;
     }
 
@@ -172,9 +331,9 @@
     }
 
     .icon-img {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 4px;
+      width: 4.5rem;
+      height: 4.5rem;
+      margin-bottom: 0.25rem;
       image-rendering: pixelated;
     }
 
@@ -228,8 +387,8 @@
     .icon-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      padding: 4px 0 8px;
+      gap: 0.9rem;
+      padding: 0.25rem 0 0.5rem;
     }
 
     .icon.static-icon {
@@ -237,7 +396,7 @@
     }
 
     #interviews-notes-window {
-      width: 300px;
+      width: 21.5rem;
     }
 
     #interviews-notes-window .icon-grid {
@@ -250,10 +409,10 @@
 
     .icon-label {
       font-family: 'Courier New', monospace;
-      font-size: 0.90rem;
+      font-size: 0.95rem;
       color: #ffffff00;
       text-shadow: 1px 1px 1px #000000;
-      padding: 1px 3px;
+      padding: 0.06rem 0.2rem;
       line-height: 1.3;
     }
 
@@ -261,8 +420,8 @@
       position: absolute;
       display: none;
       z-index: 100;
-      min-width: 60px;
-      min-height: 130px;
+      min-width: 4rem;
+      min-height: 8rem;
       max-width: 92vw;
       max-height: 82vh;
     }
@@ -289,18 +448,18 @@
 
     .window-content {
       background: #c1bdbd;
-      padding: 10px;
+      padding: 0.7rem;
       overflow-y: auto;
       flex: 1 1 auto;
       min-height: 0;
       font-family: 'Courier Prime', monospace;
-      font-size: 0.78rem;
+      font-size: 0.95rem;
       line-height: 1.8;
       color: #000;
     }
 
     .scarab-rule {
-      height: 28px;
+      height: 1.75rem;
       margin: 0.6rem 0;
       background: url("images/buglife/bedbug1.png") center/contain no-repeat;
       opacity: 0.75;
@@ -308,8 +467,8 @@
 
     .resize-handle {
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 1.1rem;
+      height: 1.1rem;
       cursor: nwse-resize;
       z-index: 5;
     }
@@ -341,7 +500,7 @@
     }
 
     .window-content h3 {
-      font-size: 0.65rem;
+      font-size: 0.8rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       border-bottom: 1px solid #000;
@@ -349,29 +508,33 @@
       padding-bottom: 0.2rem;
     }
 
+    /* Native audio controls are drawn by the browser and ignore rem for
+       their internals — setting an explicit height is the only lever that
+       makes the transport grow with the rest of the UI. */
     .window-content audio {
       width: 100%;
+      height: 3.4rem;
       margin: 0.4rem 0;
       accent-color: #000080;
     }
 
     .window-content img {
       width: 100%;
-      max-width: 400px;
+      max-width: 25rem;
       display: block;
       margin: 0.6rem 0;
       filter: grayscale(20%);
       resize: both;
       overflow: auto;
       object-fit: contain;
-      min-width: 120px;
-      min-height: 80px;
-      max-height: 600px;
+      min-width: 7.5rem;
+      min-height: 5rem;
+      max-height: 37.5rem;
       border: 1px solid #999;
     }
 
     .img-caption {
-      font-size: 0.8rem;
+      font-size: 0.88rem;
       color: #666;
       margin-bottom: 0.6rem;
     }
@@ -382,7 +545,7 @@
     }
 
     .carousel-viewport {
-      height: 400px;
+      height: 25rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -399,8 +562,8 @@
       resize: both;
       overflow: auto;
       object-fit: contain;
-      min-width: 120px;
-      min-height: 80px;
+      min-width: 7.5rem;
+      min-height: 5rem;
       border: 1px solid #999;
     }
 
@@ -408,32 +571,32 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 0.6rem;
       position: sticky;
       bottom: 0;
       background: #c1bdbd;
-      padding: 6px 0 2px;
+      padding: 0.4rem 0 0.15rem;
       border-top: 1px solid #ccc;
     }
 
     .carousel-nav button {
       flex-shrink: 0;
-      width: 26px;
-      height: 26px;
+      width: 1.625rem;
+      height: 1.625rem;
       padding: 0;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       cursor: pointer;
     }
 
     .story-counter {
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       color: #666;
-      min-width: 34px;
+      min-width: 2.5rem;
       text-align: center;
     }
 
     .story-viewport {
-      height: 400px;
+      height: 25rem;
       display: flex;
       align-items: flex-start;
       justify-content: center;
@@ -453,13 +616,13 @@
     .nlp-row {
       display: flex;
       align-items: center;
-      padding: 3px 0;
+      padding: 0.2rem 0;
       border-bottom: 1px dotted #ccc;
-      font-size: 0.72rem;
+      font-size: 0.9rem;
     }
 
     .nlp-term {
-      min-width: 110px;
+      min-width: 7rem;
       color: #010109;
     }
 
@@ -488,7 +651,7 @@
 
 
     #fluid-poem-window {
-  height: 380px;
+  height: 23.75rem;
 }
 #fluid-poem-window .window-content {
   display: flex;
@@ -498,13 +661,13 @@
 #fluid-poem-text {
   font-style: italic;
   line-height: 1.8;
-  padding-top: 12px;
+  padding-top: 0.75rem;
   border-top: 1px solid #ccc;
-  min-height: 100px;
+  min-height: 6.25rem;
 }
 
  #paranoid-window {
-  height: 280px;
+  height: 17.5rem;
 }
 #paranoid-window .window-content {
   display: flex;
@@ -514,7 +677,7 @@
 
 .citation-block {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   line-height: 1.7;
   text-align: justify;
   color: #1a1a1a;
@@ -524,14 +687,14 @@
 
 .citation-highlight {
   background: #f9a8d4;
-  padding: 0 2px;
+  padding: 0 0.12rem;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
 
 .citation-source {
   font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   color: #666;
   margin-top: 0.6rem;
   letter-spacing: 0.05em;
@@ -544,8 +707,8 @@
 }
 
 .bug-thumb-strip img {
-  width: 70px;
-  height: 70px;
+  width: 4.5rem;
+  height: 4.5rem;
   object-fit: cover;
   border: 1px solid #999;
   filter: grayscale(20%);
@@ -558,7 +721,7 @@
 #dp-story-slide-3 .dp-terminal,
 #dp-story-slide-3 .typewriter-text {
   font-family: 'Courier Prime', 'Courier New', monospace;
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   line-height: 1.7;
   color: #1a1a1a;
 }
@@ -584,7 +747,7 @@
 
 .dp-develop-frame {
   display: none;
-  width: 260px;
+  width: 16.25rem;
   max-width: 100%;
   margin: 0.6rem auto 0.6rem 0;
   background: #b3afaf;
@@ -765,9 +928,9 @@
 
     .nlp-bar-outer {
       flex: 1;
-      margin: 0 8px;
+      margin: 0 0.5rem;
       background: #eee;
-      height: 8px;
+      height: 0.55rem;
       border: 1px solid #999;
     }
 
@@ -784,32 +947,32 @@
 
     .nlp-count {
       color: #666666a1;
-      font-size: 0.65rem;
-      min-width: 30px;
+      font-size: 0.8rem;
+      min-width: 2rem;
       text-align: right;
     }
 
     #entry-window {
       position: absolute;
-      left: calc(50% - 180px);
-      top: calc(50% - 110px);
+      left: calc(50% - 11.25rem);
+      top: calc(50% - 6.875rem);
       z-index: 150;
-      width: 360px;
+      width: 22.5rem;
     }
 
     #cw-window {
       position: absolute;
-      left: calc(50% - 190px);
-      top: calc(50% - 100px);
+      left: calc(50% - 11.875rem);
+      top: calc(50% - 6.25rem);
       z-index: 400;
-      width: 380px;
+      width: 23.75rem;
     }
 
     #cw-buttons {
       display: flex;
-      gap: 8px;
+      gap: 0.5rem;
       justify-content: flex-end;
-      margin-top: 14px;
+      margin-top: 0.9rem;
     }
 
     #taskbar {
@@ -817,33 +980,33 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 28px;
+      height: 2.25rem;
       background: #c0c0c0;
       border-top: 2px solid #fff;
       display: flex;
       align-items: center;
-      padding: 0 4px;
-      gap: 4px;
+      padding: 0 0.25rem;
+      gap: 0.25rem;
       z-index: 200;
       box-shadow: inset 0 1px 0 #dfdfdf;
     }
 
     #start-btn {
       font-family: 'Courier New', monospace;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       font-weight: bold;
-      padding: 2px 6px;
-      height: 22px;
+      padding: 0.15rem 0.5rem;
+      height: 1.75rem;
       cursor: pointer;
     }
 
     .taskbar-time {
       margin-left: auto;
       font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      padding: 0 8px;
+      font-size: 0.85rem;
+      padding: 0 0.5rem;
       border: 1px solid #999;
-      height: 22px;
+      height: 1.75rem;
       display: flex;
       align-items: center;
       box-shadow: inset 1px 1px #808080;
@@ -851,11 +1014,11 @@
 
     .taskbar-btn {
       font-family: 'Courier New', monospace;
-      font-size: 0.62rem;
-      padding: 2px 5px;
-      height: 22px;
+      font-size: 0.85rem;
+      padding: 0.15rem 0.4rem;
+      height: 1.75rem;
       cursor: pointer;
-      max-width: 110px;
+      max-width: 9rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -924,37 +1087,37 @@
             <button aria-label="Close" onclick="closeWindow('entry-window')"></button>
           </div>
         </div>
-        <div class="window-content" style="text-align:center; padding:18px;">
-          <p style="font-size:0.95rem; line-height:2.1;">As you are reading this, a cadaver is lying at home, waiting to
+        <div class="window-content" style="text-align:center; padding:1.125rem;">
+          <p style="font-size:1.05rem; line-height:2.1;">As you are reading this, a cadaver is lying at home, waiting to
             be found.</p>
-          <p style="font-size:0.6rem; color:#666; margin-top:10px; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN
+          <p style="font-size:0.8rem; color:#666; margin-top:0.625rem; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN
           </p>
         </div>
       </div>
 
-      <div class="icon" style="top: 60px; left:50px;" ondblclick="openWindow('interviews-window')">
+      <div class="icon" style="top: 3.75rem; left:3.125rem;" ondblclick="openWindow('interviews-window')">
         <div class="icon-img icon-folder"></div>
         <div class="icon-label">INTERVIEWS</div>
       </div>
 
-      <div class="icon" style="top: 180px; left:50px;" ondblclick="openWindow('nlp-window')">
+      <div class="icon" style="top: 11.25rem; left:3.125rem;" ondblclick="openWindow('nlp-window')">
         <div class="icon-img icon-exe"></div>
         <div class="icon-label">analysis.exe</div>
       </div>
 
-      <div class="icon" style="top: 300px; left:50px;" ondblclick="openWindow('about-window')">
+      <div class="icon" style="top: 18.75rem; left:3.125rem;" ondblclick="openWindow('about-window')">
         <div class="icon-img icon-txt"></div>
         <div class="icon-label">README.txt</div>
       </div>
 
-      <div class="icon" style="bottom: 50px; right: 50px;" ondblclick="openWindow('bin-window')">
+      <div class="icon" style="bottom: 3.125rem; right: 3.125rem;" ondblclick="openWindow('bin-window')">
         <div class="icon-img icon-bin"></div>
         <div class="icon-label">BIN</div>
       </div>
 
 
       <!-- KNOWLEDGE -->
-      <div class="window win98-window" id="brighton-window" style="top:60px; left:120px; width:480px;">
+      <div class="window win98-window" id="brighton-window" style="top:3.75rem; left:7.5rem; width:30rem;">
         <div class="title-bar" onmousedown="dragStart(event,'brighton-window')">
           <div class="title-bar-text">KNOWLEDGE</div>
           <div class="title-bar-controls">
@@ -1008,7 +1171,7 @@
       </div>
 
       <!-- WEST LONDON -->
-      <div class="window win98-window" id="westlondon-window" style="top:80px; left:150px; width:460px;">
+      <div class="window win98-window" id="westlondon-window" style="top:5rem; left:9.375rem; width:28.75rem;">
         <div class="title-bar" onmousedown="dragStart(event,'westlondon-window')">
           <div class="title-bar-text">FLUFF</div>
           <div class="title-bar-controls">
@@ -1056,8 +1219,8 @@
         </div>
       </div>
 
-      <!-- THE ROAD -->
-      <div class="window win98-window" id="North London-window" style="top:100px; left:180px; width:460px;">
+      <!-- THE ROAD [FLUID] -->
+      <div class="window win98-window" id="North London-window" style="top:6.25rem; left:11.25rem; width:28.75rem;">
         <div class="title-bar" onmousedown="dragStart(event,'North London-window')">
           <div class="title-bar-text">FLUID</div>
           <div class="title-bar-controls">
@@ -1068,12 +1231,12 @@
         <div class="window-content">
           <h3>Field log</h3>
           <p
-            style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
+            style="font-size:0.8rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
             Content warning: this log contains descriptions of death and human decomposition.</p>
           <p>I get to the address before Matthew – he tells me on the phone to enter through the side alley. </p>
-          <p><span class="citation-highlight">I am joining an after death clean up – where a person's body has been
-            found only after a while.</span> <span class="citation-highlight">As you
-            decompose, your body seeps down and turns into black debris, embedded into the floorings and
+          <p>I am joining an <span class="citation-highlight">after death clean up</span> – where a person's <span class="citation-highlight">body</span> has been
+            <span class="citation-highlight">found</span> only after a while. <span class="citation-highlight">As you
+            decompose</span>, your body seeps down and <span class="citation-highlight">turns into black debris, embedded into the floorings and
             furniture.</span></p>
           <img src="images/northlondon.jpg" alt="" onerror="this.style.display='none'">
            <div class="img-caption">The spot where the body was found - after clean up</div>
@@ -1087,7 +1250,7 @@
             them in bags. </p>
             <img src="images/warren03.jpg" alt="" onerror="this.style.display='none'">
           <div class="img-caption">Warren dismantling a chair</div>
-          <p>As I am transcribing later – Warren says on the recording of the deceased's body lying there that his <a href="#" onclick="event.preventDefault(); openFluidPoem();">'body fluid just gone through to heaven'</a> <span class="citation-highlight">I am not sure why I think it's beautiful.</span></p>
+          <p>As I am transcribing later – Warren says on the recording of the deceased's body lying there that his <span class="citation-highlight"><a href="#" onclick="event.preventDefault(); openFluidPoem();">'body fluid just gone through to heaven'</a></span> I am not sure why I think it's beautiful.</p>
           <p>I ask how long has it been? Warren doesn't know how long it takes a body to do that. He was told it's been
             roughly a week. Matthew told me it's been a couple months. It's March. Calendar has logs up to mid January.
           </p>
@@ -1099,14 +1262,14 @@
             familiar books hindering movement; the medical equipment becoming an insult; the now vacant bedrooms
             upstairs functioning as storage units.</p>
           <p title="— Julia Armfield, Our Wives Under the Sea (2022)">Somewhere being a place you are left in</p>
-          <p>Matthew says most of these cases have carers, though they 'obviously don't do much'. He says it happens
-            often in the UK. <span class="citation-highlight">His longest case was 12 months. A 24 year old was his
-            youngest.</span></p>
+          <p>Matthew says most of these cases have carers, though they <span class="citation-highlight">'obviously don't do much'</span>. He says it happens
+            often in the UK.His longest case was 12 months. A 24 year old was his
+            youngest.</p>
         </div>
       </div>
 
       <!-- FLUID micro-poem popup -->
-<div class="window win98-window" id="fluid-poem-window" style="top:120px; left:180px; width:400px;">
+<div class="window win98-window" id="fluid-poem-window" style="top:7.5rem; left:11.25rem; width:25rem;">
   <div class="title-bar" onmousedown="dragStart(event,'fluid-poem-window')">
     <div class="title-bar-text">Warren interview</div>
     <div class="title-bar-controls">
@@ -1115,7 +1278,7 @@
     </div>
   </div>
   <div class="window-content">
-    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain;">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain;">
     <h3>Field audio</h3>
     <audio id="fluid-poem-audio" controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
     <div id="fluid-poem-text" class="typewriter-text"></div>
@@ -1123,7 +1286,7 @@
 </div>
 
    <!-- Paranoid Lady audio pop-up -->
-<div class="window win98-window" id="paranoid-window" style="top:120px; left:180px; width:400px;">
+<div class="window win98-window" id="paranoid-window" style="top:7.5rem; left:11.25rem; width:25rem;">
   <div class="title-bar" onmousedown="dragStart(event,'paranoid-window')">
     <div class="title-bar-text">A Lady</div>
     <div class="title-bar-controls">
@@ -1132,7 +1295,7 @@
     </div>
   </div>
   <div class="window-content">
-    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain;">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain;">
     <h3>Field audio</h3>
     <audio id="paranoid-audio" controls><source src="audio/westlondon.mp3" type="audio/mpeg"></audio>
   </div>
@@ -1147,8 +1310,8 @@
     </div>
   </div>
   <div class="window-content">
-    <div style="display:flex; align-items:center; gap:12px;">
-       <img src="images/icons/warning2.png" alt="Warning" style="filter: saturate(0.5); width:80px; height:auto; min-width:0; min-height:0; margin:0; border:none; flex-shrink:0;">
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+       <img src="images/icons/warning2.png" alt="Warning" style="filter: saturate(0.5); width:5rem; height:auto; min-width:0; min-height:0; margin:0; border:none; flex-shrink:0;">
       <p id="cw-text" style="margin:0;"></p>
        
     </div>
@@ -1160,7 +1323,7 @@
 </div>
 
       <!-- NLP -->
-      <div class="window win98-window" id="nlp-window" style="top:80px; left:140px; width:420px;">
+      <div class="window win98-window" id="nlp-window" style="top:5rem; left:8.75rem; width:26.25rem;">
         <div class="title-bar" onmousedown="dragStart(event,'nlp-window')">
           <div class="title-bar-text">analysis.exe</div>
           <div class="title-bar-controls">
@@ -1179,7 +1342,7 @@
             onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.
               <p
              
-                style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
+                style="font-size:0.8rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
                 List of DP patient characteristics, Hinkle (2000). The Lynch 1993 line in particular infuriated me on
                 behalf of an abstract patient.</p>
               <div
@@ -1267,21 +1430,21 @@
       </div>
 
       <!-- README -->
-      <div class="window win98-window" id="about-window" style="top:120px; left:170px; width:400px;">
+      <div class="window win98-window" id="about-window" style="top:7.5rem; left:10.625rem; width:25rem;">
         <div class="title-bar" onmousedown="dragStart(event,'about-window')">
-          <div class="title-bar-text">README.txt — Notepad</div>
+          <div class="title-bar-text">README.txt</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('about-window')"></button>
             <button aria-label="Close" onclick="closeWindow('about-window')"></button>
           </div>
         </div>
         <div class="window-content"
-          style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fbead339;">
+          style="font-family:'Courier New',monospace; font-size:0.95rem; background:#fbead339;">
           <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Introduction</h4>
               <div class="bug-thumb-strip">
-                <img src="images/buglife/cimex666.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
-               <img src="images/buglife/cimexil4.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
-               <img src="images/buglife/cimexil3000.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:120px; max-height:96px; width:auto; height:auto; object-fit:contain; display:inline-block;">
+                <img src="images/buglife/cimex666.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain; display:inline-block;">
+               <img src="images/buglife/cimexil4.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain; display:inline-block;">
+               <img src="images/buglife/cimexil3000.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain; display:inline-block;">
               </div>
           <p><b>You are a researcher</b> investigating bed bug infestations and a condition known as <a href="#"
             onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a>, conducting a series of shadowing interviews in pest control.</p>
@@ -1289,7 +1452,7 @@
           <p><b>This is your desktop,</b> your archive of materials of your research and field work.</p>
           
            <div class="scarab-rule"></div> 
-          <p><h3>Instructions:</h3> double-click icons to open windows. They can be dragged around the screen, closed or minimized.<p>
+          <p><h3>Instructions:</h3> <b>double-click</b> icons to open windows. They can be dragged around the screen, closed or minimized.<p>
           </p> Looking at your field logs you might find a three act narrative:</p>
 
           <p>
@@ -1303,16 +1466,16 @@
       </div>
 
       <!-- Bed Bug List -->
-      <div class="window win98-window" id="facts-window" style="top:120px; left:170px; width:400px;">
+      <div class="window win98-window" id="facts-window" style="top:7.5rem; left:10.625rem; width:25rem;">
         <div class="title-bar" onmousedown="dragStart(event,'facts-window')">
-          <div class="title-bar-text">Facts.txt — Notepad</div>
+          <div class="title-bar-text">Facts.txt</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('facts-window')"></button>
             <button aria-label="Close" onclick="closeWindow('facts-window')"></button>
           </div>
         </div>
         <div class="window-content"
-          style="font-family:'Courier New',monospace; font-size:0.72rem; background:#fff;">
+          style="font-family:'Courier New',monospace; font-size:0.95rem; background:#fff;">
           <h3 style="font-family:'Old English Gothic Pixel',monospace; font-size:2rem; font-weight:50;">Fun Facts</h3>
           <ul style="padding-left: 1.2em; margin: 0;">
             <li>They travel well and often</li>
@@ -1332,7 +1495,7 @@
             <li>They are attracted to humidity and darkness</li>
           </ul>
 
-          <div class="field-row-stacked" style="width: 200px">
+          <div class="field-row-stacked" style="width: 14rem">
             <label for="text20">Additional notes</label>
             <textarea id="text20" rows="8"></textarea>
             <button id="add-btn">add</button>
@@ -1343,9 +1506,9 @@
       </div>
 
       <!-- BODYMIND -->
-      <div class="window win98-window" id="morgellons-window" style="top:120px; left:210px; width:480px;">
+      <div class="window win98-window" id="morgellons-window" style="top:7.5rem; left:13.125rem; width:30rem;">
         <div class="title-bar" onmousedown="dragStart(event,'morgellons-window')">
-          <div class="title-bar-text">Morgellons — March 2026</div>
+          <div class="title-bar-text">BODYMIND</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('morgellons-window')"></button>
             <button aria-label="Close" onclick="closeWindow('morgellons-window')"></button>
@@ -1365,7 +1528,7 @@
       </div>
 
       <!-- September -->
-      <div class="window win98-window" id="september-window" style="top:140px; left:240px; width:480px;">
+      <div class="window win98-window" id="september-window" style="top:8.75rem; left:15rem; width:30rem;">
         <div class="title-bar" onmousedown="dragStart(event,'september-window')">
           <div class="title-bar-text">What happened in September 2025</div>
           <div class="title-bar-controls">
@@ -1382,7 +1545,7 @@
       </div>
 
       <!-- Extermination -->
-      <div class="window win98-window" id="extermination-window" style="top:160px; left:270px; width:480px;">
+      <div class="window win98-window" id="extermination-window" style="top:10rem; left:16.875rem; width:30rem;">
         <div class="title-bar" onmousedown="dragStart(event,'extermination-window')">
           <div class="title-bar-text">Eggsterminate</div>
           <div class="title-bar-controls">
@@ -1400,9 +1563,9 @@
       </div>
 
       <!-- House -->
-      <div class="window win98-window" id="house-window" style="top:180px; left:300px; width:480px;">
+      <div class="window win98-window" id="house-window" style="top:11.25rem; left:18.75rem; width:30rem;">
         <div class="title-bar" onmousedown="dragStart(event,'house-window')">
-          <div class="title-bar-text">the house — 2026</div>
+          <div class="title-bar-text">HOUSE</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('house-window')"></button>
             <button aria-label="Close" onclick="closeWindow('house-window')"></button>
@@ -1422,10 +1585,10 @@
         </div>
       </div>
 
-      <!-- BUGZ -->
-      <div class="window win98-window" id="img-window" style="top:200px; left:330px; width:480px;">
+      <!-- SPECIMEN -->
+      <div class="window win98-window" id="img-window" style="top:12.5rem; left:20.625rem; width:30rem;">
         <div class="title-bar" onmousedown="dragStart(event,'img-window')">
-          <div class="title-bar-text">Images</div>
+          <div class="title-bar-text">SPECIMEN</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('img-window')"></button>
             <button aria-label="Close" onclick="closeWindow('img-window')"></button>
@@ -1447,7 +1610,7 @@
       </div>
 
       <!-- Acknowledgements -->
-      <div class="window win98-window" id="credits-window" style="top:100px; left:180px; width:460px;">
+      <div class="window win98-window" id="credits-window" style="top:6.25rem; left:11.25rem; width:28.75rem;">
         <div class="title-bar" onmousedown="dragStart(event,'credits-window')">
           <div class="title-bar-text">Credits</div>
           <div class="title-bar-controls">
@@ -1478,7 +1641,7 @@
 
 
       <!-- INTERVIEWS -->
-      <div class="window win98-window" id="interviews-window" style="top:100px; left:200px;">
+      <div class="window win98-window" id="interviews-window" style="top:6.25rem; left:12.5rem;">
         <div class="title-bar" onmousedown="dragStart(event,'interviews-window')">
           <div class="title-bar-text">INTERVIEWS</div>
           <div class="title-bar-controls">
@@ -1513,7 +1676,7 @@
       </div>
 
       <!-- INTERVIEWS: IMAGES -->
-      <div class="window win98-window" id="interviews-images-window" style="top:130px; left:240px;">
+      <div class="window win98-window" id="interviews-images-window" style="top:8.125rem; left:15rem;">
         <div class="title-bar" onmousedown="dragStart(event,'interviews-images-window')">
           <div class="title-bar-text">IMAGES</div>
           <div class="title-bar-controls">
@@ -1536,7 +1699,7 @@
       </div>
 
       <!-- INTERVIEWS: NOTES -->
-      <div class="window win98-window" id="interviews-notes-window" style="top:115px; left:230px;">
+      <div class="window win98-window" id="interviews-notes-window" style="top:7.1875rem; left:14.375rem;">
         <div class="title-bar" onmousedown="dragStart(event,'interviews-notes-window')">
           <div class="title-bar-text">NOTES</div>
           <div class="title-bar-controls">
@@ -1562,7 +1725,7 @@
         </div>
       </div>
       <!-- BIN -->
-      <div class="window win98-window" id="bin-window" style="top:130px; left:240px;">
+      <div class="window win98-window" id="bin-window" style="top:8.125rem; left:15rem;">
         <div class="title-bar" onmousedown="dragStart(event,'bin-window')">
           <div class="title-bar-text">BIN</div>
           <div class="title-bar-controls">
@@ -1587,7 +1750,7 @@
   </div>
   <div id="taskbar">
     <button class="button" id="start-btn">&#x229E; Start</button>
-    <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
+    <div id="taskbar-buttons" style="display:flex; gap:0.25rem;"></div>
     <div class="taskbar-time" id="clock">00:00</div>
     <button class="button" id="fullscreen-btn" onclick="fullScreen()"
       title="Toggle fullscreen (s+i+c+k)">&#x26F6;</button>
@@ -1597,6 +1760,11 @@
 
   <script>
     const IDLE_TIMEOUT_MS = 3 * 60 * 1000;
+
+    // current value of 1rem in px — the single UI scale set by the
+    // clamp() on `html` in the stylesheet. Read live so it stays correct
+    // when the window is moved to a different-sized display.
+    const remPx = () => parseFloat(getComputedStyle(document.documentElement).fontSize);
 
     const bootScreen = document.getElementById('boot-screen');
     const desktop = document.getElementById('desktop');
@@ -1747,7 +1915,7 @@
       openWindow('img-window');
     }
 
-    const fluidPoemText1 = "What is it about women decaying alive that pulls at me so strong. It is not a new sentiment. Councils - systems leave people for dead in their way. I wish it touched a man as much as an actual corpse would.";
+    const fluidPoemText = "What is it about women decaying alive that pulls at me so strong. It is not a new sentiment. Councils - systems leave people for dead in their way. I wish it touched a man as much as an actual corpse would.";
     const FLUID_POEM_TYPE_LEAD_SECONDS = 3;
     let fluidPoemTimeUpdateHandler = null;
 
@@ -1967,8 +2135,11 @@ function openParanoid() {
         const r = resizing.getBoundingClientRect();
         const maxW = frameRect.left + frameRect.width - r.left - 8;
         const maxH = frameRect.top + frameRect.height - r.top - 8;
-        const newW = Math.max(160, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
-        const newH = Math.max(130, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
+        // floors track the UI scale, so a window can never be dragged
+        // smaller than its own chrome on a large display
+        const rem = remPx();
+        const newW = Math.max(10 * rem, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
+        const newH = Math.max(8 * rem, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
         resizing.style.width = newW + 'px';
         resizing.style.height = newH + 'px';
       }
