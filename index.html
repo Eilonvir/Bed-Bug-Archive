@@ -1268,7 +1268,7 @@
             upstairs functioning as storage units.</p>
           <p title="— Julia Armfield, Our Wives Under the Sea (2022)">Somewhere being a place you are left in</p>
           <p>Matthew says most of these cases have carers, though they <span class="citation-highlight">'obviously don't do much'</span>. He says it happens
-            often in the UK.His longest case was 12 months. A 24 year old was his
+            often in the UK. His longest case was 12 months. A 24 year old was his
             youngest.</p>
         </div>
       </div>
@@ -1327,7 +1327,7 @@
   </div>
 </div>
 
-      <!-- NLP -->
+      <!-- ANALYSIS.exe -->
       <div class="window win98-window" id="nlp-window" style="top:5rem; left:8.75rem; width:26.25rem;">
         <div class="title-bar" onmousedown="dragStart(event,'nlp-window')">
           <div class="title-bar-text">analysis.exe</div>
@@ -1419,10 +1419,10 @@
 
             <div class="story-slide" data-story-slide id="dp-story-slide-3">
               <div class="dp-terminal"><span id="dp-slide3-search"></span></div>
-              <div class="dp-develop-frame" id="dp-slide3-frame">
-                <img src="images/scratchmore.jpg" alt="Scratching" onerror="this.style.display='none'">
-              </div>
               <div id="dp-slide3-text" class="typewriter-text"></div>
+                 <div class="dp-develop-frame" id="dp-slide3-frame">
+                <img src="images/scrch.png" alt="Scratching" onerror="this.style.display='none'">
+              </div>
             </div>
           </div>
 
@@ -1537,7 +1537,7 @@
       <!-- September -->
       <div class="window win98-window" id="september-window" style="top:8.75rem; left:15rem; width:30rem;">
         <div class="title-bar" onmousedown="dragStart(event,'september-window')">
-          <div class="title-bar-text">What happened in September 2025</div>
+          <div class="title-bar-text">September '25</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" onclick="minimizeWindow('september-window')"></button>
             <button aria-label="Close" onclick="closeWindow('september-window')"></button>
@@ -1776,6 +1776,40 @@
     const desktop = document.getElementById('desktop');
     const frame = document.getElementById('screen-frame');
     const windowS = document.getElementById('september-window');
+
+    // UI click sound. A small pool so rapid clicks overlap instead of
+    // cutting each other off. Capture phase, so handlers that stop
+    // propagation still get a click.
+    const CLICK_POOL_SIZE = 4;
+    const clickSounds = Array.from({ length: CLICK_POOL_SIZE }, () => {
+      const a = new Audio('audio/click.mp3');
+      a.preload = 'auto';
+      a.volume = 0.5;
+      return a;
+    });
+    let clickSoundIndex = 0;
+
+    // Only things that actually do something get a click. Desktop icons are
+    // `ondblclick`, but they read as clickable so they count. Title bars are
+    // deliberately absent — a drag is one long mousedown, not a click — while
+    // the close/minimise buttons inside them match on `button`.
+    const CLICKABLE_SELECTOR = 'button, a[href], input, select, textarea, label, summary, .icon, [onclick]';
+
+    function clickSoundTarget(e) {
+      if (!bootScreen.classList.contains('gone')) return false;
+      const target = e.target;
+      return target instanceof Element && !!target.closest(CLICKABLE_SELECTOR);
+    }
+
+    function playClickSound(e) {
+      if (!clickSoundTarget(e)) return;
+      const a = clickSounds[clickSoundIndex];
+      clickSoundIndex = (clickSoundIndex + 1) % CLICK_POOL_SIZE;
+      a.currentTime = 0;
+      a.play().catch(() => {});
+    }
+
+    document.addEventListener('mousedown', playClickSound, true);
 
     document.querySelectorAll('.nlp-row').forEach(row => {
       row.addEventListener('mouseenter', () => {
