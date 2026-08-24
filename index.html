@@ -1908,7 +1908,7 @@
     let storyIndex = 0;
 
     const dpSlide3SearchText = "Looking for bugs....";
-    const dpSlide3Text = "I'm searching my mattress, almost absentmindedly as I am reading another article about parasitosis. I can't help but scratch.";
+    const dpSlide3Text = "I'm searching my mattress,^ almost absentmindedly~ as I am reading another article about parasitosis.~ I can't help but scratch.";
     const DP_SLIDE3_HOLD_MS = 2500;
     const DP_SLIDE3_DEVELOP_MS = 6500;
     const DP_SLIDE3_BLINK_STOP_LEAD_MS = 1500;
@@ -1955,7 +1955,7 @@
       openWindow('img-window');
     }
 
-    const fluidPoemText = "What is it about women decaying alive that pulls at me so strong. It is not a new sentiment. Councils - systems leave people for dead in their way. I wish it touched a man as much as an actual corpse would.";
+    const fluidPoemText = "What is it about women decaying alive that pulls at me so strong?.^ Systems, - I learn through the field work - leave people for dead in their way.~ I wish it touched a man as much as an actual corpse would.";
     const FLUID_POEM_TYPE_LEAD_SECONDS = 3;
     let fluidPoemTimeUpdateHandler = null;
 
@@ -1986,13 +1986,19 @@ function openFluidPoem() {
   audio.play();
 }
 
+// Pause markers usable inside any typeText string: ~ = beat, ^ = long beat.
+// They are swallowed, not printed.
+const TYPE_BEATS = { '~': 900, '^': 2200 };
+
 function typeText(el, text, i = 0, onDone) {
-  if (i < text.length) {
-    el.innerHTML += text.charAt(i);
-    setTimeout(() => typeText(el, text, i + 1, onDone), 40);
-  } else if (onDone) {
-    onDone();
+  if (i >= text.length) {
+    if (onDone) onDone();
+    return;
   }
+  const ch = text.charAt(i);
+  const beat = TYPE_BEATS[ch];
+  if (!beat) el.innerHTML += ch;
+  setTimeout(() => typeText(el, text, i + 1, onDone), beat || 40);
 }
 
 function openParanoid() {
