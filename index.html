@@ -205,16 +205,33 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('images/noiseflrs.jpg');
+      /* 2560x3840, downsampled from the 4059x6089 original (still in
+         images/noiseflrs.jpg if this ever needs regenerating). `cover` on a
+         landscape frame means width binds, so 2560 is all a 27" 1440p panel
+         can show — the original decoded to ~99MB of bitmap to display the
+         same pixels. Swap the filename back to revert. */
+      background-image: url('images/noiseflrs-2560.jpg');
       background-size: cover;
       background-position: center;
       filter: var(--filter);
       transition: filter 4.5s cubic-bezier(0.45, 0, 0.55, 1);
+      /* Keeps this on its own compositor layer permanently. Without it the
+         browser allocates the layer at the start of every filter transition
+         and throws it away at the end, and that allocation is a visible
+         hitch right at the moment the invert begins. */
+      will-change: filter;
       z-index: 0;
     }
 
+    /* Must start from var(--filter), not a hardcoded saturate(0.6). A filter
+       transition only interpolates smoothly when the two lists agree
+       function-by-function, so the leading saturate() here is load-bearing —
+       it is not a redundant duplicate of the one above. With september-window
+       open --filter becomes grayscale(1), and the old literal made the lists
+       disagree at position 0, which downgrades the whole 4.5s fade to a hard
+       jump at the halfway point. */
     #screen-frame.nlp-hovering::before {
-       filter: saturate(0.6) grayscale(1) invert(1);
+      filter: var(--filter) grayscale(1) invert(1);
     }
 
     #bug-canvas-holder {
@@ -358,7 +375,6 @@
 
     .icon-bed {
       background: url("images/icons/bed.png") center/contain no-repeat;
-      filter: saturate(0.6);    
       filter: grayscale(1);
     }
 
@@ -381,7 +397,7 @@
     .icon-body {
       background: url("images/icons/body.png") center/contain no-repeat;
       scale: 1.6;
-      filter: saturate 0.6;
+      filter: saturate(0.6);
     }
 
     .icon-grid {
@@ -467,18 +483,13 @@
 
     .resize-handle {
       position: absolute;
+      right: 1px;
+      bottom: 1px;
       width: 1.1rem;
       height: 1.1rem;
       cursor: nwse-resize;
       z-index: 5;
     }
-
-    .resize-handle {
-      right: 1px;
-      bottom: 1px;
-    }
-
-
 
 
     .window-content p {
@@ -524,8 +535,6 @@
       display: block;
       margin: 0.6rem 0;
       filter: grayscale(20%);
-      resize: both;
-      overflow: auto;
       object-fit: contain;
       min-width: 7.5rem;
       min-height: 5rem;
@@ -559,8 +568,6 @@
       max-width: 100%;
       max-height: 100%;
       margin: 0;
-      resize: both;
-      overflow: auto;
       object-fit: contain;
       min-width: 7.5rem;
       min-height: 5rem;
@@ -595,13 +602,16 @@
       text-align: center;
     }
 
+    /* min-height, not height, and no scroller of its own: .window-content
+       above is already `overflow-y: auto`, so a fixed height here gave the
+       window two nested scrollbars the moment it was resized shorter than
+       its content. The sticky .carousel-nav needs .window-content to stay
+       the scrolling box, so this is the one that gives way. */
     .story-viewport {
-      height: 25rem;
+      min-height: 25rem;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      overflow-y: auto;
-      overflow-x: hidden;
       background: #c1bdbd;
     }
 
@@ -638,14 +648,20 @@
 
     .nlp-row:hover .nlp-term-personal {
       display: inline-block;
-      animation: squiggly-ramp-in 1s linear forwards, squiggly-anim 0.4s linear infinite 1s;
     }
 
-    .story-slide-2:hover p,
-    .story-slide-2:hover h3,
-    .story-slide-2:hover .nlp-term-text,
-    .story-slide-2:hover .nlp-count,
-    .story-slide-2:hover .hover-hint {
+    /* One filter pass for the whole slide instead of one per paragraph,
+       heading, term and count — nineteen simultaneous feTurbulence
+       renders was the single most expensive thing on the page. Hovering
+       any .nlp-row also matches this rule, so the swapped-in
+       .nlp-term-personal wobbles without needing its own filter.
+
+       The background is not decorative: `filter` makes this element a
+       stacking context, which would otherwise leave the hard-light blend
+       on .nlp-bar-inner with nothing behind it but transparency. This
+       restores the .story-viewport colour as the blend backdrop. */
+    .story-slide-2:hover {
+      background: #c1bdbd;
       animation: squiggly-ramp-in 1s linear forwards, squiggly-anim 0.4s linear infinite 1s;
     }
 
@@ -1028,38 +1044,60 @@
 
 <body>
 
+  <!-- Squiggly wobble for the NLP slide. Three things here are load-bearing
+       for performance, because feTurbulence is per-pixel Perlin noise and is
+       largely un-accelerated in WebKit (i.e. on the gallery Mac):
+
+         x/y/width/height  the default filter region is -10%/+120%, which
+                           inflates the filtered area by ~44%. The largest
+                           displacement below is 2.5px, so 1% of the slide is
+                           already more margin than the wobble can use.
+         numOctaves="1"    halves the turbulence cost. Loses the finest grain
+                           of the noise, which this effect never showed at
+                           2.5px of displacement anyway.
+         color-interpolation-filters="sRGB"
+                           skips SVG's default round trip through linearRGB —
+                           two full-surface conversions per pass, for a
+                           displacement map that doesn't care about
+                           colourimetry. It does shift the turbulence values
+                           slightly, so `scale` is the knob if the wobble now
+                           reads too strong.
+
+       These are applied to .story-slide-2 as a whole rather than to each
+       piece of text inside it, so a hover is one filter pass instead of
+       nineteen. -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
-      <filter id="nlp-squiggly-0">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+      <filter id="nlp-squiggly-0" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
       </filter>
-      <filter id="nlp-squiggly-1">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="2" />
+      <filter id="nlp-squiggly-1" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="2" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" />
       </filter>
-      <filter id="nlp-squiggly-2">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="3" />
+      <filter id="nlp-squiggly-2" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="3" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
       </filter>
-      <filter id="nlp-squiggly-3">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="4" />
+      <filter id="nlp-squiggly-3" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="4" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" />
       </filter>
-      <filter id="nlp-squiggly-4">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="5" />
+      <filter id="nlp-squiggly-4" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="5" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
       </filter>
-      <filter id="nlp-squiggly-ramp-1">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+      <filter id="nlp-squiggly-ramp-1" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" />
       </filter>
-      <filter id="nlp-squiggly-ramp-2">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+      <filter id="nlp-squiggly-ramp-2" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.7" />
       </filter>
-      <filter id="nlp-squiggly-ramp-3">
-        <feTurbulence baseFrequency="0.15" numOctaves="2" result="noise" seed="1" />
+      <filter id="nlp-squiggly-ramp-3" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.1" />
       </filter>
     </defs>
@@ -1775,19 +1813,57 @@
     const bootScreen = document.getElementById('boot-screen');
     const desktop = document.getElementById('desktop');
     const frame = document.getElementById('screen-frame');
-    const windowS = document.getElementById('september-window');
 
-    // UI click sound. A small pool so rapid clicks overlap instead of
-    // cutting each other off. Capture phase, so handlers that stop
-    // propagation still get a click.
+    // UI click sound.
+    //
+    // Web Audio is the fast path: the mp3 is decoded once into an
+    // AudioBuffer and each click fires a throwaway BufferSource, which
+    // starts within a buffer quantum. HTMLAudioElement.play() has to spin up
+    // the element's own pipeline and seek back to 0, and on macOS that alone
+    // is tens of milliseconds of audible lag.
+    //
+    // The fallback matters: decoding needs fetch(), which Chrome blocks on
+    // file:// URLs. Opened straight off disk the piece silently keeps the old
+    // element pool, so serve it over the local server to get the low-latency
+    // path.
+    const CLICK_VOLUME = 0.5;
     const CLICK_POOL_SIZE = 4;
-    const clickSounds = Array.from({ length: CLICK_POOL_SIZE }, () => {
-      const a = new Audio('audio/click.mp3');
-      a.preload = 'auto';
-      a.volume = 0.5;
-      return a;
-    });
-    let clickSoundIndex = 0;
+
+    let audioCtx = null;
+    let clickGain = null;
+    let clickBuffer = null;
+    let clickElements = null;
+    let clickElementIndex = 0;
+
+    function clickElementPool() {
+      if (!clickElements) {
+        clickElements = Array.from({ length: CLICK_POOL_SIZE }, () => {
+          const a = new Audio('audio/click.mp3');
+          a.preload = 'auto';
+          a.volume = CLICK_VOLUME;
+          return a;
+        });
+      }
+      return clickElements;
+    }
+
+    function primeClickSound() {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) { clickElementPool(); return; }
+      // An AudioContext may only be created suspended before a gesture, but
+      // decoding into a suspended context is fine.
+      audioCtx = new AC();
+      clickGain = audioCtx.createGain();
+      clickGain.gain.value = CLICK_VOLUME;
+      clickGain.connect(audioCtx.destination);
+
+      fetch('audio/click.mp3')
+        .then(r => r.arrayBuffer())
+        .then(b => audioCtx.decodeAudioData(b))
+        .then(buf => { clickBuffer = buf; })
+        .catch(() => { clickElementPool(); });
+    }
+    primeClickSound();
 
     // Only things that actually do something get a click. Desktop icons are
     // `ondblclick`, but they read as clickable so they count. Title bars are
@@ -1803,8 +1879,17 @@
 
     function playClickSound(e) {
       if (!clickSoundTarget(e)) return;
-      const a = clickSounds[clickSoundIndex];
-      clickSoundIndex = (clickSoundIndex + 1) % CLICK_POOL_SIZE;
+      if (clickBuffer) {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const src = audioCtx.createBufferSource();
+        src.buffer = clickBuffer;
+        src.connect(clickGain);
+        src.start();
+        return;
+      }
+      const pool = clickElementPool();
+      const a = pool[clickElementIndex];
+      clickElementIndex = (clickElementIndex + 1) % pool.length;
       a.currentTime = 0;
       a.play().catch(() => {});
     }
@@ -2149,7 +2234,15 @@ function openParanoid() {
     }
 
     let dragging = null, dragOffX = 0, dragOffY = 0;
-    const screenFrame = document.getElementById('screen-frame');
+
+    // The frame is fixed-position and does not move during a gesture, so its
+    // rect is measured once per drag instead of on every mousemove. Reading
+    // it mid-move forces a synchronous layout, and doing that 60-120x a
+    // second is felt as lag in the drag itself.
+    let frameRect = null;
+    function captureFrameRect() {
+      frameRect = frame.getBoundingClientRect();
+    }
 
     function dragStart(e, id) {
       if (e.target.tagName === 'BUTTON') return;
@@ -2161,11 +2254,12 @@ function openParanoid() {
       const r = dragging.getBoundingClientRect();
       dragOffX = e.clientX - r.left;
       dragOffY = e.clientY - r.top;
+      captureFrameRect();
     }
 
     document.addEventListener('mousemove', e => {
+      if (!dragging && !resizing) return;
       if (dragging) {
-        const frameRect = screenFrame.getBoundingClientRect();
         const w = dragging.offsetWidth;
         const h = dragging.offsetHeight;
         const localX = e.clientX - dragOffX - frameRect.left;
@@ -2177,15 +2271,17 @@ function openParanoid() {
         dragging.style.right = 'auto';
       }
       if (resizing) {
-        const frameRect = screenFrame.getBoundingClientRect();
-        const r = resizing.getBoundingClientRect();
-        const maxW = frameRect.left + frameRect.width - r.left - 8;
-        const maxH = frameRect.top + frameRect.height - r.top - 8;
+        // A resize grows the window from its fixed top-left corner, so the
+        // frame rect, the window's own origin and the rem size are all
+        // constant for the whole gesture and are captured in resizeStart.
+        // They used to be re-measured on every mousemove, three forced
+        // layout/style flushes per event.
+        const maxW = frameRect.left + frameRect.width - resizeOriginX - 8;
+        const maxH = frameRect.top + frameRect.height - resizeOriginY - 8;
         // floors track the UI scale, so a window can never be dragged
         // smaller than its own chrome on a large display
-        const rem = remPx();
-        const newW = Math.max(10 * rem, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
-        const newH = Math.max(8 * rem, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
+        const newW = Math.max(10 * resizeRem, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
+        const newH = Math.max(8 * resizeRem, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
         resizing.style.width = newW + 'px';
         resizing.style.height = newH + 'px';
       }
@@ -2194,16 +2290,22 @@ function openParanoid() {
     document.addEventListener('mouseup', () => { dragging = null; resizing = null; });
 
     let resizing = null, resizeStartW = 0, resizeStartH = 0, resizeStartX = 0, resizeStartY = 0;
+    let resizeOriginX = 0, resizeOriginY = 0, resizeRem = 16;
 
     function resizeStart(e, id) {
       e.preventDefault();
       e.stopPropagation();
       resizing = document.getElementById(id);
       resizing.style.zIndex = getTopZ();
+      const r = resizing.getBoundingClientRect();
       resizeStartW = resizing.offsetWidth;
       resizeStartH = resizing.offsetHeight;
       resizeStartX = e.clientX;
       resizeStartY = e.clientY;
+      resizeOriginX = r.left;
+      resizeOriginY = r.top;
+      resizeRem = remPx();
+      captureFrameRect();
     }
 
     document.querySelectorAll('.win98-window').forEach(win => {
@@ -2245,13 +2347,22 @@ function openParanoid() {
       document.getElementById('entry-window').classList.add('open');
     }
 
+    // Throttled: mousemove fires 60-120x a second and this used to tear down
+    // and rebuild the timer on every one of them. Against a 3 minute timeout,
+    // resolving to the nearest second is more than enough.
+    const IDLE_RESET_THROTTLE_MS = 1000;
     let idleTimer = null;
+    let lastIdleReset = 0;
+
     function resetIdleTimer() {
+      const now = performance.now();
+      if (idleTimer && now - lastIdleReset < IDLE_RESET_THROTTLE_MS) return;
+      lastIdleReset = now;
       if (idleTimer) clearTimeout(idleTimer);
       idleTimer = setTimeout(resetGalleryToIdle, IDLE_TIMEOUT_MS);
     }
     ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
-      document.addEventListener(evt, resetIdleTimer);
+      document.addEventListener(evt, resetIdleTimer, { passive: true });
     });
     resetIdleTimer();
 
