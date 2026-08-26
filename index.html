@@ -256,6 +256,7 @@
       padding: 2.5rem;
       z-index: 1000;
       line-height: 1.8;
+      font-weight: 700;
     }
 
     .boot-line {
@@ -411,8 +412,9 @@
       position: static;
     }
 
+   
     #interviews-notes-window {
-      width: 21.5rem;
+      width: 22.5rem;
     }
 
     #interviews-notes-window .icon-grid {
@@ -427,7 +429,8 @@
       font-family: 'Courier New', monospace;
       font-size: 0.95rem;
       color: #ffffff00;
-      text-shadow: 1px 1px 1px #000000;
+
+      text-shadow: 0.06rem 0.06rem 0.06rem #000000;
       padding: 0.06rem 0.2rem;
       line-height: 1.3;
     }
@@ -494,6 +497,8 @@
 
     .window-content p {
       margin-bottom: 0.7rem;
+    
+      overflow-wrap: break-word;
     }
 
     .window-content a {
@@ -519,14 +524,17 @@
       padding-bottom: 0.2rem;
     }
 
-    /* Native audio controls are drawn by the browser and ignore rem for
-       their internals — setting an explicit height is the only lever that
-       makes the transport grow with the rest of the UI. */
+   
     .window-content audio {
       width: 100%;
       height: 3.4rem;
       margin: 0.4rem 0;
       accent-color: #000080;
+    }
+
+    
+    .window-content audio::-webkit-media-controls-volume-control-container {
+      display: none;
     }
 
     .window-content img {
@@ -582,8 +590,9 @@
       position: sticky;
       bottom: 0;
       background: #c1bdbd;
-      padding: 0.4rem 0 0.15rem;
       border-top: 1px solid #ccc;
+      margin: 0 -0.7rem -0.7rem;
+      padding: 0.4rem 0.7rem 0.85rem;
     }
 
     .carousel-nav button {
@@ -602,17 +611,24 @@
       text-align: center;
     }
 
-    /* min-height, not height, and no scroller of its own: .window-content
-       above is already `overflow-y: auto`, so a fixed height here gave the
-       window two nested scrollbars the moment it was resized shorter than
-       its content. The sticky .carousel-nav needs .window-content to stay
-       the scrolling box, so this is the one that gives way. */
+   
     .story-viewport {
       min-height: 25rem;
       display: flex;
       align-items: flex-start;
       justify-content: center;
       background: #c1bdbd;
+    }
+
+    
+    #nlp-window {
+      height: 34rem;
+    }
+
+    /* Slide 1 scrolls and the other two don't, so without a reserved gutter
+       the text column changed width on every arrow press. */
+    #nlp-window .window-content {
+      scrollbar-gutter: stable;
     }
 
     .story-slide {
@@ -976,6 +992,19 @@
       width: 22.5rem;
     }
 
+    #september-window .window-content {
+      min-height: 14rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .september-line {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
     #cw-window {
       position: absolute;
       left: calc(50% - 11.875rem);
@@ -1323,7 +1352,7 @@
   <div class="window-content">
     <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain;">
     <h3>Field audio</h3>
-    <audio id="fluid-poem-audio" controls><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+    <audio id="fluid-poem-audio" controls controlsList="nodownload noplaybackrate"><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
     <div id="fluid-poem-text" class="typewriter-text"></div>
   </div>
 </div>
@@ -1340,7 +1369,7 @@
   <div class="window-content">
     <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain;">
     <h3>Field audio</h3>
-    <audio id="paranoid-audio" controls><source src="audio/westlondon.mp3" type="audio/mpeg"></audio>
+    <audio id="paranoid-audio" controls controlsList="nodownload noplaybackrate"><source src="audio/westlondon.mp3" type="audio/mpeg"></audio>
   </div>
 </div>
 
@@ -1582,10 +1611,7 @@
           </div>
         </div>
         <div class="window-content">
-          <p>A minimal bed - maybe pixelated "click me" to reveal the TD sketch as bugs all over - under the images,
-            videos from September will run OR the interactive fiction play button</p>
-          <p>To come - images? WhatsApp screenshots? or just the bed bugs on the mattress? Captioned omg omg omg</p>
-
+          <p class="september-line">I had bed bugs.</p>
         </div>
       </div>
 
@@ -1600,7 +1626,6 @@
         </div>
         <div class="window-content">
           <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Hortus Sanititis</h4>
-          <p>Add Matthew paraffin audio</p>
 
           <img src="images/buglife/hs.jpg" style="filter: opacity(0.8);" alt="" onerror="this.style.display='none'">
           <div class="img-caption">They've been around for a while</div>
@@ -1667,18 +1692,15 @@
         <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Acknowledgements</h4>  
           <p>Thank you Matthew Blackwell, Warren King and Project Multipest for sharing your insights from work in pest
             control. Thank you Ricardo Leizola for consultation regarding interview and documentation methodologies as
-            well as interesting conceptual links. Thank you Millicent Gunn, Louise Rouse, Jeremy Wenger - for
-            consultation regarding curation, UX, adaptation to a gallery setting, interactive story telling UX concerns
-            and other</p>
+            well as interesting conceptual links. Thank you Millicent Gunn, Louise Rouse, Jeremy Wenger and Daniel Berio - for
+            consultation regarding curation, adaptation to a gallery setting, interactive story telling and UX concerns
+           </p>
           <div class="scarab-rule"></div>
           <p>Author: Michaella Miller</p>
 
           <p>MA Computational Arts<br>
           Goldsmiths, University of London, 2026</p>
          
-          <h3>bibliography</h3>
-          <p>
-          <p>
           <h3>Images</h3>
           <p>Wellcome Library, London (1499) Hortus Sanitatis: bed bugs, delousing. Wikimedia Commons. Available at: https://commons.wikimedia.org/wiki/File:Hortus_Sanitatis;_ bed_bugs,_delousing._Wellcome_M0011711.jpg (Accessed: April 10th 2026). License: CC BY 4.0.</p>
         </div>
@@ -2040,7 +2062,7 @@
       openWindow('img-window');
     }
 
-    const fluidPoemText = "What is it about women decaying alive that pulls at me so strong?.^ Systems, - I learn through the field work - leave people for dead in their way.~ I wish it touched a man as much as an actual corpse would.";
+    const fluidPoemText = "What is it about women decaying alive that pulls at me so strong?^ Systems leave people for dead in their way.~ I wish it touched a man as much as an actual corpse would.";
     const FLUID_POEM_TYPE_LEAD_SECONDS = 3;
     let fluidPoemTimeUpdateHandler = null;
 
@@ -2119,6 +2141,18 @@ function openParanoid() {
     let septMode = false;
     const fullscreenBtn = document.getElementById('fullscreen-btn');
 
+   
+    function setSeptMode(on) {
+      septMode = on;
+      if (on) {
+        frame.classList.add('bw-anim');
+        frame.style.setProperty('--filter', 'grayscale(1)');
+      } else {
+        frame.classList.remove('bw-anim');
+        frame.style.setProperty('--filter', 'saturate(0.6)');
+      }
+    }
+
     function updateFullscreenUI() {
       const active = Boolean(document.fullscreenElement);
       fullscreenBtn.style.display = active ? 'none' : '';
@@ -2159,14 +2193,7 @@ function openParanoid() {
 
       if (id !== 'entry-window') closeWindow('entry-window');
 
-      septMode = (id === 'september-window');
-      if (septMode) {
-        frame.classList.add('bw-anim');
-        frame.style.setProperty('--filter', 'grayscale(1)');
-      } else {
-        frame.classList.remove('bw-anim');
-        frame.style.setProperty('--filter', 'saturate(0.6)');
-      }
+      setSeptMode(id === 'september-window');
     }
 
     function closeWindow(id) {
@@ -2177,20 +2204,13 @@ function openParanoid() {
       openWindows.delete(id);
       updateTaskbar();
 
-      if (id === 'september-window') {
-        septMode = false;
-      }
-      if (septMode) {
-        frame.style.setProperty('--filter', 'grayscale(1)');
-      } else {
-        frame.classList.remove('bw-anim');
-        frame.style.setProperty('--filter', 'saturate(0.6)');
-      }
+      setSeptMode(id === 'september-window' ? false : septMode);
     }
 
     function minimizeWindow(id) {
       const win = document.getElementById(id);
       if (!win) return;
+      if (id === 'september-window') setSeptMode(false);
       win.classList.remove('open');
       updateTaskbar();
     }
@@ -2338,9 +2358,9 @@ function openParanoid() {
 
       document.getElementById('fluid-poem-text').innerHTML = '';
 
-      septMode = false;
-      frame.classList.remove('bw-anim');
-      frame.style.setProperty('--filter', 'saturate(0.6)');
+      setSeptMode(false);
+      frame.classList.remove('nlp-hovering');
+      window.setBugSwarmBoost && window.setBugSwarmBoost(false);
 
       playBootSequence();
 
