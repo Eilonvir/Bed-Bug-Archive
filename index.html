@@ -1,495 +1,2395 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[ untitled ]</title>
-<link rel="stylesheet" href="98.css-main/style.css">
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[ untitled ]</title>
+  <link rel="stylesheet" href="98.css-main/style.css">
+  <style>
+    /* Courier Prime, self-hosted so the piece renders identically with no
+       network — it used to be @import'ed from Google Fonts, which fails
+       silently in a gallery and drops everything back to Courier New.
+       Files in fonts/, SIL Open Font License 1.1 (fonts/CourierPrime-OFL.txt).
+       The latin / latin-ext split and unicode-ranges are Google's own
+       subsetting, kept so only the needed file is fetched. */
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* regular 400 */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
 
-  body {
-    cursor: url('images/BUG.png'), auto;
-    background-color: #f326db;
-    background-image: url('images/Grandflrs.jpg'), repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-    background-size: cover;
-    /*background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);*/
-    min-height: 100vh;
-    font-family: 'Courier Prime', 'Courier New', monospace;
-    overflow: hidden;
-    position: relative;
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* bold 700 */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* italic 400 */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400i-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/courier-prime-400i-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* bold italic 700 — the old @import never requested this, so bold text
+       inside an italic block was being synthetically slanted by the browser */
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700i-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Courier Prime';
+      font-style: italic;
+      font-weight: 700;
+      font-display: swap;
+      src: url('fonts/courier-prime-700i-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    @font-face {
+      font-family: 'Old English Gothic Pixel';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/OldEnglishGothicPixelRegular-gx1jp.woff') format('woff'),
+           url('fonts/OldEnglishGothicPixelRegular-gx1jp.otf') format('opentype');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ─── UI SCALE ───────────────────────────────────────────────────────
+       One knob for the whole interface. Everything below this point is
+       sized in rem, so raising the root font-size scales text, icons,
+       windows, chrome and taskbar together — nothing drifts out of
+       proportion. Roughly:
+
+         1280px viewport →  16px   (laptop — same as the old fixed design)
+         1920px viewport →  19px
+         2560px viewport →  22px   (27" 1440p — the gallery monitor)
+         3440px+         →  26px   (ultrawide, or 4K at 100% OS scaling)
+
+       To make the whole UI bigger or smaller, change only this clamp:
+       the middle term sets the slope, the third the ceiling. ---------- */
+    html {
+      font-size: clamp(16px, 0.47vw + 10px, 26px);
+    }
+
+    /* 98.css pins its window chrome to 11px of a bitmap font with
+       antialiasing switched off. Off its native pixel grid the glyph stems
+       drop pixels, which is what makes title bars, buttons and the taskbar
+       look broken on a large display. Scale it with the root and let it
+       antialias. */
+    body,
+    button,
+    label,
+    input,
+    legend,
+    textarea,
+    select,
+    option,
+    table,
+    ul.tree-view,
+    .window,
+    .title-bar,
+    li[role="tab"] {
+      font-size: 0.85rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input[type="submit"],
+    input[type="reset"] {
+      min-width: 4.7rem;
+      min-height: 1.5rem;
+      padding: 0 0.75rem;
+    }
+
+    .window {
+      padding: 0.2rem;
+    }
+
+    .title-bar {
+      padding: 0.2rem 0.15rem 0.2rem 0.2rem;
+    }
+
+    .title-bar-text {
+      margin-right: 1.5rem;
+    }
+
+    /* The minimise/close glyphs are fixed-size SVG backgrounds (6x2 and
+       8x7) pinned with px offsets. Grow the hit area and the glyph with
+       the rest of the chrome, keeping each one's aspect ratio. */
+    .win98-window .title-bar .title-bar-controls button {
+      min-width: 1.15rem;
+      min-height: 1rem;
+      background-position: center center;
+    }
+
+    .win98-window .title-bar .title-bar-controls button[aria-label="Close"] {
+      background-size: 0.5rem 0.4375rem;
+    }
+
+    .win98-window .title-bar .title-bar-controls button[aria-label="Minimize"] {
+      background-size: 0.4375rem 0.15rem;
+      background-position: center bottom 0.18rem;
+    }
+
+    body {
+      background-color: var(--surface);
+      box-shadow: inset 0 0 0 0.625rem rgba(255, 255, 255, 0.75), var(--border-raised-outer), var(--border-raised-inner);
+      min-height: 100vh;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #screen-frame {
+      position: fixed;
+      inset: 1.75rem;
+      background-color: #ee37ccb4;
+      box-shadow: inset 0 0 0 0.125rem rgba(255, 255, 255, 0.75);
+      overflow: hidden;
+      --filter: saturate(0.6);
+    }
+
+    #screen-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* 2560x3840, downsampled from the 4059x6089 original (still in
+         images/noiseflrs.jpg if this ever needs regenerating). `cover` on a
+         landscape frame means width binds, so 2560 is all a 27" 1440p panel
+         can show — the original decoded to ~99MB of bitmap to display the
+         same pixels. Swap the filename back to revert. */
+      background-image: url('images/noiseflrs-2560.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: var(--filter);
+      transition: filter 4.5s cubic-bezier(0.45, 0, 0.55, 1);
+      /* Keeps this on its own compositor layer permanently. Without it the
+         browser allocates the layer at the start of every filter transition
+         and throws it away at the end, and that allocation is a visible
+         hitch right at the moment the invert begins. */
+      will-change: filter;
+      z-index: 0;
+    }
+
+    /* Must start from var(--filter), not a hardcoded saturate(0.6). A filter
+       transition only interpolates smoothly when the two lists agree
+       function-by-function, so the leading saturate() here is load-bearing —
+       it is not a redundant duplicate of the one above. With september-window
+       open --filter becomes grayscale(1), and the old literal made the lists
+       disagree at position 0, which downgrades the whole 4.5s fade to a hard
+       jump at the halfway point. */
+    #screen-frame.nlp-hovering::before {
+      filter: var(--filter) grayscale(1) invert(1);
+    }
+
+    #bug-canvas-holder {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    #bug-canvas-holder canvas {
+      display: block;
+    }
+
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      color: #aaa;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      padding: 2.5rem;
+      z-index: 1000;
+      line-height: 1.8;
+      font-weight: 700;
+    }
+
+    .boot-line {
+      opacity: 0;
+      animation: bootappear 0.1s forwards;
+    }
+
+    .boot-line:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .boot-line:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .boot-line:nth-child(3) {
+      animation-delay: 1.0s;
+    }
+
+    .boot-line:nth-child(4) {
+      animation-delay: 1.4s;
+    }
+
+    .boot-line:nth-child(5) {
+      animation-delay: 1.8s;
+    }
+
+    .boot-line:nth-child(6) {
+      animation-delay: 2.2s;
+    }
+
+    .boot-line:nth-child(7) {
+      animation-delay: 2.6s;
+    }
+
+    .boot-line:nth-child(8) {
+      animation-delay: 3.0s;
+      color: #fff;
+    }
+
+    @keyframes bootappear {
+      to {
+        opacity: 1;
+      }
+    }
+
+    #boot-screen.fade-out {
+      animation: bootfade 0.8s 0.2s forwards;
+    }
+
+    @keyframes bootfade {
+      to {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    #boot-screen.gone {
+      display: none;
+    }
+
+    #desktop {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.8s ease 0.5s;
+    }
+
+    #desktop.visible {
+      opacity: 1;
+    }
+
+    .icon {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      width: 5.75rem;
+      text-align: center;
+      padding: 0.25rem;
+      user-select: none;
+    }
+
+    .icon:hover .icon-label {
+      background: #2d282d56;
+      color: #ffffff;
+    }
+
+    .icon-img {
+      width: 4.5rem;
+      height: 4.5rem;
+      margin-bottom: 0.25rem;
+      image-rendering: pixelated;
+    }
+
+    .icon-folder {
+      background: url("images/icons/folder.svg") center/contain no-repeat;
+      filter: saturate(0.6) brightness(1.2) drop-shadow(0.8px 0.8px #000);
+    }
+
+    .icon-txt {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='0.5'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='0.5'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+
+    .icon-exe {
+      background: url("images/icons/puter.png") center/contain no-repeat;
+      filter: saturate(0.6);
+    }
+
+    .icon-egg {
+      background: url("images/icons/try.png") center/contain no-repeat;
+      filter: grayscale(1);    
+    }
+
+    .icon-bed {
+      background: url("images/icons/bed.png") center/contain no-repeat;
+      filter: grayscale(1);
+    }
+
+    .icon-house {
+      background: url("images/icons/grave.png") center/contain no-repeat;
+      scale: 1.2;
+      filter: grayscale(0.9);
+    }
+
+    .icon-kill {
+      background: url("images/icons/killbill2.png") center/contain no-repeat;
+      scale: 2.2;
+    }
+
+    .icon-bin {
+      background: url("images/icons/bin.png") center/contain no-repeat;
+      filter: grayscale(1) saturate(0.6);
+    }
+
+    .icon-body {
+      background: url("images/icons/body.png") center/contain no-repeat;
+      scale: 1.6;
+      filter: saturate(0.6);
+    }
+
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      padding: 0.25rem 0 0.5rem;
+    }
+
+    .icon.static-icon {
+      position: static;
+    }
+
+   
+    #interviews-notes-window {
+      width: 22.5rem;
+    }
+
+    #interviews-notes-window .icon-grid {
+      flex-wrap: nowrap;
+    }
+
+    #interviews-notes-window .icon {
+      flex: 0 0 auto;
+    }
+
+    .icon-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      color: #ffffff00;
+
+      text-shadow: 0.06rem 0.06rem 0.06rem #000000;
+      padding: 0.06rem 0.2rem;
+      line-height: 1.3;
+    }
+
+    .win98-window {
+      position: absolute;
+      display: none;
+      z-index: 100;
+      min-width: 4rem;
+      min-height: 8rem;
+      max-width: 92vw;
+      max-height: 82vh;
+    }
+
+    .win98-window.open {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .win98-window .title-bar {
+      cursor: move;
+      user-select: none;
+      flex: 0 0 auto;
+    }
+
+ 
+    .title-bar {
+      background: linear-gradient(90deg, #535f8c, #808db8 55%, #9fabcd);
+    }
+
+    .title-bar-text {
+      text-shadow: 1px 1px 0 rgba(30, 34, 56, 0.45);
+    }
+
+    .window-content {
+      background: #c1bdbd;
+      padding: 0.7rem;
+      overflow-y: auto;
+      flex: 1 1 auto;
+      min-height: 0;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #000;
+    }
+
+    .scarab-rule {
+      height: 1.75rem;
+      margin: 0.6rem 0;
+      background: url("images/buglife/bedbug1.png") center/contain no-repeat;
+      opacity: 0.75;
+    }
+
+    .resize-handle {
+      position: absolute;
+      right: 1px;
+      bottom: 1px;
+      width: 1.1rem;
+      height: 1.1rem;
+      cursor: nwse-resize;
+      z-index: 5;
+    }
+
+
+    .window-content p {
+      margin-bottom: 0.7rem;
+    
+      overflow-wrap: break-word;
+    }
+
+    .window-content a {
+      color: #000080;
+      text-decoration: underline;
+    }
+
+    .window-content a:hover {
+      color: #a41a94;
+    }
+
+    .window-content em {
+      color: #666;
+      font-style: italic;
+    }
+
+    .window-content h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #000;
+      margin: 0.8rem 0 0.5rem;
+      padding-bottom: 0.2rem;
+    }
+
+   
+    .window-content audio {
+      width: 100%;
+      height: 3.4rem;
+      margin: 0.4rem 0;
+      accent-color: #000080;
+    }
+
+    
+    .window-content audio::-webkit-media-controls-volume-control-container {
+      display: none;
+    }
+
+    .window-content img {
+      width: 100%;
+      max-width: 25rem;
+      display: block;
+      margin: 0.6rem 0;
+      filter: grayscale(20%);
+      object-fit: contain;
+      min-width: 7.5rem;
+      min-height: 5rem;
+      max-height: 37.5rem;
+      border: 1px solid #999;
+    }
+
+    .img-caption {
+      font-size: 0.88rem;
+      color: #666;
+      margin-bottom: 0.6rem;
+    }
+
+    #house-carousel-caption,
+    #bug-carousel-caption {
+      min-height: 2.1rem;
+    }
+
+    .carousel-viewport {
+      height: 25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #c1bdbd;
+    }
+
+    .carousel-viewport img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      object-fit: contain;
+      min-width: 7.5rem;
+      min-height: 5rem;
+      border: 1px solid #999;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      position: sticky;
+      bottom: 0;
+      background: #c1bdbd;
+      border-top: 1px solid #ccc;
+      margin: 0 -0.7rem -0.7rem;
+      padding: 0.4rem 0.7rem 0.85rem;
+    }
+
+    .carousel-nav button {
+      flex-shrink: 0;
+      width: 1.625rem;
+      height: 1.625rem;
+      padding: 0;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .story-counter {
+      font-size: 0.8rem;
+      color: #666;
+      min-width: 2.5rem;
+      text-align: center;
+    }
+
+   
+    .story-viewport {
+      min-height: 25rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: #c1bdbd;
+    }
+
+    
+    #nlp-window {
+      height: 34rem;
+    }
+
+    /* Slide 1 scrolls and the other two don't, so without a reserved gutter
+       the text column changed width on every arrow press. */
+    #nlp-window .window-content {
+      scrollbar-gutter: stable;
+    }
+
+    .story-slide {
+      display: none;
+    }
+
+    .story-slide.active {
+      display: block;
+    }
+
+    .nlp-row {
+      display: flex;
+      align-items: center;
+      padding: 0.2rem 0;
+      border-bottom: 1px dotted #ccc;
+      font-size: 0.9rem;
+    }
+
+    .nlp-term {
+      min-width: 7rem;
+      color: #010109;
+    }
+
+    .nlp-term-personal {
+      display: none;
+      color: #666;
+      font-style: italic;
+    }
+
+    .nlp-row:hover .nlp-term-text {
+      display: none;
+    }
+
+    .nlp-row:hover .nlp-term-personal {
+      display: inline-block;
+    }
+
+    /* One filter pass for the whole slide instead of one per paragraph,
+       heading, term and count — nineteen simultaneous feTurbulence
+       renders was the single most expensive thing on the page. Hovering
+       any .nlp-row also matches this rule, so the swapped-in
+       .nlp-term-personal wobbles without needing its own filter.
+
+       The background is not decorative: `filter` makes this element a
+       stacking context, which would otherwise leave the hard-light blend
+       on .nlp-bar-inner with nothing behind it but transparency. This
+       restores the .story-viewport colour as the blend backdrop. */
+    .story-slide-2:hover {
+      background: #c1bdbd;
+      animation: squiggly-ramp-in 1s linear forwards, squiggly-anim 0.4s linear infinite 1s;
+    }
+
+
+    #fluid-poem-window {
+  height: 23.75rem;
+}
+#fluid-poem-window .window-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#fluid-poem-text {
+  font-style: italic;
+  line-height: 1.8;
+  padding-top: 0.75rem;
+  border-top: 1px solid #ccc;
+  min-height: 6.25rem;
+}
+
+ #paranoid-window {
+  height: 17.5rem;
+}
+#paranoid-window .window-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.citation-block {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  text-align: justify;
+  color: #1a1a1a;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+}
+
+.citation-highlight {
+  background: #f9a8d4;
+  padding: 0 0.12rem;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.citation-source {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+.bug-thumb-strip {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.bug-thumb-strip img {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border: 1px solid #999;
+  filter: grayscale(20%);
+}
+
+#dp-story-slide-3 {
+  width: 100%;
+}
+
+#dp-story-slide-3 .dp-terminal,
+#dp-story-slide-3 .typewriter-text {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #1a1a1a;
+}
+
+.dp-terminal {
+  min-height: 1.7em;
+  margin: 0.6rem 0;
+}
+
+.dp-terminal .blinking {
+  animation: terminal-blink 1.5s steps(1, end) infinite;
+}
+
+@keyframes terminal-blink {
+  0%, 49% {
+    opacity: 1;
   }
 
-  #boot-screen {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    color: #aaa;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
-    padding: 2rem;
-    z-index: 1000;
-    line-height: 1.8;
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.dp-develop-frame {
+  display: none;
+  width: 16.25rem;
+  max-width: 100%;
+  margin: 0.6rem auto 0.6rem 0;
+  background: #b3afaf;
+  border: 1px solid #999;
+  line-height: 0;
+}
+
+.dp-develop-frame.developing {
+  display: block;
+}
+
+.dp-develop-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dp-develop-frame.developing img {
+  animation: dp-develop 6.5s forwards;
+}
+
+@keyframes dp-develop {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    filter: contrast(0.45) grayscale(80%);
+    opacity: 0;
+    animation-timing-function: steps(1, end);
   }
 
-  .boot-line { opacity: 0; animation: bootappear 0.1s forwards; }
-  .boot-line:nth-child(1) { animation-delay: 0.2s; }
-  .boot-line:nth-child(2) { animation-delay: 0.6s; }
-  .boot-line:nth-child(3) { animation-delay: 1.0s; }
-  .boot-line:nth-child(4) { animation-delay: 1.4s; }
-  .boot-line:nth-child(5) { animation-delay: 1.8s; }
-  .boot-line:nth-child(6) { animation-delay: 2.2s; }
-  .boot-line:nth-child(7) { animation-delay: 2.6s; }
-  .boot-line:nth-child(8) { animation-delay: 3.0s; color: #fff; }
-
-  @keyframes bootappear { to { opacity: 1; } }
-
-  #boot-screen.fade-out { animation: bootfade 0.8s 0.2s forwards; }
-  @keyframes bootfade { to { opacity: 0; pointer-events: none; } }
-  #boot-screen.gone { display: none; }
-
-  #desktop { width: 100vw; height: 100vh; position: relative; opacity: 0; transition: opacity 0.8s ease 0.5s; }
-  #desktop.visible { opacity: 1; }
-
-  .icon {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    width: 80px;
-    text-align: center;
-    padding: 4px;
-    user-select: none;
+  5% {
+    clip-path: inset(0 0 87% 0);
+    filter: contrast(0.45) grayscale(80%);
+    opacity: 0.45;
+    animation-timing-function: steps(1, end);
   }
 
-  .icon:hover .icon-label { background: #a41a94; color: #fff; }
-
-  .icon-img {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 4px;
-    image-rendering: pixelated;
+  18% {
+    clip-path: inset(0 0 66% 0);
+    filter: contrast(0.5) grayscale(78%);
+    opacity: 0.45;
+    animation-timing-function: steps(1, end);
   }
 
-  .icon-folder { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='8' width='30' height='22' fill='%23f0c040' stroke='%23000' stroke-width='1'/%3E%3Crect x='1' y='5' width='12' height='5' fill='%23f0c040' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat; }
-  .icon-txt { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='1' width='20' height='28' fill='white' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='9' x2='21' y2='9' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='13' x2='21' y2='13' stroke='%23000' stroke-width='1'/%3E%3Cline x1='7' y1='17' x2='17' y2='17' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat; }
-  .icon-exe { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='4' width='28' height='24' fill='%23c0c0c0' stroke='%23000' stroke-width='1'/%3E%3Crect x='5' y='7' width='22' height='14' fill='%23000080'/%3E%3C/svg%3E") center/contain no-repeat; }
-  .icon-egg { background: url("images/BUG.png") center/contain no-repeat; }
-  .icon-label {
-    font-family: 'Courier New', monospace;
-    font-size: 0.62rem;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    padding: 1px 3px;
-    line-height: 1.3;
+  24% {
+    clip-path: inset(0 0 66% 0);
+    filter: contrast(0.9) grayscale(78%);
+    opacity: 0.8;
+    animation-timing-function: steps(1, end);
   }
 
-  .win98-window {
-    position: fixed;
-    display: none;
-    z-index: 100;
-    min-width: 300px;
-    max-width: 92vw;
-    max-height: 82vh;
+  27% {
+    clip-path: inset(0 0 66% 0);
+    filter: contrast(0.5) grayscale(78%);
+    opacity: 0.35;
+    animation-timing-function: steps(1, end);
   }
 
-  .win98-window.open { display: block; }
-  .win98-window .title-bar { cursor: move; user-select: none; }
-
-  .window-content {
-    background: #fff;
-    padding: 10px;
-    overflow-y: auto;
-    max-height: calc(82vh - 60px);
-    font-family: 'Courier Prime', monospace;
-    font-size: 0.78rem;
-    line-height: 1.8;
-    color: #000;
+  40% {
+    clip-path: inset(0 0 48% 0);
+    filter: contrast(0.55) grayscale(72%);
+    opacity: 0.7;
+    animation-timing-function: steps(1, end);
   }
 
-  .window-content p { margin-bottom: 0.7rem; }
-  .window-content em { color: #666; font-style: italic; }
-  .window-content h3 { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #000; margin: 0.8rem 0 0.5rem; padding-bottom: 0.2rem; }
-  .window-content audio { width: 100%; margin: 0.4rem 0; accent-color: #000080; }
-  .window-content img { width: 100%; max-width: 400px; display: block; margin: 0.6rem 0; filter: grayscale(20%); }
-  .img-caption { font-size: 0.58rem; color: #666; margin-bottom: 0.6rem; }
+  54% {
+    clip-path: inset(0 0 48% 0);
+    filter: contrast(0.55) grayscale(72%);
+    opacity: 0.7;
+    animation-timing-function: steps(1, end);
+  }
 
-  .nlp-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px dotted #ccc; font-size: 0.72rem; }
-  .nlp-term { min-width: 110px; color: #000080; }
-  .nlp-term-personal { display: none; color: #666; font-style: italic; }
-  .nlp-row:hover .nlp-term-text { display: none; }
-  .nlp-row:hover .nlp-term-personal { display: inline; }
-  .nlp-bar-outer { flex: 1; margin: 0 8px; background: #eee; height: 8px; border: 1px solid #999; }
-  .nlp-bar-inner { height: 100%; background: #000080; }
-  .nlp-row:hover .nlp-bar-inner { background: #000080; }
-  .nlp-count { color: #666; font-size: 0.65rem; min-width: 30px; text-align: right; }
-  .hover-hint { font-size: 0.58rem; color: #666; border-top: 1px solid #ccc; margin-top: 6px; padding-top: 5px; font-style: italic; }
+  59% {
+    clip-path: inset(0 0 27% 0);
+    filter: contrast(0.6) grayscale(66%);
+    opacity: 0.85;
+    animation-timing-function: steps(1, end);
+  }
 
-  .code-block { background: #000; color: #0f0; padding: 8px; font-size: 0.63rem; margin: 0.5rem 0; font-family: 'Courier New', monospace; line-height: 1.7; }
-  .code-comment { color: #555; }
+  70% {
+    clip-path: inset(0 0 27% 0);
+    filter: contrast(0.6) grayscale(66%);
+    opacity: 0.85;
+    animation-timing-function: steps(1, end);
+  }
 
-  #entry-window { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 150; width: 360px; }
+  76% {
+    clip-path: inset(0 0 9% 0);
+    filter: contrast(0.7) grayscale(58%);
+    opacity: 0.95;
+    animation-timing-function: steps(1, end);
+  }
 
-  #taskbar { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background: #c0c0c0; border-top: 2px solid #fff; display: flex; align-items: center; padding: 0 4px; gap: 4px; z-index: 200; box-shadow: inset 0 1px 0 #dfdfdf; }
-  #start-btn { font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: bold; padding: 2px 6px; height: 22px; cursor: pointer; }
-  .taskbar-time { margin-left: auto; font-family: 'Courier New', monospace; font-size: 0.65rem; padding: 0 8px; border: 1px solid #999; height: 22px; display: flex; align-items: center; box-shadow: inset 1px 1px #808080; }
-  .taskbar-btn { font-family: 'Courier New', monospace; font-size: 0.62rem; padding: 2px 5px; height: 22px; cursor: pointer; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-</style>
+  83% {
+    clip-path: inset(0 0 0 0);
+    filter: contrast(0.75) grayscale(52%);
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: contrast(1) grayscale(20%);
+    opacity: 1;
+  }
+}
+
+    @keyframes squiggly-ramp-in {
+      0% {
+        filter: none;
+      }
+
+      25% {
+        filter: url(#nlp-squiggly-ramp-1);
+      }
+
+      50% {
+        filter: url(#nlp-squiggly-ramp-2);
+      }
+
+      75% {
+        filter: url(#nlp-squiggly-ramp-3);
+      }
+
+      100% {
+        filter: url(#nlp-squiggly-0);
+      }
+    }
+
+    @keyframes squiggly-anim {
+      0% {
+        filter: url(#nlp-squiggly-0);
+      }
+
+      25% {
+        filter: url(#nlp-squiggly-1);
+      }
+
+      50% {
+        filter: url(#nlp-squiggly-2);
+      }
+
+      75% {
+        filter: url(#nlp-squiggly-3);
+      }
+
+      100% {
+        filter: url(#nlp-squiggly-4);
+      }
+    }
+    
+
+    #screen-frame.bw-anim::before {
+      animation-name: bw;
+      animation-duration: 1.5s;
+      animation-timing-function: ease;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes bw {
+      0% {
+        filter: saturate(0.6);
+      }
+      25% {
+        filter: saturate(0.6) grayscale(0.2);
+      }
+      50% {
+        filter: saturate(0.6) grayscale(0.5);
+      }
+      75% {
+        filter: saturate(0.6) grayscale(0.8);
+      }
+      100% {
+        filter: saturate(0.6) grayscale(1);
+      }
+    }
+
+
+
+    .nlp-bar-outer {
+      flex: 1;
+      margin: 0 0.5rem;
+      background: #eee;
+      height: 0.55rem;
+      border: 1px solid #999;
+    }
+
+    .nlp-bar-inner {
+      height: 100%;
+      background: #0101075f;
+    }
+
+    .nlp-row:hover .nlp-bar-inner {
+      background: linear-gradient(180deg, #0d3d08 0%, #135e0b97 40%, #2efa1f8b 60%, #0d3d08 100%);
+      mix-blend-mode: hard-light;
+      filter: saturate(1.5) drop-shadow(0 0 3px #25ba1aa0) drop-shadow(0 0 7px #1d9f148e);
+    }
+
+    .nlp-count {
+      color: #666666a1;
+      font-size: 0.8rem;
+      min-width: 2rem;
+      text-align: right;
+    }
+
+    #entry-window {
+      position: absolute;
+      left: calc(50% - 11.25rem);
+      top: calc(50% - 6.875rem);
+      z-index: 150;
+      width: 22.5rem;
+    }
+
+    #september-window .window-content {
+      min-height: 14rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .september-line {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    #cw-window {
+      position: absolute;
+      left: calc(50% - 11.875rem);
+      top: calc(50% - 6.25rem);
+      z-index: 400;
+      width: 23.75rem;
+    }
+
+    #cw-buttons {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      margin-top: 0.9rem;
+    }
+
+    #taskbar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2.25rem;
+      background: #c0c0c0;
+      border-top: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 0.25rem;
+      gap: 0.25rem;
+      z-index: 200;
+      box-shadow: inset 0 1px 0 #dfdfdf;
+    }
+
+    #start-btn {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      font-weight: bold;
+      padding: 0.15rem 0.5rem;
+      height: 1.75rem;
+      cursor: pointer;
+    }
+
+    .taskbar-time {
+      margin-left: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      padding: 0 0.5rem;
+      border: 1px solid #999;
+      height: 1.75rem;
+      display: flex;
+      align-items: center;
+      box-shadow: inset 1px 1px #808080;
+    }
+
+    .taskbar-btn {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      padding: 0.15rem 0.4rem;
+      height: 1.75rem;
+      cursor: pointer;
+      max-width: 9rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="boot-screen">
-  <div class="boot-line">UNTITLED_ARCHIVE.exe</div>
-  <div class="boot-line">Loading field materials................. OK</div>
-  <div class="boot-line">Loading audio files..................... OK</div>
-  <div class="boot-line">Initialising NLP corpus (100 abstracts). OK</div>
-  <div class="boot-line">Checking for parasites.................. OK</div>
-  <div class="boot-line">Checking for delusions.................. OK</div>
-  <div class="boot-line">Mounting research logs.................. OK</div>
-  <div class="boot-line">&gt; He asked me why I am interested in bed bugs. I told him I had them.</div>
+  <!-- Squiggly wobble for the NLP slide. Three things here are load-bearing
+       for performance, because feTurbulence is per-pixel Perlin noise and is
+       largely un-accelerated in WebKit (i.e. on the gallery Mac):
+
+         x/y/width/height  the default filter region is -10%/+120%, which
+                           inflates the filtered area by ~44%. The largest
+                           displacement below is 2.5px, so 1% of the slide is
+                           already more margin than the wobble can use.
+         numOctaves="1"    halves the turbulence cost. Loses the finest grain
+                           of the noise, which this effect never showed at
+                           2.5px of displacement anyway.
+         color-interpolation-filters="sRGB"
+                           skips SVG's default round trip through linearRGB —
+                           two full-surface conversions per pass, for a
+                           displacement map that doesn't care about
+                           colourimetry. It does shift the turbulence values
+                           slightly, so `scale` is the knob if the wobble now
+                           reads too strong.
+
+       These are applied to .story-slide-2 as a whole rather than to each
+       piece of text inside it, so a hover is one filter pass instead of
+       nineteen. -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <filter id="nlp-squiggly-0" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
+      </filter>
+      <filter id="nlp-squiggly-1" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="2" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" />
+      </filter>
+      <filter id="nlp-squiggly-2" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="3" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
+      </filter>
+      <filter id="nlp-squiggly-3" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="4" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" />
+      </filter>
+      <filter id="nlp-squiggly-4" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="5" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-1" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-2" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.7" />
+      </filter>
+      <filter id="nlp-squiggly-ramp-3" x="-1%" y="-1%" width="102%" height="102%" color-interpolation-filters="sRGB">
+        <feTurbulence baseFrequency="0.15" numOctaves="1" result="noise" seed="1" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.1" />
+      </filter>
+    </defs>
+  </svg>
+
+  <div id="boot-screen">
+    <div class="boot-line">UNTITLED_ARCHIVE.exe</div>
+    <div class="boot-line">Loading field materials................. OK</div>
+    <div class="boot-line">Loading audio files..................... OK</div>
+    <div class="boot-line">Initialising NLP corpus (100 abstracts). OK</div>
+    <div class="boot-line">Checking for parasites.................. OK</div>
+    <div class="boot-line">Checking for delusions.................. OK</div>
+    <div class="boot-line">Mounting research logs.................. OK</div>
+    <div class="boot-line">&gt; A cadaver lying at home, waiting to be found.</div>
+  </div>
+
+  <div id="screen-frame">
+    <div id="bug-canvas-holder"></div>
+    <div id="desktop">
+
+      <div class="window win98-window open" id="entry-window">
+        <div class="title-bar" onmousedown="dragStart(event,'entry-window')">
+          <div class="title-bar-text">Bugzzz-archive</div>
+          <div class="title-bar-controls">
+            <button aria-label="Close" onclick="closeWindow('entry-window')"></button>
+          </div>
+        </div>
+        <div class="window-content" style="text-align:center; padding:1.125rem;">
+          <p style="font-size:1.05rem; line-height:2.1;">As you are reading this, a cadaver is lying at home, waiting to
+            be found.</p>
+          <p style="font-size:0.8rem; color:#666; margin-top:0.625rem; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN
+          </p>
+        </div>
+      </div>
+
+      <div class="icon" style="top: 3.75rem; left:3.125rem;" ondblclick="openWindow('interviews-window')">
+        <div class="icon-img icon-folder"></div>
+        <div class="icon-label">INTERVIEWS</div>
+      </div>
+
+      <div class="icon" style="top: 11.25rem; left:3.125rem;" ondblclick="openWindow('nlp-window')">
+        <div class="icon-img icon-exe"></div>
+        <div class="icon-label">analysis.exe</div>
+      </div>
+
+      <div class="icon" style="top: 18.75rem; left:3.125rem;" ondblclick="openWindow('about-window')">
+        <div class="icon-img icon-txt"></div>
+        <div class="icon-label">README.txt</div>
+      </div>
+
+      <div class="icon" style="bottom: 3.125rem; right: 3.125rem;" ondblclick="openWindow('bin-window')">
+        <div class="icon-img icon-bin"></div>
+        <div class="icon-label">BIN</div>
+      </div>
+
+
+      <!-- KNOWLEDGE -->
+      <div class="window win98-window" id="brighton-window" style="top:3.75rem; left:7.5rem; width:30rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'brighton-window')">
+          <div class="title-bar-text">KNOWLEDGE</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('brighton-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('brighton-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div style="font-size:0.8rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
+            Read time: approx. 2-5 minutes.</div>
+          <h3>Field log</h3>
+          <p>Brighton, couple in their 20s – had bed bugs and believed they hadn't rid of them yet. Did not get pest
+            control before. This is their first appointment with Matthew – he immediately does heat treatment and
+            steaming in the flat. As he states that he "doesn't do inspections" and "if you got bed bugs, you know you
+            got it". But he later <span class="citation-highlight">retracts on that statement</span> as we <span class="citation-highlight">discuss delusional
+            clients.</span></p>
+            <img src="images/bright.jpg" style="filter: grayscale(0.6);" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">Steaming treatment</div>
+          <p>Matthew had been in pest control since he left school. His father worked in the same field. In show & tell day Matthew's father sent him to school with a dead bat. He was sent to the principal's office.
+             
+            <p>He says field
+            biologists ('pesties' he calls them) might be more keen to let me in for research. <span
+              class="citation-highlight">Cavemen got bed bugs from bats hundreds of thousands of years
+              ago,</span> he says.</p>
+          <p>The bedroom's window is double glazed, making it ideal for effectively
+            turning the room into an oven – the goal temperature is 70-80 degrees c for at least four hours. Matthew sets a reflective sheet for insulation
+            and blasts steam from a gas balloon from the bottom. He lets me check the room's temperature with an
+            infrared thermostat as it's rapidly rising. It's fun.</p>
+             <div class="scarab-rule"></div>
+          <p><span class="citation-highlight">The paranoia of infestations doesn't rub off on Matthew.</span> He doesn't wear the suit nor changes his clothes
+            when coming home. Just sits on his couch. He says that he only brought bed bugs home with him once, because
+            he was careless. He is very resilient in that sense. </p>
+           
+          <p><span class="citation-highlight">Council care homes and children's homes are vulnerable to
+            infestations.</span> Councils have tried to save on pest
+            control by prioritizing getting contractors to exterminate one type of pest over the other. But you can't
+            save on pest control.</p>
+             
+          <p>He tells me of an old lady who was feeding the foxes and another old lady who was council ordered to clear
+            up rat dropping from her house floor. When Matthew got there she had already removed several trash bags
+            worth of dry droppings on her own. The build up was 10-15 years of droppings – 
+            the council charged her with the money they might need for contractors for
+            treatment of the house but not for the help she needed. For
+            all Matthew knows, she is still in that house.
+
+            He made a throwaway comment, half joking of all the <span class="citation-highlight">crazy women</span> in his
+            field.</p>
+          <p>Wednesday's appointment in west London would be at an older lady's house. It would be a steaming treatment.
+            I am curious to see how her interaction with Matthew would go as <span class="citation-highlight">she fits
+            the DP patient profile</span> as well as belongs to a demographic that's more vulnerable to
+            infestations.</p>
+        </div>
+      </div>
+
+      <!-- WEST LONDON -->
+      <div class="window win98-window" id="westlondon-window" style="top:5rem; left:9.375rem; width:28.75rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'westlondon-window')">
+          <div class="title-bar-text">FLUFF</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('westlondon-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('westlondon-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div style="font-size:0.8rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
+            Read time: approx. 2-5 minutes.</div>
+          <h3>Field log</h3>
+          <p>West Kensington station is pretty. On the Underground I wonder if all
+            these people know they are in danger.
+          </p>
+          <p>The train is packed - I am looking at a woman in a fur coat, a child on his father's lap on the upholstered
+            seat. <span class="citation-highlight">Everything feels contaminated here.</span>
+          </p>
+          <div class="scarab-rule"></div>
+          <p>Matthew tells me he was cleaning pigeon shit Tuesday. He says the lady today is <span class="citation-highlight">a bit paranoid</span>. I ask if
+            she is being <a href="#" onclick="event.preventDefault(); openParanoid();">'rightfully paranoid?'</a> He says she is not the worst he'd seen. <span class="citation-highlight">Later, we find a bed bug in the
+            seam of her mattress.</span></p>
+
+          <img src="images/west.jpg" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">When I tell you I shrieked</div>
+            <p>Matthew presents me as his trainee.
+            She asks if the bugs can latch onto the cases of her medication. He says no but they can stick to books and
+            there are a lot of items around. He extracts something round and dark brown from the bed – apparently it's a
+            stale biscuit.
+            Steaming treatments by themselves are fairly quick – but depend on the clutter in the house.
+          </p>
+          <div class="scarab-rule"></div>
+          <p>He told me once about a man whose nephew, post mortum commissioned a bed bug extermination. Said he had a wonderful collection of books that sadly were full of them (I didn't know bed bugs latch on books I said. It was just that bad he replied).</p>
+          <p>Matthew says the <span class="citation-highlight">nastiest thing</span> is not the bed bugs – it's <span class="citation-highlight">going through
+            people's bedding.</span>
+            He shows me a fresh inky spot of bed bug feces on the mattress – it still smudges - <span
+              class="citation-highlight">they fed on her just hours before.</span>
+            </p>
+          <div
+            style="font-style: italic; line-height: 2.5; margin: 1rem 0; padding-left: 1rem; border-left: 2px solid #ccc;">
+            At the son's bedroom<br>
+            Is that —<br>
+            I point at a black spot at the seam of the mattress.<br>
+            No, that's <span class="citation-highlight">just fluff.</span>
+            I ask if any clients ever provide such evidence<br>
+            He says that yes, <span class="citation-highlight">the crazy people.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE ROAD [FLUID] -->
+      <div class="window win98-window" id="North London-window" style="top:6.25rem; left:11.25rem; width:28.75rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'North London-window')">
+          <div class="title-bar-text">FLUID</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('North London-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('North London-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <h3>Field log</h3>
+          <p
+            style="font-size:0.8rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
+            Content warning: this log contains descriptions of death and human decomposition. 
+            Reading time approx. 2-5 minutes.</p>
+          <p>I get to the address before Matthew – he tells me on the phone to enter through the side alley. </p>
+          <p>I am joining an <span class="citation-highlight">after death clean up</span> – where a person's <span class="citation-highlight">body</span> has been
+            <span class="citation-highlight">found</span> only after a while. <span class="citation-highlight">As you
+            decompose</span>, your body seeps down and <span class="citation-highlight">turns into black debris, embedded into the floorings and
+            furniture.</span></p>
+          <img src="images/northlondon.jpg" alt="" onerror="this.style.display='none'">
+           <div class="img-caption">The spot where the body was found - after clean up</div>
+            <p>The neighbor is the first to greet me. He is dumbfounded when I ask about the pest control people – I guess
+            <span class="citation-highlight">it would be an insult to be disposed of in the same manner as pests and
+            trash.</span></p>
+            <div class="scarab-rule"></div>
+          <p>Warren, the other person in that day says it is his first time on this kind of job. He is visibly shaken by
+            it. <span class="citation-highlight">The nature of the job is dismantling any piece of the house the body
+            had amalgamated with.</span> Then placing
+            them in bags. </p>
+            <img src="images/warren03.jpg" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">Warren dismantling a chair</div>
+          <p>As I am transcribing later – Warren says on the recording of the deceased's body lying there that his <span class="citation-highlight"><a href="#" onclick="event.preventDefault(); openFluidPoem();">'body fluid just gone through to heaven'</a></span> I am not sure why I think it's beautiful.</p>
+          <p>I ask how long has it been? Warren doesn't know how long it takes a body to do that. He was told it's been
+            roughly a week. Matthew told me it's been a couple months. It's March. Calendar has logs up to mid January.
+          </p>
+          <div class="scarab-rule"></div>
+          <p>There is something charming about the incongruity of the collections I find across
+            the house; a blender next to medical records, a couch manual, art equipment – but as a certain point the
+            state of clutter becomes too much. <span class="citation-highlight">I wonder how it might have felt for his
+            house to turn on him;</span> the
+            familiar books hindering movement; the medical equipment becoming an insult; the now vacant bedrooms
+            upstairs functioning as storage units.</p>
+          <p title="— Julia Armfield, Our Wives Under the Sea (2022)">Somewhere being a place you are left in</p>
+          <p>Matthew says most of these cases have carers, though they <span class="citation-highlight">'obviously don't do much'</span>. He says it happens
+            often in the UK. His longest case was 12 months. A 24 year old was his
+            youngest.</p>
+        </div>
+      </div>
+
+      <!-- FLUID micro-poem popup -->
+<div class="window win98-window" id="fluid-poem-window" style="top:7.5rem; left:11.25rem; width:25rem;">
+  <div class="title-bar" onmousedown="dragStart(event,'fluid-poem-window')">
+    <div class="title-bar-text">Warren interview</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize" onclick="minimizeWindow('fluid-poem-window')"></button>
+      <button aria-label="Close" onclick="closeWindow('fluid-poem-window')"></button>
+    </div>
+  </div>
+  <div class="window-content">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain;">
+    <h3>Field audio</h3>
+    <audio id="fluid-poem-audio" controls controlsList="nodownload noplaybackrate"><source src="audio/northlondon.mp3" type="audio/mpeg"></audio>
+    <div id="fluid-poem-text" class="typewriter-text"></div>
+  </div>
 </div>
 
-<div id="desktop">
+   <!-- Paranoid Lady audio pop-up -->
+<div class="window win98-window" id="paranoid-window" style="top:7.5rem; left:11.25rem; width:25rem;">
+  <div class="title-bar" onmousedown="dragStart(event,'paranoid-window')">
+    <div class="title-bar-text">A Lady</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize" onclick="minimizeWindow('paranoid-window')"></button>
+      <button aria-label="Close" onclick="closeWindow('paranoid-window')"></button>
+    </div>
+  </div>
+  <div class="window-content">
+    <img src="images/working.gif" alt="" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain;">
+    <h3>Field audio</h3>
+    <audio id="paranoid-audio" controls controlsList="nodownload noplaybackrate"><source src="audio/westlondon.mp3" type="audio/mpeg"></audio>
+  </div>
+</div>
 
-  <div class="window win98-window open" id="entry-window">
-    <div class="title-bar">
-      <div class="title-bar-text">untitled — micro archive</div>
-      <div class="title-bar-controls">
-        <button aria-label="Close" onclick="closeWindow('entry-window')"></button>
+   <!-- Content warning -->
+<div class="window win98-window" id="cw-window">
+  <div class="title-bar" onmousedown="dragStart(event,'cw-window')">
+    <div class="title-bar-text">CONTENT WARNING</div>
+    <div class="title-bar-controls">
+      <button aria-label="Close" onclick="declineContentWarning()"></button>
+    </div>
+  </div>
+  <div class="window-content">
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+       <img src="images/icons/warning2.png" alt="Warning" style="filter: saturate(0.5); width:5rem; height:auto; min-width:0; min-height:0; margin:0; border:none; flex-shrink:0;">
+      <p id="cw-text" style="margin:0;"></p>
+       
+    </div>
+    <div id="cw-buttons">
+      <button onclick="declineContentWarning()">Go back</button>
+      <button onclick="acceptContentWarning()">Continue</button>
+    </div>
+  </div>
+</div>
+
+      <!-- ANALYSIS.exe -->
+      <div class="window win98-window" id="nlp-window" style="top:5rem; left:8.75rem; width:26.25rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'nlp-window')">
+          <div class="title-bar-text">analysis.exe</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('nlp-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('nlp-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="story-viewport" id="story-viewport">
+
+            <div class="story-slide" data-story-slide>
+              <p><b>Delusory parasitosis (DP)</b>: a fixed, false belief that one is infested by parasites, insects, or other
+                organisms, held despite the absence of any medical or entomological evidence.</p>
+              <div class="scarab-rule"></div>
+              <p>Despite that, patients tend to do their own evidence gathering, providing <a href="#"
+            onclick="event.preventDefault(); openSpecimen(0);">insect-like specimen</a> such as skin particles, trapped fibers and the like to show pest control professionals, dermatologist, entomologists and others.
+              <p
+             
+                style="font-size:0.8rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">
+                List of DP patient characteristics, Hinkle (2000). The Lynch 1993 line in particular infuriated me on
+                behalf of an abstract patient.</p>
+              <div
+                style="font-style: italic; line-height: 2.2; margin: 0.5rem 0; padding-left: 1rem; border-left: 2px solid #ccc;">
+                Reject possibility of psychological or other explanations (Trabert 1995). "I'm not crazy." "I'm not
+                imagining this."<br>
+                Vehemence indicative of DP (Zanol et al. 1998).<br>
+                <h3>"Exceptional strength of conviction regarding infestation"</h3> (Lynch 1993) — almost diagnostic for DP (Webb
+                1993).
+              </div>
+
+            </div>
+
+            <div class="story-slide story-slide-2" data-story-slide>
+
+              <p>DP disproportionately affects women - so if you were to pull characteristics of DP patient demographics
+                you'd get 'female', 'elderly', 'isolated' and so on.</p>
+              <h3>Patient characteristics, pulled from 100 PubMed abstracts</h3>
+
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">women</span><span
+                    class="nlp-term-personal">you</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:100%"></div>
+                </div><span class="nlp-count">(13)</span>
+              </div>
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">female</span><span
+                    class="nlp-term-personal">your body</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:77%"></div>
+                </div><span class="nlp-count">(10)</span>
+              </div>
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">woman</span><span
+                    class="nlp-term-personal">you</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:69%"></div>
+                </div><span class="nlp-count">(9)</span>
+              </div>
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span
+                    class="nlp-term-personal">your age</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:62%"></div>
+                </div><span class="nlp-count">(8)</span>
+              </div>
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span
+                    class="nlp-term-personal">you</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:62%"></div>
+                </div><span class="nlp-count">(8)</span>
+              </div>
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span
+                    class="nlp-term-personal">your body</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:46%"></div>
+                </div><span class="nlp-count">(6)</span>
+              </div>
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span
+                    class="nlp-term-personal">distance</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:23%"></div>
+                </div><span class="nlp-count">(3)</span>
+              </div>
+              <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span
+                    class="nlp-term-personal">you, alone</span></span>
+                <div class="nlp-bar-outer">
+                  <div class="nlp-bar-inner" style="width:23%"></div>
+                </div><span class="nlp-count">(3)</span>
+              </div>
+            </div>
+
+            <div class="story-slide" data-story-slide id="dp-story-slide-3">
+              <div class="dp-terminal"><span id="dp-slide3-search"></span></div>
+              <div id="dp-slide3-text" class="typewriter-text"></div>
+                 <div class="dp-develop-frame" id="dp-slide3-frame">
+                <img src="images/scrch.png" alt="Scratching" onerror="this.style.display='none'">
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-nav">
+            <button id="story-prev" aria-label="Previous slide">&#9664;</button>
+            <span class="story-counter" id="story-counter"></span>
+            <button id="story-next" aria-label="Next slide">&#9654;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- README -->
+      <div class="window win98-window" id="about-window" style="top:7.5rem; left:10.625rem; width:25rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'about-window')">
+          <div class="title-bar-text">README.txt</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('about-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('about-window')"></button>
+          </div>
+        </div>
+        <div class="window-content"
+          style="font-family:'Courier New',monospace; font-size:0.95rem; background:#fbead339;">
+          <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Introduction</h4>
+              <div class="bug-thumb-strip">
+                <img src="images/buglife/cimex666.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain; display:inline-block;">
+               <img src="images/buglife/cimexil4.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain; display:inline-block;">
+               <img src="images/buglife/cimexil3000.jpg" alt="bug" onerror="this.style.display='none'" style="max-width:7.5rem; max-height:6rem; width:auto; height:auto; object-fit:contain; display:inline-block;">
+              </div>
+          <p><b>You are a researcher</b> investigating bed bug infestations and a condition known as <a href="#"
+            onclick="event.preventDefault(); openNLPStory(0);">Delusory Parasitosis</a>, conducting a series of shadowing interviews in pest control.</p>
+
+          <p><b>This is your desktop,</b> your archive of materials of your research and field work.</p>
+          
+           <div class="scarab-rule"></div> 
+          <p><h3>Instructions:</h3> <b>double-click</b> icons to open windows. They can be dragged around the screen, closed or minimized.<p>
+          </p> Looking at your field logs you might find a three act narrative:</p>
+
+          <p>
+            I. A young couple<br>
+            II. An older woman<br>
+            III. An after death clean
+          </p>
+
+          <p><b>Read-through time:</b> approx. 15-20 minutes [You don't have to go through it all though!]</p>
+
+          <p>Happy reading. don't scratch too hard.<p> 
+        </div>
+      </div>
+
+      <!-- Bed Bug List -->
+      <div class="window win98-window" id="facts-window" style="top:7.5rem; left:10.625rem; width:25rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'facts-window')">
+          <div class="title-bar-text">Facts.txt</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('facts-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('facts-window')"></button>
+          </div>
+        </div>
+        <div class="window-content"
+          style="font-family:'Courier New',monospace; font-size:0.95rem; background:#fff;">
+          <h3 style="font-family:'Old English Gothic Pixel',monospace; font-size:2rem; font-weight:50;">Fun Facts</h3>
+          <ul style="padding-left: 1.2em; margin: 0;">
+            <li>They travel well and often</li>
+            <li>They spread through public transport</li>
+            <li>A few years ago, bed bugs traveled on the Eurostar from Paris to London</li>
+            <li>Waves of infestations happen in summer when people travel</li>
+            <li>They are smart</li>
+            <li>Their bites tend to cluster on one spot – sometimes come in threes or more but they won't necessarily follow
+            this pattern – they can be extremely cautious and taste you on one spot.</li>
+            <li>They don't operate as a colony or a swarm.</li>
+            <li>If there are a lot of them, it's just because.</li>
+            <li>Their eggs are tiny like specks of dust and will latch onto your clothes easily</li>
+            <li>In a lab environment, 50 degrees c for an hour should kill them</li>
+            <li>Having bed bugs isn't a sign of bad hygiene – just bad luck.</li>
+            <li>They develop resistance to pesticides.</li>
+            <li>Bed bug spray must touch them to kill them</li>
+            <li>They are attracted to humidity and darkness</li>
+          </ul>
+
+          <div class="field-row-stacked" style="width: 14rem">
+            <label for="text20">Additional notes</label>
+            <textarea id="text20" rows="8"></textarea>
+            <button id="add-btn">add</button>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BODYMIND -->
+      <div class="window win98-window" id="morgellons-window" style="top:7.5rem; left:13.125rem; width:30rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'morgellons-window')">
+          <div class="title-bar-text">BODYMIND</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('morgellons-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('morgellons-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <h3>Field log</h3>
+          
+
+          <p>I'm at the anthropology department. A lecturer is running me through interview methodologies - smile and nod - to avoid corrupting your audio. Get your foot at the door with small talk and so on.</p>
+          <p>I'm telling him about my research when a TA drops by, 'I can already feel them crawling' she comments. It's such a simple way to express empathy I think.</p>
+          <p>He tells me about Morgellons disease. Parasitosis is a clinical diagnosis. Morgellons is largely self-diagnosed but falls under DP technically.  It's a twisted, oddly specific symptomatic form of patient agency.</p> 
+          <p>I would like to note that either can be caused by an array of other conditions as a complication. If your body is sick so is your mind and vice versa.</p>
+          <p>I wonder why I'm seeking out the bed bugs. Do I need to pursue sickness for self worth? Am I searching for sickness? Am I sick? Am I at this point masquerading illness?</p>
+
+        </div>
+      </div>
+
+      <!-- September -->
+      <div class="window win98-window" id="september-window" style="top:8.75rem; left:15rem; width:30rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'september-window')">
+          <div class="title-bar-text">September '25</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('september-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('september-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <p class="september-line">I had bed bugs.</p>
+        </div>
+      </div>
+
+      <!-- Extermination -->
+      <div class="window win98-window" id="extermination-window" style="top:10rem; left:16.875rem; width:30rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'extermination-window')">
+          <div class="title-bar-text">Eggsterminate</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('extermination-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('extermination-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Hortus Sanititis</h4>
+
+          <img src="images/buglife/hs.jpg" style="filter: opacity(0.8);" alt="" onerror="this.style.display='none'">
+          <div class="img-caption">They've been around for a while</div>
+        </div>
+      </div>
+
+      <!-- House -->
+      <div class="window win98-window" id="house-window" style="top:11.25rem; left:18.75rem; width:30rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'house-window')">
+          <div class="title-bar-text">HOUSE</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('house-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('house-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+            <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">House Pics I've Taken</h4>
+          <p>[That I probably shouldn't have]</p>
+          <div class="carousel-viewport">
+            <img id="house-carousel-img" src="" alt="" onerror="this.style.display='none'">
+          </div>
+          <div class="img-caption" id="house-carousel-caption"></div>
+          <div class="carousel-nav">
+            <button id="house-prev" aria-label="Previous image">&#9664;</button>
+            <button id="house-next" aria-label="Next image">&#9654;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPECIMEN -->
+      <div class="window win98-window" id="img-window" style="top:12.5rem; left:20.625rem; width:30rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'img-window')">
+          <div class="title-bar-text">SPECIMEN</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('img-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('img-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="carousel-viewport">
+            <img id="bug-carousel-img" src="" alt="" onerror="this.style.display='none'">
+          </div>
+          <div class="img-caption" id="bug-carousel-caption"></div>
+          <div class="carousel-nav">
+            <button id="bug-prev" aria-label="Previous image">&#9664;</button>
+            <button id="bug-next" aria-label="Next image">&#9654;</button>
+
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Acknowledgements -->
+      <div class="window win98-window" id="credits-window" style="top:6.25rem; left:11.25rem; width:28.75rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'credits-window')">
+          <div class="title-bar-text">Credits</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('credits-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('credits-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+        <h4 style="font-family:'Old English Gothic Pixel',monospace; font-size:2.5rem; font-weight:100;">Acknowledgements</h4>  
+          <p>Thank you Matthew Blackwell, Warren King and Project Multipest for sharing your insights from work in pest
+            control. Thank you Ricardo Leizola for consultation regarding interview and documentation methodologies as
+            well as interesting conceptual links. Thank you Millicent Gunn, Louise Rouse, Jeremy Wenger and Daniel Berio - for
+            consultation regarding curation, adaptation to a gallery setting, interactive story telling and UX concerns
+           </p>
+          <div class="scarab-rule"></div>
+          <p>Author: Michaella Miller</p>
+
+          <p>MA Computational Arts<br>
+          Goldsmiths, University of London, 2026</p>
+         
+          <h3>Images</h3>
+          <p>Wellcome Library, London (1499) Hortus Sanitatis: bed bugs, delousing. Wikimedia Commons. Available at: https://commons.wikimedia.org/wiki/File:Hortus_Sanitatis;_ bed_bugs,_delousing._Wellcome_M0011711.jpg (Accessed: April 10th 2026). License: CC BY 4.0.</p>
+        </div>
+      </div>
+
+
+      <!-- INTERVIEWS -->
+      <div class="window win98-window" id="interviews-window" style="top:6.25rem; left:12.5rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'interviews-window')">
+          <div class="title-bar-text">INTERVIEWS</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('interviews-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('interviews-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="icon-grid">
+            <div class="icon static-icon" ondblclick="openWindow('brighton-window')">
+              <div class="icon-img icon-txt"></div>
+              <div class="icon-label">KNOWLEDGE</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('westlondon-window')">
+              <div class="icon-img icon-txt"></div>
+              <div class="icon-label">FLUFF</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('North London-window')">
+              <div class="icon-img icon-txt"></div>
+              <div class="icon-label">FLUID</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('interviews-images-window')">
+              <div class="icon-img icon-folder"></div>
+              <div class="icon-label">IMAGES</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('interviews-notes-window')">
+              <div class="icon-img icon-folder"></div>
+              <div class="icon-label">NOTES</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERVIEWS: IMAGES -->
+      <div class="window win98-window" id="interviews-images-window" style="top:8.125rem; left:15rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'interviews-images-window')">
+          <div class="title-bar-text">IMAGES</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('interviews-images-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('interviews-images-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="icon-grid">
+            <div class="icon static-icon" ondblclick="openWindow('img-window')">
+              <div class="icon-img icon-egg"></div>
+              <div class="icon-label">specimen</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('house-window')">
+              <div class="icon-img icon-house"></div>
+              <div class="icon-label">house</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERVIEWS: NOTES -->
+      <div class="window win98-window" id="interviews-notes-window" style="top:7.1875rem; left:14.375rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'interviews-notes-window')">
+          <div class="title-bar-text">NOTES</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('interviews-notes-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('interviews-notes-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="icon-grid">
+            <div class="icon static-icon" ondblclick="openWindow('morgellons-window')">
+              <div class="icon-img icon-body"></div>
+              <div class="icon-label">BODYMIND</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('facts-window')">
+              <div class="icon-img icon-txt"></div>
+              <div class="icon-label">facts.txt</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('extermination-window')">
+              <div class="icon-img icon-kill"></div>
+              <div class="icon-label">hortus S</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- BIN -->
+      <div class="window win98-window" id="bin-window" style="top:8.125rem; left:15rem;">
+        <div class="title-bar" onmousedown="dragStart(event,'bin-window')">
+          <div class="title-bar-text">BIN</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" onclick="minimizeWindow('bin-window')"></button>
+            <button aria-label="Close" onclick="closeWindow('bin-window')"></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="icon-grid">
+             <div class="icon static-icon" ondblclick="openWindow('credits-window')">
+              <div class="icon-img icon-txt"></div>
+              <div class="icon-label">Credits</div>
+            </div>
+            <div class="icon static-icon" ondblclick="openWindow('september-window')">
+              <div class="icon-img icon-bed"></div>
+              <div class="icon-label">September</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="window-content" style="text-align:center; padding:18px;">
-      <p style="font-size:0.95rem; line-height:2.1;">He asked me why I am interested in bed bugs.<br><em>I told him I had them.</em></p>
-      <p style="font-size:0.6rem; color:#666; margin-top:10px; letter-spacing:0.12em;">DOUBLE-CLICK AN ICON TO BEGIN</p>
-    </div>
+  </div>
+  <div id="taskbar">
+    <button class="button" id="start-btn" onclick="resetGalleryToIdle()"
+      title="Reset the gallery">&#x229E; Start</button>
+    <div id="taskbar-buttons" style="display:flex; gap:0.25rem;"></div>
+    <div class="taskbar-time" id="clock">00:00</div>
+    <button class="button" id="fullscreen-btn" onclick="fullScreen()"
+      title="Toggle fullscreen (s+i+c+k)">&#x26F6;</button>
   </div>
 
-  <div class="icon" style="top:40px; left:30px;" ondblclick="openWindow('brighton-window')">
-    <div class="icon-img icon-folder"></div>
-    <div class="icon-label">abundance of knowledge</div>
-  </div>
+  <script>
+    const IDLE_TIMEOUT_MS = 3 * 60 * 1000;
 
-  <div class="icon" style="top:150px; left:30px;" ondblclick="openWindow('westlondon-window')">
-    <div class="icon-img icon-folder"></div>
-    <div class="icon-label">just fluff</div>
-  </div>
+    // current value of 1rem in px — the single UI scale set by the
+    // clamp() on `html` in the stylesheet. Read live so it stays correct
+    // when the window is moved to a different-sized display.
+    const remPx = () => parseFloat(getComputedStyle(document.documentElement).fontSize);
 
-  <div class="icon" style="top:260px; left:30px;" ondblclick="openWindow('North London-window')">
-    <div class="icon-img icon-folder"></div>
-    <div class="icon-label">fluid gone Through to Heaven</div>
-  </div>
+    const bootScreen = document.getElementById('boot-screen');
+    const desktop = document.getElementById('desktop');
+    const frame = document.getElementById('screen-frame');
 
-  <div class="icon" style="top:370px; left:30px;" ondblclick="openWindow('nlp-window')">
-    <div class="icon-img icon-exe"></div>
-    <div class="icon-label">dp_analysis.exe</div>
-  </div>
+    // UI click sound.
+    //
+    // Web Audio is the fast path: the mp3 is decoded once into an
+    // AudioBuffer and each click fires a throwaway BufferSource, which
+    // starts within a buffer quantum. HTMLAudioElement.play() has to spin up
+    // the element's own pipeline and seek back to 0, and on macOS that alone
+    // is tens of milliseconds of audible lag.
+    //
+    // The fallback matters: decoding needs fetch(), which Chrome blocks on
+    // file:// URLs. Opened straight off disk the piece silently keeps the old
+    // element pool, so serve it over the local server to get the low-latency
+    // path.
+    const CLICK_VOLUME = 0.5;
+    const CLICK_POOL_SIZE = 4;
 
-  <div class="icon" style="top:480px; left:30px;" ondblclick="openWindow('about-window')">
-    <div class="icon-img icon-txt"></div>
-    <div class="icon-label">README.txt</div>
-  </div>
+    let audioCtx = null;
+    let clickGain = null;
+    let clickBuffer = null;
+    let clickElements = null;
+    let clickElementIndex = 0;
 
-  <div class="icon" style="top:440px; right:80px;" ondblclick="openWindow('facts-window')">
-    <div class="icon-img icon-txt"></div>
-    <div class="icon-label">facts.txt</div>
-  </div>
+    function clickElementPool() {
+      if (!clickElements) {
+        clickElements = Array.from({ length: CLICK_POOL_SIZE }, () => {
+          const a = new Audio('audio/click.mp3');
+          a.preload = 'auto';
+          a.volume = CLICK_VOLUME;
+          return a;
+        });
+      }
+      return clickElements;
+    }
 
+    function primeClickSound() {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) { clickElementPool(); return; }
+      // An AudioContext may only be created suspended before a gesture, but
+      // decoding into a suspended context is fine.
+      audioCtx = new AC();
+      clickGain = audioCtx.createGain();
+      clickGain.gain.value = CLICK_VOLUME;
+      clickGain.connect(audioCtx.destination);
 
+      fetch('audio/click.mp3')
+        .then(r => r.arrayBuffer())
+        .then(b => audioCtx.decodeAudioData(b))
+        .then(buf => { clickBuffer = buf; })
+        .catch(() => { clickElementPool(); });
+    }
+    primeClickSound();
 
-  <!-- BRIGHTON -->
-  <div class="window win98-window" id="brighton-window" style="top:60px; left:120px; width:480px;">
-    <div class="title-bar" onmousedown="dragStart(event,'brighton-window')">
-      <div class="title-bar-text">I. Brighton — March 2026</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" onclick="closeWindow('brighton-window')"></button>
-        <button aria-label="Close" onclick="closeWindow('brighton-window')"></button>
-      </div>
-    </div>
-    <div class="window-content">
-  <h3>Field log</h3>
-      <p>Brighton, couple in their 20s – had bed bugs and believe they haven't rid of them yet. Did not get pest control before. This is their first appointment with Matthew – he immediately does heat treatment and steaming in the flat. As he states that he "doesn't do inspections" and "if you got bed bugs, you know you got it". But he later retracts on that statement as we discuss delusional clients.</p>
-      <p>Matthew had been in pest control since he left school. His father worked in the same field. He says field biologists ('pesties' he calls them) might be more kin to let me in for research. Apparently cavemen got bed bugs from bats hundreds of millions years ago.</p>
-      <p>The bedroom's window is double glazed, making it ideal for effectively turning the room into an oven – the goal temperature is 70-80 degrees c for at least four hours. Matthew sets a reflective sheet for insulation and blasts steam from a gas balloon from the bottom. He lets me check the room's temperature with an infrared thermostat as it's rapidly rising. It's fun.</p>
-      <p>The paranoia of infestations doesn't rub off on Matthew. He doesn't wear the suit nor changes his clothes when coming home. Just sits on his couch. He says that he only brought bed bugs home with him once, because he was careless. He is very resilient in that sense. </p>
-      <p>Council care homes and children's homes are vulnerable to infestations. Councils have tried to save on pest control by prioritizing getting contractors to exterminate one type of pest over the other. But you can't save on pest control.</p>
-      <p>He tells me of an old lady who was feeding the foxes and another old lady who was council ordered to clear up rat dropping from her house floor. When Matthew got there she had already removed several trash bags worth of dry droppings on her own. The build up was 10-15 years of droppings – the council charged her with the money they might need for contractors for treatment of the house but not for the help she needed. For all Matthew knows, she is still in that house. 
+    // Only things that actually do something get a click. Desktop icons are
+    // `ondblclick`, but they read as clickable so they count. Title bars are
+    // deliberately absent — a drag is one long mousedown, not a click — while
+    // the close/minimise buttons inside them match on `button`.
+    const CLICKABLE_SELECTOR = 'button, a[href], input, select, textarea, label, summary, .icon, [onclick]';
 
-He made a throwaway comment, half joking of all the crazy women in his field.</p>
-      <p>Wednesday's appointment in west London would be at an older lady's house. It would be a steaming treatment. I am curious to see how her interaction with Matthew would go as she fits the DP patient profile as well as belongs to a demographic that's more vulnerable to infestations.</p>
-      <img src="images/brighton.jpg" alt="" onerror="this.style.display='none'">
-      <div class="img-caption">Brighton, March 2026</div>
-    </div>
-  </div>
+    function clickSoundTarget(e) {
+      if (!bootScreen.classList.contains('gone')) return false;
+      const target = e.target;
+      return target instanceof Element && !!target.closest(CLICKABLE_SELECTOR);
+    }
 
-  <!-- WEST LONDON -->
-  <div class="window win98-window" id="westlondon-window" style="top:80px; left:150px; width:460px;">
-    <div class="title-bar" onmousedown="dragStart(event,'westlondon-window')">
-      <div class="title-bar-text">II. West London — March 2026</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" onclick="closeWindow('westlondon-window')"></button>
-        <button aria-label="Close" onclick="closeWindow('westlondon-window')"></button>
-      </div>
-    </div>
-    <div class="window-content">
-      <h3>Field log</h3>
-      <p>West Kensington station is pretty. At the underground I wonder if all these people know they are in danger. </p>
-      <p>The train is packed - I am looking at a woman in a fur coat, a child on his father's lap on the upholstered seat. Everything feels contaminated here.
-</p>
-      <p>Matthew tells me he was cleaning pigeon shit Tuesday. He says the lady today is a bit paranoid. I ask if she is being rightfully paranoid? He says she is not the worst he'd seen. Later, we find a bed bug in the seam of her mattress.  
-Matthew presents me as his trainee. 
-She asks if the bugs can latch onto the cases of her medication. He says no but they can stick to books and there are a lot of items around. He extracts something round and dark brown from the bed – apparently it's a stale biscuit.
-Steaming treatments by themselves are fairly quick – but depend on the clutter in the house.
-</p>
-      <p>Matthew says the nastiest thing is not the bed bugs – it's going through people's bedding. 
-He shows me a fresh inky spot of bed bug feces on the mattress – it still smudges - they fed on her just hours before. 
-</em></p>
-      <div style="font-style: italic; line-height: 2.5; margin: 1rem 0; padding-left: 1rem; border-left: 2px solid #ccc;">
-       At the son's bedroom<br>
-       Is that —<br>
-       I point at a black spot at the seam of the mattress.<br>
-       No, that's just fluff.<br>
-      I ask if any clients ever provide such evidence<br>
-      He says that yes, the crazy people.
-</div>
+    function playClickSound(e) {
+      if (!clickSoundTarget(e)) return;
+      if (clickBuffer) {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const src = audioCtx.createBufferSource();
+        src.buffer = clickBuffer;
+        src.connect(clickGain);
+        src.start();
+        return;
+      }
+      const pool = clickElementPool();
+      const a = pool[clickElementIndex];
+      clickElementIndex = (clickElementIndex + 1) % pool.length;
+      a.currentTime = 0;
+      a.play().catch(() => {});
+    }
 
-      <img src="images/westlondon.jpg" alt="" onerror="this.style.display='none'">
-      <div class="img-caption">West London, March 2026</div>
-      <h3>Field audio</h3>
-      <audio controls><source src="audio/westlondon.MP3" type="audio/mpeg"></audio>
-    </div>
-  </div>
+    document.addEventListener('mousedown', playClickSound, true);
 
-  <!-- THE ROAD -->
-  <div class="window win98-window" id="North London-window" style="top:100px; left:180px; width:460px;">
-    <div class="title-bar" onmousedown="dragStart(event,'North London-window')">
-      <div class="title-bar-text">North London — 18 March 2026</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" onclick="closeWindow('North London-window')"></button>
-        <button aria-label="Close" onclick="closeWindow('North London-window')"></button>
-      </div>
-    </div>
-    <div class="window-content">
-      <h3>Field log</h3>
-      <p style="font-size:0.65rem; color:#666; font-style:italic; border-bottom: 1px solid #ccc; padding-bottom:0.5rem; margin-bottom:0.8rem;">Content warning: this log contains descriptions of death and human decomposition.</p>
-      <p>I get to the address before Matthew – he tells me on the phone to enter through the side alley </p>
-      <p>I am joining an after death clean up – where a person's body has been found only after a while. As you decompose, your body seeps down and becomes this black debris, embedded into the floorings and furniture.</p>
-      <p>The neighbor is the first to greet me. He is dumbfounded when I ask about the pest control people – I guess it would be an insult to be disposed of in the same manner as pests and trash.</p>
-      <p>Warren, the other person in that day says it is his first time on this kind of job. He is visibly shaken by it. The nature of the job is dismantling any piece of the house the body had amalgamated with. Then placing them in bags.  </p>
-      <p>As I am transcribing later – Warren says on the recording of the deceased's body lying there that his 'body fluid just gone through to heaven'. I am not sure why I think it's beautiful.</p>
-      <p>I ask how long has it been? Warren doesn't know how long it takes a body to do that. He was told it's been roughly a week. Matthew told me it's been a couple months. It's March. Calendar has logs up to mid January.</p>
-      <p>I think of the uncanny. There is something charming about the incongruity of the collections I find across the house; a blender next to medical records, a couch manual, art equipment – but as a certain point the state of clutter becomes too much. I wonder how it might have felt for his house to turn on him; the familiar books hindering movement; the medical equipment becoming an insult; the now vacant bedrooms upstairs functioning as storage units.</p>
-      <p title="— Julia Armfield, Our Wives Under the Sea (2022)">Somewhere being a place you are left in</p>
-      <p>Matthew says most of these cases have carers, though they 'obviously don't do much'. He says it happens often in the UK. His longest case was 12 months. A 24 year old was his youngest.</p>
-      <img src="images/northlondon.jpg" alt="" onerror="this.style.display='none'">
-      <div class="img-caption">North London, March 2026</div>
-      <h3>Field audio</h3>
-      <audio controls><source src="audio/northlondon.MP3" type="audio/mpeg"></audio>
-    </div>
-  </div>
+    document.querySelectorAll('.nlp-row').forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        frame.classList.add('nlp-hovering');
+        window.setBugSwarmBoost && window.setBugSwarmBoost(true);
+      });
+      row.addEventListener('mouseleave', () => {
+        frame.classList.remove('nlp-hovering');
+        window.setBugSwarmBoost && window.setBugSwarmBoost(false);
+      });
+    });
 
-  <!-- NLP -->
-  <div class="window win98-window" id="nlp-window" style="top:80px; left:140px; width:420px;">
-    <div class="title-bar" onmousedown="dragStart(event,'nlp-window')">
-      <div class="title-bar-text">dp_analysis.exe</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" onclick="closeWindow('nlp-window')"></button>
-        <button aria-label="Close" onclick="closeWindow('nlp-window')"></button>
-      </div>
-    </div>
-    <div class="window-content">
-      <h3>100 PubMed abstracts — delusory parasitosis</h3>
-      <p style="font-size:0.68rem; color:#555;">131/1970 sentences: demographic + diagnostic co-occurrence (6.6%)<br>Hover over terms to translate.</p>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">women</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:100%"></div></div><span class="nlp-count">(13)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">female</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:77%"></div></div><span class="nlp-count">(10)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">woman</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:69%"></div></div><span class="nlp-count">(9)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">elderly</span><span class="nlp-term-personal">your age</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">men</span><span class="nlp-term-personal">you</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:62%"></div></div><span class="nlp-count">(8)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">male</span><span class="nlp-term-personal">your body</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:46%"></div></div><span class="nlp-count">(6)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">geriatric</span><span class="nlp-term-personal">clinical distance</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
-      <div class="nlp-row"><span class="nlp-term"><span class="nlp-term-text">isolation</span><span class="nlp-term-personal">you, alone</span></span><div class="nlp-bar-outer"><div class="nlp-bar-inner" style="width:23%"></div></div><span class="nlp-count">(3)</span></div>
-      <div class="hover-hint">correlation ≠ causation.</div>
-    </div>
-  </div>
+    function playBootSequence() {
+      bootScreen.classList.remove('fade-out', 'gone');
+      desktop.classList.remove('visible');
+      const bootLines = bootScreen.querySelectorAll('.boot-line');
+      bootLines.forEach(line => { line.style.animation = 'none'; });
+      void bootScreen.offsetWidth;
+      bootLines.forEach(line => { line.style.animation = ''; });
 
-  <!-- README -->
-  <div class="window win98-window" id="about-window" style="top:120px; left:170px; width:400px;">
-    <div class="title-bar" onmousedown="dragStart(event,'about-window')">
-      <div class="title-bar-text">README.txt — Notepad</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" onclick="closeWindow('about-window')"></button>
-        <button aria-label="Close" onclick="closeWindow('about-window')"></button>
-      </div>
-    </div>
-    <div class="window-content" style="font-family:'Courier New',monospace; font-size:0.72rem; white-space:pre-wrap; background:#fff;">[ untitled ] — micro archive
-You are a researcher investigating bed bug infestations and a condition known as Delusory Parasitosis – when you are convinced you have a parasite in you body but cannot provide empirical evidence of it. Its symptoms such as biting and crawling sensations intersect with symptoms to an array of other conditions. 
+      setTimeout(() => {
+        bootScreen.classList.add('fade-out');
+        desktop.classList.add('visible');
+        setTimeout(() => bootScreen.classList.add('gone'), 1200);
+      }, 4200);
+    }
 
+    playBootSequence();
 
-You sent a mass email to local pest control services requesting a shadowing interview: and have attended three appointments over the course of March 2026. They produced mainly audio recordings and
-written logs.
- Looking at your materials you might find 
+    document.querySelector('#add-btn').onclick = function () {
+      const textarea = document.getElementById('text20');
+      const text = textarea.value.trim();
+      if (!text) return;
+      const content = document.querySelector('#facts-window .window-content');
+      const newLine = document.createElement('div');
+      newLine.textContent = text;
+      content.insertBefore(newLine, content.querySelector('.field-row-stacked'));
+      textarea.value = '';
+    };
 
-a three act narrative:
+    const houseImages = [
+      { src: 'images/house/censored_censored_bedsense.jpg', caption: 'A hospital like bed on the ground floor. Tissues and some sort of antiseptic by the bedside.' },
+      { src: 'images/house/censored_censored_dishezzsense.jpg', caption: 'The calendar tracks incontinence symptoms up to mid January, then stops.' },
+      { src: 'images/house/censored_censored_stoves.jpg', caption: 'Grime on gas pots and pans.' },
+      { src: 'images/house/magicfreezetoo.png', caption: 'Freezer is packed. Warren picked up on that at some point. Said they would need to clear that as well' }
+    ];
+    let houseIndex = 0;
 
-  I.   A young couple 
-  II.  An older woman 
-  III. An after death clean 
+    function renderHouseCarousel() {
+      const img = document.getElementById('house-carousel-img');
+      const caption = document.getElementById('house-carousel-caption');
+      img.style.display = '';
+      img.src = houseImages[houseIndex].src;
+      caption.textContent = houseImages[houseIndex].caption;
+    }
 
-NLP prototype: 100 PubMed abstracts on
-delusory parasitosis, searched for demographic
-language clustering with diagnostic terminology.
+    document.getElementById('house-prev').onclick = function () {
+      houseIndex = (houseIndex - 1 + houseImages.length) % houseImages.length;
+      renderHouseCarousel();
+    };
+    document.getElementById('house-next').onclick = function () {
+      houseIndex = (houseIndex + 1) % houseImages.length;
+      renderHouseCarousel();
+    };
+    renderHouseCarousel();
 
-Github: https://github.com/Eilonvir/Bed-Bug-Archive/tree/main
+    function renderBugCarousel() {
+      const img = document.getElementById('bug-carousel-img');
+      const caption = document.getElementById('bug-carousel-caption');
+      img.style.display = '';
+      img.src = bugImages[bugIndex].src;
+      caption.textContent = bugImages[bugIndex].caption;
+    }
+    const bugImages = [
+      { src: 'images/buglife/bedbug1.png', caption: 'Bug.' },
+      { src: 'images/buglife/bugparts.jpg', caption: 'Bug parts.' },
+      { src: 'images/buglife/bwdith-13.jpg', caption: 'Bug?.' },
+      { src: 'images/buglife/bwdith-7.jpg', caption: 'A bug.' },
+      { src: 'images/buglife/squash.png', caption: 'The bug.' },
+      { src: 'images/buglife/cimexil9.jpeg', caption: 'Bug.' },
+      { src: 'images/buglife/shoe.png', caption: 'Bug?' },
+    ];
+    let bugIndex = 0;
 
+    document.getElementById('bug-prev').onclick = function () {
+      bugIndex = (bugIndex - 1 + bugImages.length) % bugImages.length;
+      renderBugCarousel();
+    };
+    document.getElementById('bug-next').onclick = function () {
+      bugIndex = (bugIndex + 1) % bugImages.length;
+      renderBugCarousel();
+    };
+    renderBugCarousel();
 
-Author: Michaella Miller
+    const storySlides = document.querySelectorAll('#story-viewport .story-slide');
+    let storyIndex = 0;
 
-MA Computational Arts
-Goldsmiths, University of London, 2026
-</div>
-  </div>
+    const dpSlide3SearchText = "Looking for bugs....";
+    const dpSlide3Text = "I'm searching my mattress,^ almost absentmindedly~ as I am reading another article about parasitosis.~ I can't help but scratch.";
+    const DP_SLIDE3_HOLD_MS = 2500;
+    const DP_SLIDE3_DEVELOP_MS = 6500;
+    const DP_SLIDE3_BLINK_STOP_LEAD_MS = 1500;
+    let dpSlide3Started = false;
 
-<!-- Bed Bug List -->
-  <div class="window win98-window" id="facts-window" style="top:120px; left:170px; width:400px;">
-    <div class="title-bar" onmousedown="dragStart(event,'facts-window')">
-      <div class="title-bar-text">Facts.txt — Notepad</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" onclick="closeWindow('facts-window')"></button>
-        <button aria-label="Close" onclick="closeWindow('facts-window')"></button>
-      </div>
-    </div>
-    <div class="window-content" style="font-family:'Courier New',monospace; font-size:0.72rem; white-space:pre-wrap; background:#fff;"><h3>Everything I can list about bed bugs off the top of my head</h3>
-They travel well and often
-They spread through public transport
-A few years ago, bed bugs traveled on the Eurostar from Paris to London
-Waves of infestations happen in summer when people travel
-They are smart
-Their bites tend to cluster on one spot – sometimes come in threes or more but they won't necessarily follow this pattern – they can be extremely cautious and taste you on one spot.
-They don't operate as a colony or a swarm. 
-If there are a lot of them, it's just because.
-Their eggs are tiny like specks of dust and will latch onto your clothes easily
-In a lab environment, 50 degrees c for an hour should kill them
+    function startDpSlide3Sequence() {
+      if (dpSlide3Started) return;
+      dpSlide3Started = true;
 
-Having bed bugs isn't a sign of bad hygiene – just bad luck.
-They develop resistance to pesticides. 
-Bed bug spray must touch them to kill them
-They are attracted to humidity and darkness
+      const searchEl = document.getElementById('dp-slide3-search');
+      const frameEl = document.getElementById('dp-slide3-frame');
+      const imgEl = frameEl.querySelector('img');
+      const textEl = document.getElementById('dp-slide3-text');
 
-<div class="field-row-stacked" style="width: 200px">
-  <label for="text20">Additional notes</label>
-  <textarea id="text20" rows="8"></textarea>
-  <button id="add-btn">add</button>
-  
-</div>
-</div>
- 
-</div>
+      typeText(searchEl, dpSlide3SearchText, 0, () => {
+        searchEl.classList.add('blinking');
+        setTimeout(() => {
+          imgEl.addEventListener('animationend', () => typeText(textEl, dpSlide3Text), { once: true });
+          frameEl.classList.add('developing');
+          setTimeout(() => searchEl.classList.remove('blinking'),
+            DP_SLIDE3_DEVELOP_MS - DP_SLIDE3_BLINK_STOP_LEAD_MS);
+        }, DP_SLIDE3_HOLD_MS);
+      });
+    }
 
-</div>
+    function renderStory() {
+      storySlides.forEach((el, i) => el.classList.toggle('active', i === storyIndex));
+      document.getElementById('story-counter').textContent = (storyIndex + 1) + ' / ' + storySlides.length;
 
-<div id="taskbar">
-  <button class="button" id="start-btn">&#x229E; Start</button>
-  <div id="taskbar-buttons" style="display:flex; gap:4px;"></div>
-  <div class="taskbar-time" id="clock">00:00</div>
-</div>
+      const dpSlide3 = document.getElementById('dp-story-slide-3');
+      if (dpSlide3 && dpSlide3.classList.contains('active')) {
+        startDpSlide3Sequence();
+      }
+    }
 
-<script>
-  const bootScreen = document.getElementById('boot-screen');
-  const desktop = document.getElementById('desktop');
+    function openNLPStory(index = 0) {
+      storyIndex = index;
+      openWindow('nlp-window');
+      renderStory();
+    }
 
-  setTimeout(() => {
-    bootScreen.classList.add('fade-out');
-    desktop.classList.add('visible');
-    setTimeout(() => bootScreen.classList.add('gone'), 1200);
-  }, 4200);
+    function openSpecimen(index = 0){
+      storyIndex = index;
+      openWindow('img-window');
+    }
 
-  document.querySelector('#add-btn').onclick = function() {
-  const textarea = document.getElementById('text20');
-  const text = textarea.value.trim();
-  if (!text) return;
-  const content = document.querySelector('#facts-window .window-content');
-  const newLine = document.createElement('div');
-  newLine.textContent = text;
-  content.insertBefore(newLine, content.querySelector('.field-row-stacked'));
-  textarea.value = '';
-};
+    const fluidPoemText = "What is it about women decaying alive that pulls at me so strong?^ Systems leave people for dead in their way.~ I wish it touched a man as much as an actual corpse would.";
+    const FLUID_POEM_TYPE_LEAD_SECONDS = 3;
+    let fluidPoemTimeUpdateHandler = null;
 
-  function updateClock() {
-    const n = new Date();
-    document.getElementById('clock').textContent = String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
+function openFluidPoem() {
+  openWindow('fluid-poem-window');
+  const audio = document.getElementById('fluid-poem-audio');
+  const textEl = document.getElementById('fluid-poem-text');
+  textEl.innerHTML = '';
+  audio.pause();
+  audio.currentTime = 0;
+
+  if (fluidPoemTimeUpdateHandler) audio.removeEventListener('timeupdate', fluidPoemTimeUpdateHandler);
+
+  let typewriterStarted = false;
+  function startTypewriter() {
+    if (typewriterStarted) return;
+    typewriterStarted = true;
+    typeText(textEl, fluidPoemText);
   }
-  updateClock();
-  setInterval(updateClock, 1000);
 
-  const openWindows = new Set();
+  fluidPoemTimeUpdateHandler = () => {
+    if (audio.duration && audio.currentTime >= audio.duration - FLUID_POEM_TYPE_LEAD_SECONDS) {
+      startTypewriter();
+    }
+  };
+  audio.addEventListener('timeupdate', fluidPoemTimeUpdateHandler);
+  audio.onended = startTypewriter;
+  audio.play();
+}
 
-  function openWindow(id) {
-    const win = document.getElementById(id);
-    if (!win) return;
-    win.classList.add('open');
-    win.style.zIndex = getTopZ();
-    openWindows.add(id);
-    updateTaskbar();
-    if (id !== 'entry-window') closeWindow('entry-window');
+// Pause markers usable inside any typeText string: ~ = beat, ^ = long beat.
+// They are swallowed, not printed.
+const TYPE_BEATS = { '~': 900, '^': 2200 };
+
+function typeText(el, text, i = 0, onDone) {
+  if (i >= text.length) {
+    if (onDone) onDone();
+    return;
   }
+  const ch = text.charAt(i);
+  const beat = TYPE_BEATS[ch];
+  if (!beat) el.innerHTML += ch;
+  setTimeout(() => typeText(el, text, i + 1, onDone), beat || 40);
+}
 
-  function closeWindow(id) {
-    const win = document.getElementById(id);
-    if (!win) return;
-    win.querySelectorAll('audio').forEach(a => { a.pause(); });
-    win.classList.remove('open');
-    openWindows.delete(id);
-    updateTaskbar();
-  }
+function openParanoid() {
+  openWindow('paranoid-window');
+  const audio = document.getElementById('paranoid-audio');
+  audio.pause();
+  audio.currentTime = 0;
+}
 
-  function getTopZ() {
-    let max = 100;
-    document.querySelectorAll('.win98-window.open').forEach(w => { const z = parseInt(w.style.zIndex)||100; if(z>max) max=z; });
-    return max + 1;
-  }
+    document.getElementById('story-prev').onclick = function () {
+      storyIndex = (storyIndex - 1 + storySlides.length) % storySlides.length;
+      renderStory();
+    };
+    document.getElementById('story-next').onclick = function () {
+      storyIndex = (storyIndex + 1) % storySlides.length;
+      renderStory();
+    };
+    renderStory();
 
-  function updateTaskbar() {
-    const c = document.getElementById('taskbar-buttons');
-    c.innerHTML = '';
-    openWindows.forEach(id => {
+    function updateClock() {
+      const n = new Date();
+      document.getElementById('clock').textContent = String(n.getHours()).padStart(2, '0') + ':' + String(n.getMinutes()).padStart(2, '0');
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    const openWindows = new Set();
+    const CONTENT_WARNINGS = {
+      'North London-window': 'This field log describes an unattended death and human decomposition, and includes photographs of the site after cleaning.',
+      'morgellons-window': 'This log discusses mental illness, health anxiety and self-diagnosis.'
+    };
+    let pendingWarning = null;
+    let septMode = false;
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+   
+    function setSeptMode(on) {
+      septMode = on;
+      if (on) {
+        frame.classList.add('bw-anim');
+        frame.style.setProperty('--filter', 'grayscale(1)');
+      } else {
+        frame.classList.remove('bw-anim');
+        frame.style.setProperty('--filter', 'saturate(0.6)');
+      }
+    }
+
+    function updateFullscreenUI() {
+      const active = Boolean(document.fullscreenElement);
+      fullscreenBtn.style.display = active ? 'none' : '';
+      fullscreenBtn.setAttribute('aria-pressed', String(active));
+    }
+
+    function openWindow(id) {
+      if (CONTENT_WARNINGS[id] && !openWindows.has(id)) {
+        pendingWarning = id;
+        document.getElementById('cw-text').textContent = CONTENT_WARNINGS[id];
+        openWindowNow('cw-window');
+        return;
+      }
+      openWindowNow(id);
+    }
+
+    function acceptContentWarning() {
+      const id = pendingWarning;
+      pendingWarning = null;
+      closeWindow('cw-window');
+      if (!id) return;
+      openWindowNow(id);
+    }
+
+    function declineContentWarning() {
+      pendingWarning = null;
+      closeWindow('cw-window');
+    }
+
+    function openWindowNow(id) {
       const win = document.getElementById(id);
       if (!win) return;
-      const label = win.querySelector('.title-bar-text').textContent.substring(0,18);
-      const btn = document.createElement('button');
-      btn.className = 'button taskbar-btn';
-      btn.textContent = label;
-      btn.onclick = () => { win.style.zIndex = getTopZ(); };
-      c.appendChild(btn);
+
+      win.classList.add('open');
+      win.style.zIndex = getTopZ();
+      openWindows.add(id);
+      updateTaskbar();
+
+      if (id !== 'entry-window') closeWindow('entry-window');
+
+      setSeptMode(id === 'september-window');
+    }
+
+    function closeWindow(id) {
+      const win = document.getElementById(id);
+      if (!win) return;
+      win.querySelectorAll('audio').forEach(a => { a.pause(); });
+      win.classList.remove('open');
+      openWindows.delete(id);
+      updateTaskbar();
+
+      setSeptMode(id === 'september-window' ? false : septMode);
+    }
+
+    function minimizeWindow(id) {
+      const win = document.getElementById(id);
+      if (!win) return;
+      if (id === 'september-window') setSeptMode(false);
+      win.classList.remove('open');
+      updateTaskbar();
+    }
+
+    function getTopZ() {
+      let max = 100;
+      document.querySelectorAll('.win98-window.open').forEach(w => { const z = parseInt(w.style.zIndex) || 100; if (z > max) max = z; });
+      return max + 1;
+    }
+
+
+    function fullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+      updateFullscreenUI();
+    }
+
+    document.addEventListener('fullscreenchange', updateFullscreenUI);
+
+    updateFullscreenUI();
+
+    function updateTaskbar() {
+      const c = document.getElementById('taskbar-buttons');
+      c.innerHTML = '';
+      openWindows.forEach(id => {
+        const win = document.getElementById(id);
+        if (!win) return;
+        const label = win.querySelector('.title-bar-text').textContent.substring(0, 18);
+        const btn = document.createElement('button');
+        btn.className = 'button taskbar-btn';
+        btn.textContent = label;
+        btn.onclick = () => {
+          if (!win.classList.contains('open')) win.classList.add('open');
+          win.style.zIndex = getTopZ();
+        };
+        c.appendChild(btn);
+      });
+    }
+
+    let dragging = null, dragOffX = 0, dragOffY = 0;
+
+    // The frame is fixed-position and does not move during a gesture, so its
+    // rect is measured once per drag instead of on every mousemove. Reading
+    // it mid-move forces a synchronous layout, and doing that 60-120x a
+    // second is felt as lag in the drag itself.
+    let frameRect = null;
+    function captureFrameRect() {
+      frameRect = frame.getBoundingClientRect();
+    }
+
+    function dragStart(e, id) {
+      if (e.target.tagName === 'BUTTON') return;
+      e.preventDefault();
+      e.stopPropagation();
+      dragging = document.getElementById(id);
+      dragging.style.zIndex = getTopZ();
+      dragging.style.transform = 'none';
+      const r = dragging.getBoundingClientRect();
+      dragOffX = e.clientX - r.left;
+      dragOffY = e.clientY - r.top;
+      captureFrameRect();
+    }
+
+    document.addEventListener('mousemove', e => {
+      if (!dragging && !resizing) return;
+      if (dragging) {
+        const w = dragging.offsetWidth;
+        const h = dragging.offsetHeight;
+        const localX = e.clientX - dragOffX - frameRect.left;
+        const localY = e.clientY - dragOffY - frameRect.top;
+        const newLeft = Math.max(0, Math.min(localX, frameRect.width - w));
+        const newTop = Math.max(0, Math.min(localY, frameRect.height - h));
+        dragging.style.left = newLeft + 'px';
+        dragging.style.top = newTop + 'px';
+        dragging.style.right = 'auto';
+      }
+      if (resizing) {
+        // A resize grows the window from its fixed top-left corner, so the
+        // frame rect, the window's own origin and the rem size are all
+        // constant for the whole gesture and are captured in resizeStart.
+        // They used to be re-measured on every mousemove, three forced
+        // layout/style flushes per event.
+        const maxW = frameRect.left + frameRect.width - resizeOriginX - 8;
+        const maxH = frameRect.top + frameRect.height - resizeOriginY - 8;
+        // floors track the UI scale, so a window can never be dragged
+        // smaller than its own chrome on a large display
+        const newW = Math.max(10 * resizeRem, Math.min(resizeStartW + (e.clientX - resizeStartX), maxW));
+        const newH = Math.max(8 * resizeRem, Math.min(resizeStartH + (e.clientY - resizeStartY), maxH));
+        resizing.style.width = newW + 'px';
+        resizing.style.height = newH + 'px';
+      }
     });
-  }
 
-  let dragging = null, dragOffX = 0, dragOffY = 0;
+    document.addEventListener('mouseup', () => { dragging = null; resizing = null; });
 
-  function dragStart(e, id) {
-    if (e.target.tagName === 'BUTTON') return;
-    dragging = document.getElementById(id);
-    dragging.style.zIndex = getTopZ();
-    const r = dragging.getBoundingClientRect();
-    dragOffX = e.clientX - r.left;
-    dragOffY = e.clientY - r.top;
-  }
+    let resizing = null, resizeStartW = 0, resizeStartH = 0, resizeStartX = 0, resizeStartY = 0;
+    let resizeOriginX = 0, resizeOriginY = 0, resizeRem = 16;
 
-  document.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const w = dragging.offsetWidth;
-    const h = dragging.offsetHeight;
-    const newLeft = Math.max(0, Math.min(e.clientX - dragOffX, vw - w));
-    const newTop = Math.max(0, Math.min(e.clientY - dragOffY, vh - h));
-    dragging.style.left = newLeft + 'px';
-    dragging.style.top = newTop + 'px';
-    dragging.style.right = 'auto';
-  });
+    function resizeStart(e, id) {
+      e.preventDefault();
+      e.stopPropagation();
+      resizing = document.getElementById(id);
+      resizing.style.zIndex = getTopZ();
+      const r = resizing.getBoundingClientRect();
+      resizeStartW = resizing.offsetWidth;
+      resizeStartH = resizing.offsetHeight;
+      resizeStartX = e.clientX;
+      resizeStartY = e.clientY;
+      resizeOriginX = r.left;
+      resizeOriginY = r.top;
+      resizeRem = remPx();
+      captureFrameRect();
+    }
 
-  document.addEventListener('mouseup', () => { dragging = null; });
-</script>
+    document.querySelectorAll('.win98-window').forEach(win => {
+      if (win.id === 'entry-window' || win.id === 'cw-window') return;
+      const handle = document.createElement('div');
+      handle.className = 'resize-handle';
+      [handle].forEach(h => {
+        h.addEventListener('mousedown', e => resizeStart(e, win.id));
+      });
+      win.appendChild(handle);
+    });
+
+    function resetGalleryToIdle() {
+      openWindows.forEach(id => {
+        const win = document.getElementById(id);
+        if (win) win.classList.remove('open');
+      });
+      openWindows.clear();
+      pendingWarning = null;
+      updateTaskbar();
+
+      document.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
+
+      houseIndex = 0;
+      renderHouseCarousel();
+      bugIndex = 0;
+      renderBugCarousel();
+      storyIndex = 0;
+      renderStory();
+
+      document.getElementById('fluid-poem-text').innerHTML = '';
+
+      setSeptMode(false);
+      frame.classList.remove('nlp-hovering');
+      window.setBugSwarmBoost && window.setBugSwarmBoost(false);
+
+      playBootSequence();
+
+      document.getElementById('entry-window').classList.add('open');
+    }
+
+    // Throttled: mousemove fires 60-120x a second and this used to tear down
+    // and rebuild the timer on every one of them. Against a 3 minute timeout,
+    // resolving to the nearest second is more than enough.
+    const IDLE_RESET_THROTTLE_MS = 1000;
+    let idleTimer = null;
+    let lastIdleReset = 0;
+
+    function resetIdleTimer() {
+      const now = performance.now();
+      if (idleTimer && now - lastIdleReset < IDLE_RESET_THROTTLE_MS) return;
+      lastIdleReset = now;
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(resetGalleryToIdle, IDLE_TIMEOUT_MS);
+    }
+    ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
+      document.addEventListener(evt, resetIdleTimer, { passive: true });
+    });
+    resetIdleTimer();
+
+  </script>
+
+  <script src="p5.js"></script>
+  <script src="bug-swarm.js"></script>
 </body>
+
 </html>
