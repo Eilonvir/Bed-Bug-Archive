@@ -20,10 +20,6 @@ Open `index.html` in any modern browser, or visit the live site at [https://eilo
 ## Requirements
 - Any modern browser (Chrome, Firefox, Safari) for the website
 
-## Screenshots / Media
-
-
-Video documentation: https://vimeo.com/1182346717?fl=pl&fe=sh
 
 ## Credits / Acknowledgements
 Michaella Miller
