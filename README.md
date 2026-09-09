@@ -1,12 +1,19 @@
-# [ untitled ] micro archive
+# Bed Bug Archive
 
-## Blurb
-Some of my pest control interview materials curated into a 98.css-style desktop interface - the visitor inhabits my workstation and sorts through my logs non-linearly, in a Cain's Jawbone-esque mini puzzle extending an interactive fiction game about the psychological aftermath of a bed bug infestation.
+As you are reading this, a cadaver lies at home, waiting to be found. 
 
+This archive documents my research into bed bugs and Delusory parasitosis - accompanying me through examination of researcher bias, clinical distance and gender-based dismissal. Along the way, issues in bureaucratic hell came up, with neglect of the elderly in both private & council settings as a by-product in its process. 
+
+# IMPORTANT(!)
+Please see the documentation folder as additional evidance of sustained effort. 
 
 ## Technology Used
 - HTML / CSS / JavaScript
-- [98.css](https://github.com/jdan/98.css) (jdan, 2017) - Windows 98 UI library
+- [98.css](https://github.com/jdan/98.css) (jdan, 2017) - Windows 98 UI library. MIT License.
+- [p5.js](https://p5js.org) v1.11.11 (McCarthy and the Processing Foundation, 2025) - creative coding library. GNU LGPL 2.1.
+- [Courier Prime](https://quoteunquoteapps.com/courierprime/) (Quote-Unquote Apps, 2015) and Old English Gothic Pixel - typefaces. SIL Open Font License 1.1.
+- [ImageMagick](https://imagemagick.org) - ordered-dither halftone treatments applied to still images.
+- [git-filter-repo](https://github.com/newren/git-filter-repo) (Newren) - used to redact sensitive material from repository history.
 
 ## How to Run / Install
 **Website:**
@@ -15,27 +22,27 @@ Open `index.html` in any modern browser, or visit the live site at [https://eilo
 
 
 
-
 ## Requirements
 - Any modern browser (Chrome, Firefox, Safari) for the website
 
-## Screenshots / Media
-
-
-Video documentation: https://vimeo.com/1182346717?fl=pl&fe=sh
 
 ## Credits / Acknowledgements
 Michaella Miller
 MA Computational Arts, Goldsmiths, University of London, 2026
 Supervisor: Dr. Louise Rouse
 
-Claude Anthropic, (2026) was used for technical guidance, base code structure, and debugging in HTML and Python. All design, functionality, research, methodology, content, and conceptual decisions are the author’s own.
 
 ## License
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to use and adapt with attribution.
 
+This applies to my own code, text, images and audio. Third-party components remain under their own licences: 98.css (MIT), p5.js (GNU LGPL 2.1), the typefaces (SIL Open Font License 1.1), and archival images as credited in the Credits window of the piece.
+
 ## Contact / Links
 - Live site: https://eilonvir.github.io/Bed-Bug-Archive/
-- Video documentation: https://vimeo.com/manage/videos/1182637114
-- Interactive fiction game: https://editor.p5js.org/mijelly/full/WN1VjXVRW repo: https://github.com/Eilonvir/Moved-to-London--Got-Bed-Bugs.git
+- READTHROUGH DEMO: https://youtu.be/1zLV6ow78Lo
+- Project Miro
+
+
+Related projects 
+- Moved-to-London--Got-Bed-Bugs.git
 - NLP repo: https://github.com/Eilonvir/Delusory-Parasitosis-NLP.git
