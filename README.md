@@ -5,7 +5,7 @@ As you are reading this, a cadaver lies at home, waiting to be found.
 This archive documents my research into bed bugs and Delusory parasitosis - accompanying me through examination of researcher bias, clinical distance and gender-based dismissal. Along the way, issues in bureaucratic hell came up, with neglect of the elderly in both private & council settings as a by-product in its process. 
 
 # IMPORTANT(!)
-Please see the documentation folder as additional evidance of sustained effort. 
+Please see the documentation folder as additional evidence of sustained effort.
 
 ## Technology Used
 - HTML / CSS / JavaScript
