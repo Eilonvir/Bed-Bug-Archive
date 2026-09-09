@@ -35,7 +35,7 @@ Supervisor: Dr. Louise Rouse
 ## License
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to use and adapt with attribution.
 
-This applies to my own code, text, images and audio. Third-party components remain under their own licences: 98.css (MIT), p5.js (GNU LGPL 2.1), the typefaces (SIL Open Font License 1.1), and archival images as credited in the Credits window of the piece.
+This applies to my own code, text, images and audio. Third-party components remain under their own licences: 98.css (MIT), p5.js (GNU LGPL 2.1), the typefaces (SIL Open Font License 1.1), one interface icon from the GNOME Project (GNU GPL v2 or later), and archival images under Creative Commons or public domain terms. All are credited in the Credits window of the piece.
 
 ## Contact / Links
 - Live site: https://eilonvir.github.io/Bed-Bug-Archive/
