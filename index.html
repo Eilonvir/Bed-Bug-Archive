@@ -7,14 +7,7 @@
   <title>[ untitled ]</title>
   <link rel="stylesheet" href="98.css-main/style.css">
   <style>
-    /* Courier Prime, self-hosted so the piece renders identically with no
-       network — it used to be @import'ed from Google Fonts, which fails
-       silently in a gallery and drops everything back to Courier New.
-       Files in fonts/, SIL Open Font License 1.1 (fonts/CourierPrime-OFL.txt).
-       The latin / latin-ext split and unicode-ranges are Google's own
-       subsetting, kept so only the needed file is fetched. */
-
-    /* regular 400 */
+   
     @font-face {
       font-family: 'Courier Prime';
       font-style: normal;
@@ -33,7 +26,7 @@
       unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
 
-    /* bold 700 */
+    
     @font-face {
       font-family: 'Courier Prime';
       font-style: normal;
@@ -52,7 +45,7 @@
       unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
 
-    /* italic 400 */
+    
     @font-face {
       font-family: 'Courier Prime';
       font-style: italic;
@@ -71,8 +64,6 @@
       unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
 
-    /* bold italic 700 — the old @import never requested this, so bold text
-       inside an italic block was being synthetically slanted by the browser */
     @font-face {
       font-family: 'Courier Prime';
       font-style: italic;
@@ -1693,7 +1684,7 @@
           <p>Thank you Matthew Blackwell, Warren King and Project Multipest for sharing your insights from work in pest
             control. Thank you Ricardo Leizola for consultation regarding interview and documentation methodologies as
             well as interesting conceptual links. Thank you Millicent Gunn, Louise Rouse, Jeremy Wenger and Daniel Berio - for
-            consultation regarding curation, adaptation to a gallery setting, interactive story telling and UX concerns. Thank you Dave Bailey for your a lab tour and genrously providing me with lab equipment and help during install. 
+            consultation regarding curation, adaptation to a gallery setting, interactive story telling and UX concerns. Thank you Dave Bailey for genrously providing me with lab equipment and help during install. 
            </p>
           <div class="scarab-rule"></div>
           <p>Author: Michaella Miller</p>
@@ -2445,7 +2436,18 @@ function openParanoid() {
   </script>
 
   <script src="p5.js"></script>
-  <script src="bug-swarm.js"></script>
+  <!-- Loaded with a per-load cache-bust. A plain src, or a hand-bumped ?v=N,
+       lets the browser serve a stale sketch after an edit — which looks
+       exactly like the resting texture silently failing to render, rather
+       than like a caching problem. Nothing runs after this, so appending the
+       tag is safe; p5.js above has already executed by this point. -->
+  <script>
+    (function () {
+      const s = document.createElement('script');
+      s.src = 'bug-swarm.js?t=' + Date.now();
+      document.body.appendChild(s);
+    })();
+  </script>
 </body>
 
 </html>

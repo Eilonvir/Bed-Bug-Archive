@@ -17,8 +17,8 @@ Please see the documentation folder as additional evidence of sustained effort.
 
 ## How to Run / Install
 **Website:**
-Best to visit on a  computer
-Open `index.html` in any modern browser, or visit the live site at [https://eilonvir.github.io/Bed-Bug-Archive/]
+Best to visit on a computer.
+Open `index.html` in any modern browser, or visit the live site at [https://eilonvir.github.io/Bed-Bug-Archive/](https://eilonvir.github.io/Bed-Bug-Archive/)
 
 
 

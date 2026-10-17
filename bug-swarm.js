@@ -43,16 +43,25 @@ const DITHER_GRAIN = 0.08; // 0-1 random threshold jitter layered on the ordered
 const BUG_INK = [25, 22, 18];
 const BUG_INK_ALPHA = 235; // baked into the sprite; the spawn/despawn fade is applied at blit time
 
-// ---- static resting texture: a light dither grain that sits on the screen
+// ---- static resting texture: a halftone dot screen that sits on the screen
 // at all times (the "old screen / textile" idle state), independent of the
 // bugs. Rendered once (not per frame) so it reads as a fixed print pattern
-// rather than flickering static. Keep ALPHA/DENSITY low so it stays behind
-// the icon labels instead of competing with them.
-const STATIC_DITHER_CELL = 2;       // px per dither cell
-const STATIC_DITHER_ALPHA = 45;        // 0-255 ink opacity — low keeps labels legible
-const STATIC_DITHER_DENSITY = 0.2;   // 0-1 ink coverage ceiling — lower = sparser
+// rather than flickering static.
+//
+// ALPHA and DENSITY pull in opposite directions, which is the thing to
+// understand before touching them. DENSITY sets how much ink the noise asks
+// for, and the Bayer matrix only stamps a cell when that ink clears the
+// cell's threshold (0/16 .. 15/16). Keep DENSITY low enough that only the
+// 0/16 cell clears and you get one dot per 4x4 block — a regular lattice at
+// CELL*4 px spacing, which is what reads as a halftone screen. Raise it and
+// more thresholds clear, the lattice fills in, and it degrades into a dense
+// crosshatch. ALPHA is then free to go high to make each dot read as a dot.
+// Dense + faint is grain; sparse + dark is a screen.
+const STATIC_DITHER_CELL = 1;       // px per dither cell — dot spacing is CELL*4
+const STATIC_DITHER_ALPHA = 100;        // 0-255 ink opacity — high so each dot reads
+const STATIC_DITHER_DENSITY = 0.09;   // 0-1 ink coverage ceiling — low keeps the lattice open
 const STATIC_DITHER_NOISE_SCALE = 0.05; // perlin sample scale — lower = larger textile-like blobs
-const STATIC_DITHER_GRAIN = 0.05;
+const STATIC_DITHER_GRAIN = 0;      // threshold jitter — 0 keeps the lattice regular
 // A full-screen rebuild is expensive, and macOS fires a burst of resize
 // events while a fullscreen transition animates. Coalesce them so the
 // texture is rebuilt once the size has settled, not once per event.
@@ -162,12 +171,44 @@ function bugSwarmSketch(p) {
   function renderStaticTexture() {
     const brightnessFn = (i, j) =>
       p.noise(i * STATIC_DITHER_NOISE_SCALE, j * STATIC_DITHER_NOISE_SCALE) * STATIC_DITHER_DENSITY;
-    ditherFieldToPixels(
-      staticTextureBuf,
-      STATIC_DITHER_CELL,
-      brightnessFn,
-      { fg: [20, 18, 15], alpha: STATIC_DITHER_ALPHA, grain: STATIC_DITHER_GRAIN }
-    );
+    const opts = { fg: [20, 18, 15], alpha: STATIC_DITHER_ALPHA, grain: STATIC_DITHER_GRAIN };
+
+    ditherFieldToPixels(staticTextureBuf, STATIC_DITHER_CELL, brightnessFn, opts);
+
+    // The ImageData path above is the fast one, but it is the only thing in
+    // this sketch that writes pixels directly rather than going through p5's
+    // drawing API, and it has been observed producing an empty buffer on at
+    // least one machine while the identical maths via rect() renders fine.
+    // Rather than ship a texture that silently isn't there, check the result
+    // and redo it the slow way if nothing landed. The slow path is what the
+    // bug sprites already use, so if sprites render, this will too.
+    if (!bufferHasInk(staticTextureBuf)) {
+      ditherField(
+        staticTextureBuf, 0, 0,
+        staticTextureBuf.width, staticTextureBuf.height,
+        STATIC_DITHER_CELL, brightnessFn, opts
+      );
+    }
+  }
+
+  // Spot-checks a few small patches rather than reading the whole buffer. The
+  // texture is a near-uniform lattice, so any one patch that covers several
+  // dot cells is enough to tell "rendered" from "didn't", and a full-canvas
+  // readback at 27" is exactly the cost this is meant to avoid.
+  function bufferHasInk(buf) {
+    const ctx = buf.drawingContext;
+    const probe = 32;
+    const spots = [[0.5, 0.5], [0.2, 0.3], [0.8, 0.7]];
+    for (const [fx, fy] of spots) {
+      const x = Math.min(Math.floor(buf.width * fx), Math.max(0, buf.width - probe));
+      const y = Math.min(Math.floor(buf.height * fy), Math.max(0, buf.height - probe));
+      const w = Math.min(probe, buf.width - x);
+      const h = Math.min(probe, buf.height - y);
+      if (w <= 0 || h <= 0) continue;
+      const d = ctx.getImageData(x, y, w, h).data;
+      for (let k = 3; k < d.length; k += 4) if (d[k] > 0) return true;
+    }
+    return false;
   }
 
   function rebuildStaticTexture() {
