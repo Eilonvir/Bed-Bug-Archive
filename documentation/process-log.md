@@ -120,8 +120,7 @@ Morgellons folder, maybe even break it down and rethink how it might contribute 
 the progression of this story.
 
 **General notes on story structure and README shenanigans.** Implementing 'bugs'. I
-think that the README should include very subtle bugs, or maybe it's not a must (omg
-I made a new word by amalgamating two words).
+think that the README should include very subtle bugs, or maybe it's not a must.
 
 The windows in general should map in some form mental decline. Also using the bed bug
 images (if they wind up not in use in the img folder) as embellishments for the more
